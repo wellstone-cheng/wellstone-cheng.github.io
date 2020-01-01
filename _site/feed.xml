@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-01T18:15:40+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Blog - wellstone_cheng</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</subtitle><author><name>wellstone_cheng</name></author><entry><title type="html">githubio</title><link href="http://localhost:4000/githubio/" rel="alternate" type="text/html" title="githubio" /><published>2019-12-25T08:05:00+08:00</published><updated>2019-12-25T08:05:00+08:00</updated><id>http://localhost:4000/githubio</id><content type="html" xml:base="http://localhost:4000/githubio/">&lt;h2 id=&quot;1-github-io主流框架&quot;&gt;1 github io主流框架&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;github推荐的jekyll&lt;/li&gt;
+  &lt;li&gt;Hexo&lt;/li&gt;
+  &lt;li&gt;pandoc&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-基于jekyll&quot;&gt;2 基于jekyll&lt;/h2&gt;
+&lt;p&gt;jekylly是一种静态网页生成器，包含一些用markdown语法写的文件的文件夹；通过markdown和Liquid转换器
+生成一个网站.&lt;/p&gt;
+
+&lt;h3 id=&quot;21-文件目录&quot;&gt;2.1 文件目录&lt;/h3&gt;
+
+&lt;h4 id=&quot;211-_configyml-存储配置数据把配置写在这个文件里面可以让你不用在命令行中写&quot;&gt;2.1.1 _config.yml :存储配置数据，把配置写在这个文件里面，可以让你不用在命令行中写。&lt;/h4&gt;
+&lt;p&gt;permalink：这个规定了你博客的URL地址
+   如下&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   permalink: /themes/:title/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;对应博客网址为github.io/themes/title/&lt;/p&gt;
+&lt;h4 id=&quot;212-_layouts里面的文件通过content包含_posts里面的文章&quot;&gt;2.1.2 _layouts:里面的文件通过{content}包含_posts里面的文章&lt;/h4&gt;
+&lt;p&gt;注：！！！！使用下面符号双中括号+content，在markdown中会造成引用其他markdown文件的混乱异常情况。&lt;/p&gt;
+
+&lt;h4 id=&quot;213-indexhtml&quot;&gt;2.1.3 index.html&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;layout: default
+title: wellstone-cheng
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;3-调试工具&quot;&gt;3 调试工具&lt;/h2&gt;
+&lt;h3 id=&quot;31-利用chrome或者firefox可以更好的调整页面设计&quot;&gt;3.1 利用chrome或者Firefox可以更好的调整页面设计&lt;/h3&gt;</content><author><name>wellstone-cheng</name></author><category term="githubio" /><summary type="html">1 github io主流框架 github推荐的jekyll Hexo pandoc 2 基于jekyll jekylly是一种静态网页生成器，包含一些用markdown语法写的文件的文件夹；通过markdown和Liquid转换器 生成一个网站.</summary></entry><entry><title type="html">python</title><link href="http://localhost:4000/python/" rel="alternate" type="text/html" title="python" /><published>2019-10-27T08:05:00+08:00</published><updated>2019-10-27T08:05:00+08:00</updated><id>http://localhost:4000/python</id><content type="html" xml:base="http://localhost:4000/python/">&lt;h1 id=&quot;1python-安装与卸载&quot;&gt;1.Python 安装与卸载&lt;/h1&gt;
+
+&lt;h2 id=&quot;11-先卸载已安装的python版本&quot;&gt;1.1 先卸载已安装的Python版本&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;卸载python版本
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get remove python 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;卸载Python以及他的依赖包
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get remove --auto-remove python*
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;清除python配置文件和数据文件
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get purge python
+sudo apt-get purge --auto-remove python
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;h2 id=&quot;12-安装最新的python版本方法1&quot;&gt;1.2 安装最新的Python版本（方法1）&lt;/h2&gt;
+  &lt;/li&gt;
+  &lt;li&gt;安装依赖环境
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;下载Python3.7安装包
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://www.python.org/ftp/python/3.7.5/Python-3.7.5.tgz
+tar -zxvf Python-3.7.5.tgz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;注：使用wget命令比网页下载快很多。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;进入解压后目录执行./configure
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./configure --prefix=/usr/local/python3   #/usr/local/python3为安装目录
+make
+make install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;建立python3的软链
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ln -s /usr/local/python3/bin/python3 /usr/bin/python3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;将/usr/local/python3/bin加入PATH,在/etc/profile文件末尾加入
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export PATH=$PATH:/usr/local/python3/bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;生效在配置信息中环境变量
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;source /etc/profile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;测试是否安装成功
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# python3 -V&lt;/span&gt;
+Python 3.7.5
+&lt;span class=&quot;c&quot;&gt;# pip3 -V&lt;/span&gt;
+pip 19.2.3 from /usr/local/python3/lib/python3.7/site-packages/pip &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;python 3.7&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;h2 id=&quot;13-apt-get-install-直接安装python方法2&quot;&gt;1.3 apt-get install 直接安装python（方法2）&lt;/h2&gt;
+  &lt;/li&gt;
+  &lt;li&gt;安装&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt install python3-dev python3-pip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;测试是否安装成功
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# python3 -V                         
+Python 3.6.8
+# pip3 -V
+pip 9.0.1 from /usr/lib/python3/dist-packages (python 3.6)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;升级pip&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#pip3 install --upgrade pip
+Collecting pip
+  Downloading https://files.pythonhosted.org/packages/00/b6/9cfa56b4081ad13874b0c6f96af8ce16cfbc1cb06bedf8e9164ce5551ec1/pip-19.3.1-py2.py3-none-any.whl (1.4MB)
+    100% |################################| 1.4MB 73kB/s 
+# pip3 -V
+Traceback (most recent call last):
+  File &quot;/usr/bin/pip3&quot;, line 9, in &amp;lt;module&amp;gt;
+    from pip import main
+ImportError: cannot import name 'main'
+# pip -V
+pip 19.3.1 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;2python-ide选择&quot;&gt;2.Python IDE选择&lt;/h1&gt;
+
+&lt;h2 id=&quot;21-pycharm&quot;&gt;2.1 PyCharm&lt;/h2&gt;
+
+&lt;h3 id=&quot;211-安装与运行&quot;&gt;2.1.1 安装与运行&lt;/h3&gt;
+&lt;p&gt;从网页上下载pycharm-community-2019.2.4.tar.gz解压后&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd pycharm-community-2019.2.4/bin
+sh pycharm.sh &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;212-配置&quot;&gt;2.1.2 配置&lt;/h3&gt;
+
+&lt;p&gt;进入File -&amp;gt; Settings -&amp;gt; project:Project Interpreter&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;project Interpreter&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;项目解释器，指向Python的执行文件&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;package&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;可以一次选中所有package进行安装？？？
+还是需要什么package就一个一个添加？&lt;/p&gt;
+
+&lt;h3 id=&quot;213-运行状况&quot;&gt;2.1.3 运行状况&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;不需进行任何配置就能运行动态图&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;22-jupyter-notebook&quot;&gt;2.2 Jupyter Notebook&lt;/h2&gt;
+
+&lt;h3 id=&quot;221-可以使用anaconda自带的jupyter&quot;&gt;2.2.1 可以使用anaconda自带的jupyter&lt;/h3&gt;
+&lt;h3 id=&quot;222-配置&quot;&gt;2.2.2 配置&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;指定jupyter解释器&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;找到Jupyter Notebook内核指定的Python环境位置, 打开kernel.json文件, 编辑路径即可&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+ &quot;argv&quot;: [
+  &quot;/root/anaconda3/bin/python&quot;,
+  &quot;-m&quot;,
+  &quot;ipykernel_launcher&quot;,
+  &quot;-f&quot;,
+  &quot;{connection_file}&quot;
+ ],
+ &quot;display_name&quot;: &quot;Python 3&quot;,
+ &quot;language&quot;: &quot;python&quot;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;223-运行状况&quot;&gt;2.2.3 运行状况&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;暂时还没解决不能显示动态图的问题&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;3python包与环境管理&quot;&gt;3.Python包与环境管理&lt;/h1&gt;
+
+&lt;h2 id=&quot;31-pip&quot;&gt;3.1 pip&lt;/h2&gt;
+
+&lt;p&gt;pip 是 Python 包管理工具，该工具提供了对Python 包的查找、下载、安装、卸载的功能；
+Python 2.7.9 + 或 Python 3.4+ 以上版本都自带 pip 工具。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;pip install&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;```
+sudo pip install packagename
+``` 代表进行全局安装，安装后全局可用。如果是信任的安装包可用使用该命令进行安装
+  
+```
+pip install --user packagename
+```    代表仅该用户的安装，安装后仅该用户可用。处于安全考虑，尽量使用该命令进行安装。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;pip 安装包清单&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  pip list
+  Package     Version  
+  ----------- ---------
+  numpy       1.17.3   
+  Pillow      6.2.1    
+  pip         19.3.1   
+  setuptools  41.2.0   
+  six         1.12.0   
+  torch       1.3.0+cpu
+  torchvision 0.4.1+cpu
+  virtualenv  16.7.7   
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;pip安装包路径，在Python的安装路径下
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python3/lib/python3.7/site-packages
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;32-conda&quot;&gt;3.2 conda&lt;/h2&gt;
+&lt;p&gt;一个开源的软件包管理系统和环境管理系统，用于安装多个版本的软件包及其依赖关系，并在它们之间轻松切换&lt;/p&gt;
+
+&lt;h2 id=&quot;33-anaconda&quot;&gt;3.3 anaconda&lt;/h2&gt;
+
+&lt;p&gt;用于科学计算的python发行版，里面预装好了conda，某个版本的python，众多packages,科学计算工具等。Anaconda利用工具/命令conda来进行package和environment的管理，并且已经包含了python和相关配套工具&lt;/p&gt;
+
+&lt;h3 id=&quot;331-从国内镜像中安装anaconda&quot;&gt;3.3.1 从国内镜像中安装anaconda&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-2019.10-Linux-x86_64.sh
+sh Anaconda3-2019.10-Linux-x86_64.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;注：anaconda中已包含python和conda,conda下载的包默认链接至自带的Python中，可以通过&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;conda安装包清单
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#conda list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;conda安装包路径，在anaconda的安装路径下
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;anaconda3/lib/python3.7/site-packages
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>wellstone-cheng</name></author><category term="python" /><summary type="html">1.Python 安装与卸载</summary></entry><entry><title type="html">pytorch</title><link href="http://localhost:4000/pytorch/" rel="alternate" type="text/html" title="pytorch" /><published>2019-10-27T08:05:00+08:00</published><updated>2019-10-27T08:05:00+08:00</updated><id>http://localhost:4000/pytorch</id><content type="html" xml:base="http://localhost:4000/pytorch/">&lt;h1 id=&quot;1-pytorch-安装&quot;&gt;1 pytorch 安装&lt;/h1&gt;
+
+&lt;h2 id=&quot;11-基于docker安装&quot;&gt;1.1 基于docker安装&lt;/h2&gt;
+
+&lt;h3 id=&quot;111-参照tensorflow的安装可以直接在其镜像中安装pytorch&quot;&gt;1.1.1 参照tensorflow的安装，可以直接在其镜像中安装pytorch&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;直接从官网下载
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install torch-1.3.0-cp36-cp36m-manylinux1_x86_64.whl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;从国内镜像下载
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install -i http://pypi.doubanio.com/simple/torch/ torch-1.3.0-cp36-cp36m-manylinux1_x86_64.whl
+WARNING: Requirement 'torch-1.3.0-cp36-cp36m-manylinux1_x86_64.whl' looks like a filename, but the file does not exist
+Looking in indexes: http://pypi.doubanio.com/simple/torch/
+Processing /torch-1.3.0-cp36-cp36m-manylinux1_x86_64.whl
+ERROR: Could not install packages due to an EnvironmentError: [Errno 2] No such file or directory: '/torch-1.3.0-cp36-cp36m-manylinux1_x86_64.whl'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;改成直接去http://pypi.doubanio.com/simple/torch/直接下载文件后再安装&lt;/p&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install torch-1.3.0-cp36-cp36m-manylinux1_x86_64.whl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;h2 id=&quot;12-本地安装&quot;&gt;1.2 本地安装&lt;/h2&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;13-验证&quot;&gt;1.3 验证&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Python输入
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from __future__ import print_function
+import torch
+x = torch.rand(5, 3)
+print(x)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;输出
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tensor([[0.5671, 0.7577, 0.3835],
+      [0.0772, 0.0404, 0.6050],
+      [0.3107, 0.7565, 0.5558],
+      [0.5457, 0.9647, 0.0046],
+      [0.5192, 0.0422, 0.6586]])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">1 pytorch 安装 1.1 基于docker安装</summary></entry><entry><title type="html">tensorflow的安装</title><link href="http://localhost:4000/tensorflow/" rel="alternate" type="text/html" title="tensorflow的安装" /><published>2019-10-27T08:05:00+08:00</published><updated>2019-10-27T08:05:00+08:00</updated><id>http://localhost:4000/tensorflow</id><content type="html" xml:base="http://localhost:4000/tensorflow/">&lt;h1 id=&quot;1-tensorflow-安装&quot;&gt;1 Tensorflow 安装&lt;/h1&gt;
+
+&lt;h2 id=&quot;11-基于docker安装&quot;&gt;1.1 基于docker安装&lt;/h2&gt;
+&lt;p&gt;docker方式安装，并以jupyter server运行，可以通过网页远程访问&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -it -p 8888:8888 tensorflow/tensorflow:nightly-py3-jupyter
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;注：可以在jupyter页面通过new Terminal打开终端进行操作。&lt;/p&gt;
+
+&lt;h2 id=&quot;12-基于python安装&quot;&gt;1.2 基于Python安装&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;先安装python，参照python study篇章&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;直接安装tensorflow&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; pip3 install --user --upgrade tensorflow  # install in $HOME
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;验证安装&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python3 -c &quot;import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;13-本地基于pip虚拟环境安装&quot;&gt;1.3 本地基于pip虚拟环境安装&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;先安装python，参照python study篇章&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;安装virtualenv&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip3 install -U virtualenv 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;启动虚拟环境&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;        virtualenv --system-site-packages -p python3 ./venv
+        source ./venv/bin/activate  # sh, bash, ksh, or zsh
+（venv） pip install --upgrade pip
+（venv） pip list  # show packages installed within the virtual environment
+（venv） deactivate  # don't exit until you're done using TensorFlow
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在virtualenv安装tensorflow&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;（venv）pip install --upgrade tensorflow
+  Collecting tensorflow
+  Cache entry deserialization failed, entry ignored
+  Downloading https://files.pythonhosted.org/packages/de/f0/96fb2e0412ae9692dbf400e5b04432885f677ad6241c088ccc5fe7724d69/tensorflow-1.14.0-cp36-cp36m-manylinux1_x86_64.whl (109.2MB)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;验证安装&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;（venv）python -c &quot;import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;
+2019-11-02 22:41:53.733300: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2019-11-02 22:41:53.752820: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3408000000 Hz
+2019-11-02 22:41:53.753392: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x50a5470 executing computations on platform Host. Devices:
+2019-11-02 22:41:53.753417: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
+tf.Tensor(1447.9882, shape=(), dtype=float32)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;14本地基于conda虚拟环境安装&quot;&gt;1.4本地基于conda虚拟环境安装&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;先安装python，参照python study篇章&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;启动虚拟环境&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;        conda create -n venv pip python=3.7  # select python version
+        source activate venv
+（venv） pip install --ignore-installed --upgrade packageURL
+（venv） source deactivate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在virtualenv安装tensorflow&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;（venv）pip install --upgrade tensorflow
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;验证安装&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;（venv）python -c &quot;import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;15-安装过程遇到的问题及解决方案&quot;&gt;1.5 安装过程遇到的问题及解决方案&lt;/h2&gt;
+
+&lt;h3 id=&quot;151-cache-entry-deserialization-failed&quot;&gt;1.5.1 Cache entry deserialization failed&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;error details&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# pip3 install --upgrade tensorflow
+Collecting tensorflow
+  Cache entry deserialization failed, entry ignored
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;sulotion：升级pip&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip3 install --upgrade pip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;152-futurewarning&quot;&gt;1.5.2 FutureWarning&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;error details&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;环境1 报错信息：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# python3 -c &quot;import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;
+2019-11-03 03:50:03.730110: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2019-11-03 03:50:03.750617: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3408000000 Hz
+2019-11-03 03:50:03.751483: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x4ebcdc0 executing computations on platform Host. Devices:
+2019-11-03 03:50:03.751528: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
+tf.Tensor(398.2649, shape=(), dtype=float32)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;环境2 保报错信息：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python3 -c &quot;import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;
+/usr/local/lib/python3.6/dist-packages/tensorflow/python/framework/dtypes.py:516: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;-Analysis
+  环境1： Python 3.6.8 + pip 19.3.1 + numpy 1.17.3 +tensorflow 2.0.0 –&amp;gt; no this error
+  环境2： Python 3.6.8 + pip 9.0.1 + numpy 1.17.3 +tensorflow 1.14.0 –&amp;gt; have this error&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;solution
+ 将环境2的numpy版本降至1.16.0&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# pip3 install numpy==1.16.0
+# python3 -c &quot;import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;
+Tensor(&quot;Sum:0&quot;, shape=(), dtype=float32)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;153-your-cpu-supports-instructions-that-this-tensorflow-binary-was-not-compiled-to-use-avx2-fma&quot;&gt;1.5.3 Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;error details&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python -c &quot;import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;
+2019-11-02 22:41:53.733300: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2019-11-02 22:41:53.752820: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3408000000 Hz
+2019-11-02 22:41:53.753392: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x50a5470 executing computations on platform Host. Devices:
+2019-11-02 22:41:53.753417: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
+tf.Tensor(1447.9882, shape=(), dtype=float32)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Analysis&lt;/p&gt;
+
+    &lt;p&gt;环境3：Python 3.7.5 + pip 19.3.1 + numpy 1.17.3 +tensorflow 2.0.0 –&amp;gt; have this error
+环境2: Python 3.6.8 + pip 9.0.1 + numpy 1.16.0 +tensorflow 1.14.0 –&amp;gt; no this error
+环境4: Python 3.6.8 + pip 19.3.1 + numpy 1.17.3 +tf-nightly 2.1.0 –&amp;gt; have this error,but in jupyter no error&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;solution
+ 更换tensorflow版本？&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;16-验证&quot;&gt;1.6 验证&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Python输入&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import tensorflow as tf;
+print(tf.reduce_sum(tf.random.normal([1000, 1000])))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;输出&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tf.Tensor(-380.3409, shape=(), dtype=float32)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>wellstone-cheng</name></author><category term="tensorflow" /><summary type="html">1 Tensorflow 安装</summary></entry></feed>

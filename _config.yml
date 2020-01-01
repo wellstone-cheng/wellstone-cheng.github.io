@@ -1,1 +1,77 @@
-theme: jekyll-theme-minimal
+title: Blog - wellstone_cheng
+description: > # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+permalink: ':title/'
+#baseurl: "/adam-blog" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+
+# Author settings add your name
+author: wellstone_cheng
+
+
+# Newsletter
+mailchimp: # Add your MailChimp form identifier.
+
+# Disqus修改成你自己的
+discus_identifier: wellstone_cheng
+# Add your discus identifier
+
+# Paginate
+paginate: 18
+paginate_path: /page:num/
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-paginate
+  - jekyll-feed
+  - jekyll-sitemap
+
+include: [_pages]
+exclude: ["node_modules", "gulpfile.js", "package.json", "yarn.lock"]
+
+imagepath: /blogdemo
+
+links:
+  - name:         Home
+    url:          https://www.wellstone-cheng.github.io
+    external:     false
+  - name:         About
+    url:          /blogdemo/about
+    external:     false
+
+#添加分类步骤：
+#1：在_config.yml links1及blog_中添加对应内容
+#2：在_includes里面headr.html中添加对应内容
+#3：在根目录blog文件中创建对应内容
+
+label1: <span style="font-size:12px">Publish by
+label2:  </span>
+
+
+links1:
+  - name:         python
+    url:          myblog/python
+    type:         python
+    external:     false
+  - name:         pytorch
+    url:          myblog/pytorch
+    type:         pytorch
+    external:     false
+  - name:         tensorflow
+    url:          myblog/tensorflow
+    type:         tensorflow
+    external:     false
+  - name:         githubio
+    url:          myblog/githubio
+    type:         githubio
+    external:     false
+blog_1:    githubio
+blog_2:    python
+blog_3:    pytorch
+blog_4:    tensorflow
+
+
+#permalink: /:year/:month/:day/:title.html
