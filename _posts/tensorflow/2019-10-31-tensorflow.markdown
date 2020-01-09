@@ -23,7 +23,7 @@ docker run -it -p 8888:8888 tensorflow/tensorflow:nightly-py3-jupyter
 ## 1.2 基于Python安装
 - 先安装python，参照python study篇章
 
-- 直接安装tensorflow
+- 然后再直接安装tensorflow
 
 ```
  pip3 install --user --upgrade tensorflow  # install in $HOME

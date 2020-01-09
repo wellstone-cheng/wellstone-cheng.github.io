@@ -1,0 +1,169 @@
+---
+layout: post
+title: pytorch 实战1
+date: 2020-01-07 00:05:00
+author: wellstone-cheng
+img: pytorch.jpeg
+pytorch: true
+tags: [pytorch]
+---
+
+### pytorch 和numpy的转换
+```python
+import torch
+import numpy as np
+np_date_1=np.arange(4).reshape(4,)#1维数组
+np_date_2=np.arange(6).reshape(2,3)# numpy格式 取6个数据,分为2组,每组3个数据--2维数组
+np_date_3=np.arange(24).reshape(4,3,2)# 3维数组
+torch_data_1=torch.from_numpy(np_date_1)# 将numpy数据转成tensor格式
+tensor2array_1= torch_data_1.numpy()#将Tensor格式转成numpy格式
+torch_data_2=torch.from_numpy(np_date_2)# 将numpy数据转成tensor格式
+tensor2array_2= torch_data_2.numpy()#将Tensor格式转成numpy格式
+torch_data_3=torch.from_numpy(np_date_3)# 将numpy数据转成tensor格式
+tensor2array_3= torch_data_3.numpy()#将Tensor格式转成numpy格式
+print('\n numpy np_date_1',np_date_1)
+print('\n torch_data_1',torch_data_1)
+print('\n tensor2array_1',tensor2array_1)
+print('\n numpy np_date_2',np_date_2)
+print('\n torch_data_2',torch_data_2)
+print('\n tensor2array_2',tensor2array_2)
+print('\n numpy np_date_3',np_date_3)
+print('\n torch_data_3',torch_data_3)
+print('\n tensor2array_3',tensor2array_3)
+```
+打印如下
+```python
+ numpy np_date_1 [0 1 2 3]
+
+ torch_data_1 tensor([0, 1, 2, 3])
+
+ tensor2array_1 [0 1 2 3]
+
+ numpy np_date_2 [[0 1 2][3 4 5]]
+
+ torch_data_2 tensor([[0, 1, 2],[3, 4, 5]])
+
+ tensor2array_2 [[0 1 2][3 4 5]]
+
+ numpy np_date_3 [[[ 0  1][ 2  3][ 4  5]]
+                  [[ 6  7][ 8  9][10 11]]
+                  [[12 13][14 15][16 17]]
+                  [[18 19][20 21][22 23]]]
+
+ torch_data_3 tensor([[[ 0,  1],[ 2,  3],[ 4,  5]],
+                      [[ 6,  7],[ 8,  9],[10, 11]],
+                      [[12, 13],[14, 15],[16, 17]],
+                      [[18, 19],[20, 21],[22, 23]]])
+
+ tensor2array_3 [[[ 0  1][ 2  3][ 4  5]]
+                 [[ 6  7][ 8  9][10 11]]
+                 [[12 13][14 15][16 17]]
+                 [[18 19][20 21][22 23]]]
+
+```
+注 '['为1维, '[['为2维, '[[['为3维
+
+---
+#####  python 的列表(list)与元组(tuple)
+* 列表(list):列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出现。
+如下:
+```Python
+list1 = [1, 2, 3, 4, 5 ]
+```
+* 元组(tuple):Python的元组与列表类似，不同之处在于元组的元素不能修改。
+元组使用小括号，列表使用方括号。
+如下:
+```Python
+list1 = (1, 2, 3, 4, 5 )
+```
+#### Python 列表与numpy数组的区别和联系
+* 实例1
+```Python
+import numpy as np
+data=[-1,-2,1,2]  #列表list
+np_array=np.array(data)# numpy数组
+print(
+    '\n data',data,
+    '\n np_array',np_array
+)
+```
+打印如下:
+```
+ data [-1, -2, 1, 2] 
+ np_array [-1 -2  1  2]
+```
+* 实例2
+```Python
+import numpy as np
+np_array=np.arange(4) #numpy数组
+data=np_array.tolist() # 列表list
+print(
+    '\n data',data,
+    '\n np_array',np_array
+)
+```
+打印如下:
+```
+ data [0, 1, 2, 3] 
+ np_array [0 1 2 3]
+```
+
+* 区别 
+  python 列表和numpy数组都是用中括号包住,但前者各成员直接用逗号隔开,后者用空格隔开
+* 联系 
+  从列表list转成 numpy数组用 np.array()
+  从numpy数组转列表用.tolist
+---
+#### tensor vs numpy array
+从数据结构上来看，张量就是多维数组。
+* 区别: numpy array 用空格间隔开成员,tensor 用逗号间隔开并与小括号+中括号包裹
+ ```
+ numpy array     [0 1 2 3]
+ tensor         ([0, 1, 2, 3])
+ ```
+* 联系
+  Tensor 转 numpy array 用 .numpy()
+  numpy array 转 Tensor用 torch.from_numpy()
+---
+#### tensor vs python list
+* 实例1
+  ```Python
+  import numpy as np
+  import torch
+  np_data=np.arange(4) # numpy array
+  tensor=torch.from_numpy(np_data) #tensor
+  data=tensor.numpy().tolist() # 列表list
+  print(
+    '\n tensor',tensor,
+    '\n data', data
+  )
+  ```
+  打印如下:
+  ```
+   tensor tensor([0, 1, 2, 3]) 
+   data [0, 1, 2, 3]
+  ```
+* 实例2
+  ``` Python
+  import numpy as np
+  import torch
+  data=[0, 1, 2, 3]# 列表list
+  tensor=torch.Tensor(data) #tensor
+  print(
+    '\n data', data,
+    '\n tensor',tensor
+
+  )
+  ```
+  打印如下:
+  ```
+  data [0, 1, 2, 3] 
+  tensor tensor([0., 1., 2., 3.])
+  ```
+  * 区别
+  Tensor比 list多个小括号,
+  <font color='red'> 注意:以上讲的numpy array(中括号,空格)和Tensor(小括号,中括号,逗号)的格式都是说的输出显示格式,以上格式并不能作为输入进行赋值或者初始化,只有list的格式(中括号,逗号)才能作为输入 </font>
+  * 联系
+  Tensor 转 list :先Tensor转numpy再转列表 .numpy().tolist()
+  list 转Tensor : torch.Tensor()
+### 数学计算

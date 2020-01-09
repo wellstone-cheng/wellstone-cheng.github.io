@@ -100,7 +100,7 @@ cd pycharm-community-2019.2.4/bin
 sh pycharm.sh &
 ```
 
-### 2.1.2 配置
+### 2.1.2 配置ls
 
   进入File -> Settings -> project:Project Interpreter
   
@@ -168,19 +168,33 @@ Python 2.7.9 + 或 Python 3.4+ 以上版本都自带 pip 工具。
   pip list
   Package     Version  
   ----------- ---------
-  numpy       1.17.3   
-  Pillow      6.2.1    
-  pip         19.3.1   
-  setuptools  41.2.0   
-  six         1.12.0   
-  torch       1.3.0+cpu
-  torchvision 0.4.1+cpu
-  virtualenv  16.7.7   
+  numpy                1.17.3   
+  Pillow               6.2.1    
+  pip                  19.3.1   
+  setuptools           41.2.0   
+  six                  1.12.0   
+  tensorboard          2.0.1    
+  tensorflow           2.0.0    
+  tensorflow-estimator 2.0.1  
+  torch                1.3.0+cpu
+  torchvision          0.4.1+cpu
+  virtualenv           16.7.7   
 
  ```
 - pip安装包路径，在Python的安装路径下
 ```
-python3/lib/python3.7/site-packages
+# cd python3/lib/python3.7/site-packages
+# ls
+# 
+ tensorboard
+ tensorboard-2.0.1.dist-info
+ tensorflow
+ tensorflow-2.0.0.dist-info
+ tensorflow_core
+ tensorflow_estimator
+ tensorflow_estimator-2.0.1.dist-info
+ torch
+ torchvision
 ```
 
 
@@ -197,7 +211,8 @@ python3/lib/python3.7/site-packages
 wget -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-2019.10-Linux-x86_64.sh
 sh Anaconda3-2019.10-Linux-x86_64.sh
 ```
-注：anaconda中已包含python和conda,conda下载的包默认链接至自带的Python中，可以通过
+注：anaconda中已包含python和conda,
+conda下载的包默认链接至自带的Python中，可以通过
 
 - conda安装包清单
 ```
