@@ -1,0 +1,8 @@
+I"<h4 id="矩阵的乘法矩阵的点乘和叉乘">矩阵的乘法,矩阵的点乘和叉乘</h4>
+<hr />
+<h5 id="矩阵的乘法矩阵的叉乘">矩阵的乘法/矩阵的叉乘??</h5>
+<pre><code class="language-MATH">A=\left[ \begin{matrix} 1 &amp; 2 \\ 3 &amp; 4\end{matrix} \right]
+B=\left[ \begin{matrix} 1 &amp; 2 \\ 3 &amp; 4\end{matrix} \right]
+AB=\left[ \begin{matrix} 1*1+2*3 &amp; 1*2+2*4 \\ 3*1+4*3&amp; 3*2+4*4\end{matrix} \right]=\left[ \begin{matrix} 7 &amp; 9 \\ 15&amp; 22\end{matrix} \right]
+</code></pre>
+:ET

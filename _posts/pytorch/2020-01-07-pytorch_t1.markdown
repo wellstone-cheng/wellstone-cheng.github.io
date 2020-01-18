@@ -1,6 +1,6 @@
 ---
 layout: post
-title: pytorch 实战1
+title: Tensor, Numpy array, List
 date: 2020-01-07 00:05:00
 author: wellstone-cheng
 img: pytorch.jpeg
@@ -9,6 +9,7 @@ tags: [pytorch]
 ---
 
 ### pytorch 和numpy的转换
+
 ```python
 import torch
 import numpy as np
@@ -64,6 +65,7 @@ print('\n tensor2array_3',tensor2array_3)
 注 '['为1维, '[['为2维, '[[['为3维
 
 ---
+
 #####  python 的列表(list)与元组(tuple)
 * 列表(list):列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出现。
 如下:
@@ -76,6 +78,7 @@ list1 = [1, 2, 3, 4, 5 ]
 ```Python
 list1 = (1, 2, 3, 4, 5 )
 ```
+
 #### Python 列表与numpy数组的区别和联系
 * 实例1
 ```Python
@@ -114,6 +117,7 @@ print(
   从列表list转成 numpy数组用 np.array()
   从numpy数组转列表用.tolist
 ---
+
 #### tensor vs numpy array
 从数据结构上来看，张量就是多维数组。
 * 区别: numpy array 用空格间隔开成员,tensor 用逗号间隔开并与小括号+中括号包裹
@@ -125,6 +129,7 @@ print(
   Tensor 转 numpy array 用 .numpy()
   numpy array 转 Tensor用 torch.from_numpy()
 ---
+
 #### tensor vs python list
 * 实例1
   ```Python
@@ -166,4 +171,3 @@ print(
   * 联系
   Tensor 转 list :先Tensor转numpy再转列表 .numpy().tolist()
   list 转Tensor : torch.Tensor()
-### 数学计算

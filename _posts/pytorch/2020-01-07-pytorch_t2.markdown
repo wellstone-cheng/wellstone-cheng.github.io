@@ -1,0 +1,59 @@
+---
+layout: post
+title: 矩阵的乘法
+date: 2020-01-07 00:05:00
+author: wellstone-cheng
+img: pytorch.jpeg
+pytorch: true
+tags: [pytorch]
+---
+
+
+#### 矩阵的乘法,矩阵的点乘和叉乘
+---
+##### 矩阵的乘法/矩阵的叉乘??
+```MATH
+A=\left[ \begin{matrix} 1 & 2 \\ 3 & 4\end{matrix} \right]
+B=\left[ \begin{matrix} 1 & 2 \\ 3 & 4\end{matrix} \right]
+AB=\left[ \begin{matrix} 1*1+2*3 & 1*2+2*4 \\ 3*1+4*3& 3*2+4*4\end{matrix} \right]=\left[ \begin{matrix} 7 & 9 \\ 15& 22\end{matrix} \right]
+```
+
+* torch.mm 矩阵相乘
+* 代码运行如下
+```Python
+import numpy as np
+import torch
+data=[[1, 2],[3, 4]]# 列表list
+tensor=torch.Tensor(data) #tensor
+
+print(
+    '\n np.matmul', np.matmul(data,data),#矩阵乘法
+    '\n np.multiply', np.multiply(data,data),#矩阵点乘
+    '\n np.dot', np.dot(data,data),#矩阵叉乘 =矩阵乘法
+    '\n torch.mm',torch.mm(tensor,tensor), #矩阵乘法
+    '\n torch.mul',torch.mul(tensor,tensor), #矩阵点乘
+    '\n torch.dot',torch.dot(torch.from_numpy(np.array(data).flatten()),torch.from_numpy(np.array(data).flatten())) # torch.dot 只能适用于1维的矩阵
+)
+```
+打印如下:
+```shell
+np.matmul [[ 7 10][15 22]] 
+np.multiply [[ 1  4][ 9 16]] 
+np.dot [[ 7 10][15 22]] 
+torch.mm tensor([[ 7., 10.],[15., 22.]]) 
+torch.mul tensor([[ 1.,  4.],[ 9., 16.]]) 
+torch.dot tensor(30)
+```
+
+---
+##### 矩阵的点乘/哈达马积
+
+* torch.mul 矩阵点乘
+
+```MATH
+A=\left[ \begin{matrix} 1 & 2 \\ 3 & 4\end{matrix} \right]
+B=\left[ \begin{matrix} 1 & 2 \\ 3 & 4\end{matrix} \right]
+A*B=\left[ \begin{matrix} 1*1 & 2*2 \\ 3*3& 4*4\end{matrix} \right]=\left[ \begin{matrix} 1 & 4 \\ 9& 16\end{matrix} \right]
+```
+---
+##### 克罗内克积

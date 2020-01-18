@@ -1,0 +1,94 @@
+I"W<h4 id="所用函数">所用函数</h4>
+<ul>
+  <li>torch.unsqueeze
+torch.unsqueeze(input, dim, out=None) → Tensor
+对数据维度进行扩充,dim维扩维数
+    <font color="red"> torch只会处理2维的数据??? </font>
+    <p>Returns a new tensor with a dimension of size one inserted at the specified position.</p>
+
+    <p>实例如下:</p>
+    <pre><code class="language-Python">import torch
+x=[1,2,3,4]
+x_tenser=torch.Tensor(x)
+x_tenser_0=torch.unsqueeze(x_tenser,0)
+x_tenser_1=torch.unsqueeze(x_tenser,1)
+print(
+  '\n x',x,
+  '\n x_tenser',x_tenser,
+  '\n x_tenser_0',x_tenser_0,
+  '\n x_tenser_1',x_tenser_1
+)
+</code></pre>
+    <p>打印如下</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> x <span class="o">[</span>1, 2, 3, 4] 
+ x_tenser tensor<span class="o">([</span>1., 2., 3., 4.]<span class="o">)</span> 
+ x_tenser_0 tensor<span class="o">([[</span>1., 2., 3., 4.]]<span class="o">)</span> 
+ x_tenser_1 tensor<span class="o">([[</span>1.],[2.],[3.],[4.]]<span class="o">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>torch.linspace
+torch.linspace(start, end, steps=100, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) → Tensor
+Returns a one-dimensional tensor of steps equally spaced points between start and end.
+The output tensor is 1-D of size steps.</p>
+  </li>
+  <li>torch.nn.Linear
+CLASS torch.nn.Linear(in_features, out_features, bias=True)</li>
+</ul>
+
+<h4 id="建立数据集">建立数据集</h4>
+<pre><code class="language-Python">import torch
+import matplotlib.pyplot as plt
+x_l=torch.linspace(-1,1,100)
+x=torch.unsqueeze(x_l,dim=1) #torch.unsqueeze对数据维度进行扩充
+y=x.pow(2)+0.2*torch.rand(x.size())# pow 幂
+plt.scatter(x.numpy(),y.numpy())
+plt.show()
+</code></pre>
+<p>显示图片如下</p>
+
+<p><img src="/assets/img/scatter.png" alt="baby" /></p>
+
+<h4 id="回归">回归</h4>
+<pre><code class="language-Python">import torch
+import matplotlib.pyplot as plt
+import torch.nn.functional as F
+x = torch.unsqueeze(torch.linspace(-1, 1, 100), dim=1)  # x data (tensor), shape=(100, 1)
+y = x.pow(2) + 0.2*torch.rand(x.size())                 # noisy y data (tensor), shape=(100, 1)
+
+class Net(torch.nn.Module):
+    def __init__(self,n_feature,n_hidden,n_output):
+        super(Net,self).__init__()
+        self.hidden=torch.nn.Linear(n_feature,n_hidden)
+        self.predict=torch.nn.Linear(n_hidden,n_output)
+
+    def forward(self, x):
+        x = F.relu(self.hidden(x))
+        x = self.predict(x)
+        return x
+
+net = Net(n_feature=1,n_hidden=10,n_output=1)
+print(net)
+
+optimizer = torch.optim.SGD(net.parameters(),lr=0.2)
+loss_func = torch.nn.MSELoss()
+
+plt.ion()
+
+for t in range(2000):
+    prediction = net(x)
+    loss = loss_func(prediction,y)
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+    if t % 5 == 0:
+        plt.cla()
+        plt.scatter(x.numpy(),y.numpy())
+        plt.plot(x.numpy(),prediction.data.numpy(),'r-',lw=5)
+        plt.text(0.5,0,'Loss=%.4f' % loss.data.numpy(), fontdict={'size': 20, 'color':  'red'})
+        plt.pause(0.1)
+
+plt.ioff()
+plt.show()
+</code></pre>
+:ET

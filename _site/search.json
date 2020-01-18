@@ -1,6 +1,38 @@
 [
   
     {
+      "title"    : "关系拟合(回归)",
+      "category" : "",
+      "tags"     : "pytorch",
+      "url"      : "/pytorch_t4/",
+      "date"     : "2020-01-17 08:05:00 +0800"
+    } ,
+  
+    {
+      "title"    : "激励函数",
+      "category" : "",
+      "tags"     : "pytorch",
+      "url"      : "/pytorch_t3/",
+      "date"     : "2020-01-07 08:05:00 +0800"
+    } ,
+  
+    {
+      "title"    : "矩阵的乘法",
+      "category" : "",
+      "tags"     : "pytorch",
+      "url"      : "/pytorch_t2/",
+      "date"     : "2020-01-07 08:05:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Tensor, Numpy array, List",
+      "category" : "",
+      "tags"     : "pytorch",
+      "url"      : "/pytorch_t1/",
+      "date"     : "2020-01-07 08:05:00 +0800"
+    } ,
+  
+    {
       "title"    : "githubio",
       "category" : "",
       "tags"     : "githubio",
@@ -17,10 +49,10 @@
     } ,
   
     {
-      "title"    : "pytorch",
+      "title"    : "pytorch 安装",
       "category" : "",
       "tags"     : "pytorch",
-      "url"      : "/pytorch/",
+      "url"      : "/pytorch_t0/",
       "date"     : "2019-10-27 08:05:00 +0800"
     } ,
   

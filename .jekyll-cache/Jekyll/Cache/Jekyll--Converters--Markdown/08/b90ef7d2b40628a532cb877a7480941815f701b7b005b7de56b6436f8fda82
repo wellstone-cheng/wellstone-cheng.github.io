@@ -1,0 +1,8 @@
+I"�<h3 id="常用的激励函数relu-sigmoid-tanh-softplus">常用的激励函数relu, sigmoid, tanh, softplus</h3>
+<p>```python
+import torch
+import torch.nn.functional as F
+import matplotlib.pyplot as plt
+x=torch.linspace(-5,5,200) #
+x_np=x.numpy()</p>
+:ET

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>pytorch - Blog - wellstone_cheng</title>
+	<title>矩阵的乘法 - Blog - wellstone_cheng</title>
 	<meta name="description" content="">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -128,7 +128,7 @@
 
             
 
-			 <li><a  href="myblog/pytorch"  data-hover="pytorch">pytorch(1)</a></li>
+			 <li><a  href="myblog/pytorch"  data-hover="pytorch">pytorch(5)</a></li>
 		 
             
 
@@ -239,53 +239,63 @@
     <div class="wrapper">
       <div class="page-content">
         <div class="header-page">
-          <h1 class="page-title">pytorch</h1>
-          <div class="page-date"><time datetime="2019-10-27 08:05:00 +0800">2019, Oct 27</time>
+          <h1 class="page-title">矩阵的乘法</h1>
+          <div class="page-date"><time datetime="2020-01-07 08:05:00 +0800">2020, Jan 07</time>
 		  <span id="busuanzi_container_page_pv"> | 访问量：<span id="busuanzi_value_page_pv"></span> 次</span>
 		  </div>
         </div>
-        <h1 id="1-pytorch-安装">1 pytorch 安装</h1>
+        <h4 id="矩阵的乘法矩阵的点乘和叉乘">矩阵的乘法,矩阵的点乘和叉乘</h4>
+<hr />
 
-<h2 id="11-基于docker安装">1.1 基于docker安装</h2>
+<h5 id="矩阵的乘法矩阵的叉乘">矩阵的乘法/矩阵的叉乘??</h5>
+<pre><code class="language-MATH">A=\left[ \begin{matrix} 1 &amp; 2 \\ 3 &amp; 4\end{matrix} \right]
+B=\left[ \begin{matrix} 1 &amp; 2 \\ 3 &amp; 4\end{matrix} \right]
+AB=\left[ \begin{matrix} 1*1+2*3 &amp; 1*2+2*4 \\ 3*1+4*3&amp; 3*2+4*4\end{matrix} \right]=\left[ \begin{matrix} 7 &amp; 9 \\ 15&amp; 22\end{matrix} \right]
+</code></pre>
 
-<h3 id="111-参照tensorflow的安装可以直接在其镜像中安装pytorch">1.1.1 参照tensorflow的安装，可以直接在其镜像中安装pytorch</h3>
 <ul>
-  <li>直接从官网下载
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install torch-1.3.0-cp36-cp36m-manylinux1_x86_64.whl
-</code></pre></div>    </div>
-  </li>
-  <li>从国内镜像下载
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install -i http://pypi.doubanio.com/simple/torch/ torch-1.3.0-cp36-cp36m-manylinux1_x86_64.whl
-WARNING: Requirement 'torch-1.3.0-cp36-cp36m-manylinux1_x86_64.whl' looks like a filename, but the file does not exist
-Looking in indexes: http://pypi.doubanio.com/simple/torch/
-Processing /torch-1.3.0-cp36-cp36m-manylinux1_x86_64.whl
-ERROR: Could not install packages due to an EnvironmentError: [Errno 2] No such file or directory: '/torch-1.3.0-cp36-cp36m-manylinux1_x86_64.whl'
-</code></pre></div>    </div>
-    <p>改成直接去http://pypi.doubanio.com/simple/torch/直接下载文件后再安装</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install torch-1.3.0-cp36-cp36m-manylinux1_x86_64.whl
-</code></pre></div>    </div>
-    <h2 id="12-本地安装">1.2 本地安装</h2>
-  </li>
-</ul>
-
-<h2 id="13-验证">1.3 验证</h2>
-<ul>
-  <li>Python输入
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from __future__ import print_function
+  <li>torch.mm 矩阵相乘</li>
+  <li>代码运行如下
+```Python
+import numpy as np
 import torch
-x = torch.rand(5, 3)
-print(x)
-</code></pre></div>    </div>
-  </li>
-  <li>输出
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tensor([[0.5671, 0.7577, 0.3835],
-      [0.0772, 0.0404, 0.6050],
-      [0.3107, 0.7565, 0.5558],
-      [0.5457, 0.9647, 0.0046],
-      [0.5192, 0.0422, 0.6586]])
-</code></pre></div>    </div>
-  </li>
+data=[[1, 2],[3, 4]]# 列表list
+tensor=torch.Tensor(data) #tensor</li>
 </ul>
+
+<p>print(
+    ‘\n np.matmul’, np.matmul(data,data),#矩阵乘法
+    ‘\n np.multiply’, np.multiply(data,data),#矩阵点乘
+    ‘\n np.dot’, np.dot(data,data),#矩阵叉乘 =矩阵乘法
+    ‘\n torch.mm’,torch.mm(tensor,tensor), #矩阵乘法
+    ‘\n torch.mul’,torch.mul(tensor,tensor), #矩阵点乘
+    ‘\n torch.dot’,torch.dot(torch.from_numpy(np.array(data).flatten()),torch.from_numpy(np.array(data).flatten())) # torch.dot 只能适用于1维的矩阵
+)</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>打印如下:
+```shell
+np.matmul [[ 7 10][15 22]] 
+np.multiply [[ 1  4][ 9 16]] 
+np.dot [[ 7 10][15 22]] 
+torch.mm tensor([[ 7., 10.],[15., 22.]]) 
+torch.mul tensor([[ 1.,  4.],[ 9., 16.]]) 
+torch.dot tensor(30)
+</code></pre></div></div>
+
+<hr />
+
+<h5 id="矩阵的点乘哈达马积">矩阵的点乘/哈达马积</h5>
+
+<ul>
+  <li>torch.mul 矩阵点乘</li>
+</ul>
+
+<pre><code class="language-MATH">A=\left[ \begin{matrix} 1 &amp; 2 \\ 3 &amp; 4\end{matrix} \right]
+B=\left[ \begin{matrix} 1 &amp; 2 \\ 3 &amp; 4\end{matrix} \right]
+A*B=\left[ \begin{matrix} 1*1 &amp; 2*2 \\ 3*3&amp; 4*4\end{matrix} \right]=\left[ \begin{matrix} 1 &amp; 4 \\ 9&amp; 16\end{matrix} \right]
+</code></pre>
+<hr />
+
+<h5 id="克罗内克积">克罗内克积</h5>
 
   </article>
   <div class="search-box">

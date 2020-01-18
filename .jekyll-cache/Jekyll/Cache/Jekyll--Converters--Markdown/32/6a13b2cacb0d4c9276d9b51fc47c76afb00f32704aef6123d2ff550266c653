@@ -1,0 +1,204 @@
+I","<h1 id="1-tensorflow-安装">1 Tensorflow 安装</h1>
+
+<h2 id="11-基于docker安装">1.1 基于docker安装</h2>
+<p>docker方式安装，并以jupyter server运行，可以通过网页远程访问</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -it -p 8888:8888 tensorflow/tensorflow:nightly-py3-jupyter
+</code></pre></div></div>
+<p>注：可以在jupyter页面通过new Terminal打开终端进行操作。</p>
+
+<h2 id="12-基于python安装">1.2 基于Python安装</h2>
+<ul>
+  <li>
+    <p>先安装python，参照python study篇章</p>
+  </li>
+  <li>
+    <p>然后再直接安装tensorflow</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> pip3 install --user --upgrade tensorflow  # install in $HOME
+</code></pre></div></div>
+
+<ul>
+  <li>验证安装</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+</code></pre></div></div>
+
+<h2 id="13-本地基于pip虚拟环境安装">1.3 本地基于pip虚拟环境安装</h2>
+<ul>
+  <li>
+    <p>先安装python，参照python study篇章</p>
+  </li>
+  <li>
+    <p>安装virtualenv</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 install -U virtualenv 
+</code></pre></div></div>
+
+<ul>
+  <li>启动虚拟环境</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        virtualenv --system-site-packages -p python3 ./venv
+        source ./venv/bin/activate  # sh, bash, ksh, or zsh
+（venv） pip install --upgrade pip
+（venv） pip list  # show packages installed within the virtual environment
+（venv） deactivate  # don't exit until you're done using TensorFlow
+</code></pre></div></div>
+
+<ul>
+  <li>在virtualenv安装tensorflow</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>（venv）pip install --upgrade tensorflow
+  Collecting tensorflow
+  Cache entry deserialization failed, entry ignored
+  Downloading https://files.pythonhosted.org/packages/de/f0/96fb2e0412ae9692dbf400e5b04432885f677ad6241c088ccc5fe7724d69/tensorflow-1.14.0-cp36-cp36m-manylinux1_x86_64.whl (109.2MB)
+</code></pre></div></div>
+
+<ul>
+  <li>验证安装</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>（venv）python -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+2019-11-02 22:41:53.733300: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2019-11-02 22:41:53.752820: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3408000000 Hz
+2019-11-02 22:41:53.753392: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x50a5470 executing computations on platform Host. Devices:
+2019-11-02 22:41:53.753417: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
+tf.Tensor(1447.9882, shape=(), dtype=float32)
+</code></pre></div></div>
+<h2 id="14本地基于conda虚拟环境安装">1.4本地基于conda虚拟环境安装</h2>
+
+<ul>
+  <li>
+    <p>先安装python，参照python study篇章</p>
+  </li>
+  <li>
+    <p>启动虚拟环境</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        conda create -n venv pip python=3.7  # select python version
+        source activate venv
+（venv） pip install --ignore-installed --upgrade packageURL
+（venv） source deactivate
+</code></pre></div></div>
+
+<ul>
+  <li>在virtualenv安装tensorflow</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>（venv）pip install --upgrade tensorflow
+</code></pre></div></div>
+
+<ul>
+  <li>验证安装</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>（venv）python -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+</code></pre></div></div>
+
+<h2 id="15-安装过程遇到的问题及解决方案">1.5 安装过程遇到的问题及解决方案</h2>
+
+<h3 id="151-cache-entry-deserialization-failed">1.5.1 Cache entry deserialization failed</h3>
+
+<ul>
+  <li>error details</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># pip3 install --upgrade tensorflow
+Collecting tensorflow
+  Cache entry deserialization failed, entry ignored
+</code></pre></div></div>
+<ul>
+  <li>sulotion：升级pip</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 install --upgrade pip
+</code></pre></div></div>
+
+<h3 id="152-futurewarning">1.5.2 FutureWarning</h3>
+
+<ul>
+  <li>error details</li>
+</ul>
+
+<p>环境1 报错信息：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># python3 -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+2019-11-03 03:50:03.730110: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2019-11-03 03:50:03.750617: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3408000000 Hz
+2019-11-03 03:50:03.751483: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x4ebcdc0 executing computations on platform Host. Devices:
+2019-11-03 03:50:03.751528: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
+tf.Tensor(398.2649, shape=(), dtype=float32)
+</code></pre></div></div>
+
+<p>环境2 保报错信息：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+/usr/local/lib/python3.6/dist-packages/tensorflow/python/framework/dtypes.py:516: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+</code></pre></div></div>
+
+<p>-Analysis
+  环境1： Python 3.6.8 + pip 19.3.1 + numpy 1.17.3 +tensorflow 2.0.0 –&gt; no this error
+  环境2： Python 3.6.8 + pip 9.0.1 + numpy 1.17.3 +tensorflow 1.14.0 –&gt; have this error</p>
+
+<ul>
+  <li>solution
+ 将环境2的numpy版本降至1.16.0</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># pip3 install numpy==1.16.0
+# python3 -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+Tensor("Sum:0", shape=(), dtype=float32)
+</code></pre></div></div>
+
+<h3 id="153-your-cpu-supports-instructions-that-this-tensorflow-binary-was-not-compiled-to-use-avx2-fma">1.5.3 Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA</h3>
+
+<ul>
+  <li>error details</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+2019-11-02 22:41:53.733300: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2019-11-02 22:41:53.752820: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3408000000 Hz
+2019-11-02 22:41:53.753392: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x50a5470 executing computations on platform Host. Devices:
+2019-11-02 22:41:53.753417: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
+tf.Tensor(1447.9882, shape=(), dtype=float32)
+</code></pre></div></div>
+<ul>
+  <li>
+    <p>Analysis</p>
+
+    <p>环境3：Python 3.7.5 + pip 19.3.1 + numpy 1.17.3 +tensorflow 2.0.0 –&gt; have this error
+环境2: Python 3.6.8 + pip 9.0.1 + numpy 1.16.0 +tensorflow 1.14.0 –&gt; no this error
+环境4: Python 3.6.8 + pip 19.3.1 + numpy 1.17.3 +tf-nightly 2.1.0 –&gt; have this error,but in jupyter no error</p>
+  </li>
+  <li>
+    <p>solution
+ 更换tensorflow版本？</p>
+  </li>
+</ul>
+
+<h2 id="16-验证">1.6 验证</h2>
+<ul>
+  <li>Python输入</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import tensorflow as tf;
+print(tf.reduce_sum(tf.random.normal([1000, 1000])))
+</code></pre></div></div>
+
+<ul>
+  <li>输出</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tf.Tensor(-380.3409, shape=(), dtype=float32)
+</code></pre></div></div>
+:ET

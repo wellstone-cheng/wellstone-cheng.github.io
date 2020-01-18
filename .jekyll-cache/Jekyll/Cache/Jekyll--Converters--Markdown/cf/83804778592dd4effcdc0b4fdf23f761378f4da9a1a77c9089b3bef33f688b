@@ -1,0 +1,40 @@
+I"�<h3 id="常用的激励函数relu-sigmoid-tanh-softplus">常用的激励函数relu, sigmoid, tanh, softplus</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">x</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span> <span class="c1">#
+</span><span class="n">x_np</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+
+<span class="n">y_relu</span><span class="o">=</span><span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">y_sigmoid</span> <span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>     <span class="c1">#        F.sigmoid(x).numpy()
+</span><span class="n">y_tanh</span> <span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>           <span class="c1">#F.tanh(x).numpy()
+</span><span class="n">y_softplus</span> <span class="o">=</span><span class="n">F</span><span class="o">.</span><span class="n">softplus</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>             <span class="c1"># 图片编号为1,尺寸为宽高8*6英寸,编号相同即在同一张图片上显示
+</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_np</span><span class="p">,</span><span class="n">y_relu</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>                          <span class="c1">#y轴的范围为-1到5
+</span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">'best'</span><span class="p">)</span>                  <span class="c1">#给图加上图例,loc为位置
+</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_np</span><span class="p">,</span><span class="n">y_sigmoid</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">'sigmoid'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">1.1</span><span class="p">)</span>                      <span class="c1">#y轴的范围为-0.1到1.1
+</span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">'best'</span><span class="p">)</span>                  <span class="c1">#给图加上图例,loc为位置
+</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">223</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_np</span><span class="p">,</span><span class="n">y_tanh</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">'tanh'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.1</span><span class="p">)</span>                        <span class="c1">#y轴的范围为-1.1到1.1
+</span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">'best'</span><span class="p">)</span>                    <span class="c1">#给图加上图例,loc为位置
+</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">224</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_np</span><span class="p">,</span><span class="n">y_softplus</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">'softplus'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>                          <span class="c1">#y轴的范围为-1.1到1.1
+</span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">'upper left'</span><span class="p">)</span>              <span class="c1">#给图加上图例,loc为位置
+</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+<p>显示图片如下</p>
+
+<p><img src="/assets/img/Afunction.png" alt="baby" /></p>
+:ET

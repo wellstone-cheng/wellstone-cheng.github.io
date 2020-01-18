@@ -1,0 +1,30 @@
+I"<h2 id="1-github-io主流框架">1 github io主流框架</h2>
+<ul>
+  <li>github推荐的jekyll</li>
+  <li>Hexo</li>
+  <li>pandoc</li>
+</ul>
+
+<h2 id="2-基于jekyll">2 基于jekyll</h2>
+<p>jekylly是一种静态网页生成器，包含一些用markdown语法写的文件的文件夹；通过markdown和Liquid转换器
+生成一个网站.</p>
+
+<h3 id="21-文件目录">2.1 文件目录</h3>
+
+<h4 id="211-_configyml-存储配置数据把配置写在这个文件里面可以让你不用在命令行中写">2.1.1 _config.yml :存储配置数据，把配置写在这个文件里面，可以让你不用在命令行中写。</h4>
+<p>permalink：这个规定了你博客的URL地址
+   如下</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   permalink: /themes/:title/
+</code></pre></div></div>
+<p>对应博客网址为github.io/themes/title/</p>
+<h4 id="212-_layouts里面的文件通过content包含_posts里面的文章">2.1.2 _layouts:里面的文件通过{content}包含_posts里面的文章</h4>
+<p>注：！！！！使用下面符号双中括号+content，在markdown中会造成引用其他markdown文件的混乱异常情况。</p>
+
+<h4 id="213-indexhtml">2.1.3 index.html</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>layout: default
+title: wellstone-cheng
+</code></pre></div></div>
+<h2 id="3-调试工具">3 调试工具</h2>
+<h3 id="31-利用chrome或者firefox可以更好的调整页面设计">3.1 利用chrome或者Firefox可以更好的调整页面设计</h3>
+:ET

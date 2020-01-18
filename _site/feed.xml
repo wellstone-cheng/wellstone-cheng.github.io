@@ -1,5 +1,356 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-01T18:15:40+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Blog - wellstone_cheng</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-</subtitle><author><name>wellstone_cheng</name></author><entry><title type="html">githubio</title><link href="http://localhost:4000/githubio/" rel="alternate" type="text/html" title="githubio" /><published>2019-12-25T08:05:00+08:00</published><updated>2019-12-25T08:05:00+08:00</updated><id>http://localhost:4000/githubio</id><content type="html" xml:base="http://localhost:4000/githubio/">&lt;h2 id=&quot;1-github-io主流框架&quot;&gt;1 github io主流框架&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-19T06:59:45+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Blog - wellstone_cheng</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</subtitle><author><name>wellstone_cheng</name></author><entry><title type="html">关系拟合(回归)</title><link href="http://localhost:4000/pytorch_t4/" rel="alternate" type="text/html" title="关系拟合(回归)" /><published>2020-01-17T08:05:00+08:00</published><updated>2020-01-17T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t4</id><content type="html" xml:base="http://localhost:4000/pytorch_t4/">&lt;h4 id=&quot;所用函数&quot;&gt;所用函数&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;torch.unsqueeze
+torch.unsqueeze(input, dim, out=None) → Tensor
+对数据维度进行扩充,dim维扩维数
+    &lt;font color=&quot;red&quot;&gt; torch只会处理2维的数据??? &lt;/font&gt;
+    &lt;p&gt;Returns a new tensor with a dimension of size one inserted at the specified position.&lt;/p&gt;
+
+    &lt;p&gt;实例如下:&lt;/p&gt;
+    &lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;import torch
+x=[1,2,3,4]
+x_tenser=torch.Tensor(x)
+x_tenser_0=torch.unsqueeze(x_tenser,0)
+x_tenser_1=torch.unsqueeze(x_tenser,1)
+print(
+  '\n x',x,
+  '\n x_tenser',x_tenser,
+  '\n x_tenser_0',x_tenser_0,
+  '\n x_tenser_1',x_tenser_1
+)
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;p&gt;打印如下&lt;/p&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; x &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;1, 2, 3, 4] 
+ x_tenser tensor&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;1., 2., 3., 4.]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+ x_tenser_0 tensor&lt;span class=&quot;o&quot;&gt;([[&lt;/span&gt;1., 2., 3., 4.]]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+ x_tenser_1 tensor&lt;span class=&quot;o&quot;&gt;([[&lt;/span&gt;1.],[2.],[3.],[4.]]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;torch.linspace
+torch.linspace(start, end, steps=100, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) → Tensor
+Returns a one-dimensional tensor of steps equally spaced points between start and end.
+The output tensor is 1-D of size steps.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;torch.nn.Linear
+CLASS torch.nn.Linear(in_features, out_features, bias=True)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;建立数据集&quot;&gt;建立数据集&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;import torch
+import matplotlib.pyplot as plt
+x_l=torch.linspace(-1,1,100)
+x=torch.unsqueeze(x_l,dim=1) #torch.unsqueeze对数据维度进行扩充
+y=x.pow(2)+0.2*torch.rand(x.size())# pow 幂
+plt.scatter(x.numpy(),y.numpy())
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示图片如下&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/scatter.png&quot; alt=&quot;baby&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;回归&quot;&gt;回归&lt;/h4&gt;
+
+&lt;p&gt;代码如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;import torch
+import matplotlib.pyplot as plt
+import torch.nn.functional as F
+x = torch.unsqueeze(torch.linspace(-1, 1, 100), dim=1)  # x data (tensor), shape=(100, 1)
+y = x.pow(2) + 0.2*torch.rand(x.size())                 # noisy y data (tensor), shape=(100, 1)
+
+class Net(torch.nn.Module):
+    def __init__(self,n_feature,n_hidden,n_output):
+        super(Net,self).__init__()
+        self.hidden=torch.nn.Linear(n_feature,n_hidden)
+        self.predict=torch.nn.Linear(n_hidden,n_output)
+
+    def forward(self, x):
+        x = F.relu(self.hidden(x))
+        x = self.predict(x)
+        return x
+
+net = Net(n_feature=1,n_hidden=10,n_output=1)
+print(net)
+
+optimizer = torch.optim.SGD(net.parameters(),lr=0.2)
+loss_func = torch.nn.MSELoss()
+
+plt.ion()
+
+for t in range(2000):
+    prediction = net(x)
+    loss = loss_func(prediction,y)
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+    if t % 5 == 0:
+        plt.cla()
+        plt.scatter(x.numpy(),y.numpy())
+        plt.plot(x.numpy(),prediction.data.numpy(),'r-',lw=5)
+        plt.text(0.5,0,'Loss=%.4f' % loss.data.numpy(), fontdict={'size': 20, 'color':  'red'})
+        plt.pause(0.1)
+
+plt.ioff()
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示图片如下&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/regression.png&quot; alt=&quot;baby&quot; /&gt;&lt;/p&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">所用函数 torch.unsqueeze torch.unsqueeze(input, dim, out=None) → Tensor 对数据维度进行扩充,dim维扩维数 torch只会处理2维的数据??? Returns a new tensor with a dimension of size one inserted at the specified position.</summary></entry><entry><title type="html">Tensor, Numpy array, List</title><link href="http://localhost:4000/pytorch_t1/" rel="alternate" type="text/html" title="Tensor, Numpy array, List" /><published>2020-01-07T08:05:00+08:00</published><updated>2020-01-07T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t1</id><content type="html" xml:base="http://localhost:4000/pytorch_t1/">&lt;h3 id=&quot;pytorch-和numpy的转换&quot;&gt;pytorch 和numpy的转换&lt;/h3&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;np_date_1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,)&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#1维数组
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np_date_2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# numpy格式 取6个数据,分为2组,每组3个数据--2维数组
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np_date_3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 3维数组
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch_data_1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np_date_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 将numpy数据转成tensor格式
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor2array_1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch_data_1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#将Tensor格式转成numpy格式
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch_data_2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np_date_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 将numpy数据转成tensor格式
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor2array_2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch_data_2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#将Tensor格式转成numpy格式
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch_data_3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np_date_3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 将numpy数据转成tensor格式
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor2array_3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch_data_3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#将Tensor格式转成numpy格式
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; numpy np_date_1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np_date_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; torch_data_1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch_data_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; tensor2array_1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor2array_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; numpy np_date_2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np_date_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; torch_data_2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch_data_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; tensor2array_2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor2array_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; numpy np_date_3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np_date_3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; torch_data_3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch_data_3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; tensor2array_3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor2array_3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;打印如下&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np_date_1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+ &lt;span class=&quot;n&quot;&gt;torch_data_1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+
+ &lt;span class=&quot;n&quot;&gt;tensor2array_1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+ &lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np_date_2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+
+ &lt;span class=&quot;n&quot;&gt;torch_data_2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
+
+ &lt;span class=&quot;n&quot;&gt;tensor2array_2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+
+ &lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np_date_3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+                  &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+                  &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+                  &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;21&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;23&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]]&lt;/span&gt;
+
+ &lt;span class=&quot;n&quot;&gt;torch_data_3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt;
+                      &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt;
+                      &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt;
+                      &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;21&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;23&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]])&lt;/span&gt;
+
+ &lt;span class=&quot;n&quot;&gt;tensor2array_3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+                 &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+                 &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+                 &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;21&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;23&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]]&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;注 ‘[‘为1维, ‘[[‘为2维, ‘[[[‘为3维&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&quot;python-的列表list与元组tuple&quot;&gt;python 的列表(list)与元组(tuple)&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;列表(list):列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出现。
+如下:
+    &lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;list1 = [1, 2, 3, 4, 5 ]
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;元组(tuple):Python的元组与列表类似，不同之处在于元组的元素不能修改。
+元组使用小括号，列表使用方括号。
+如下:
+    &lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;list1 = (1, 2, 3, 4, 5 )
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;python-列表与numpy数组的区别和联系&quot;&gt;Python 列表与numpy数组的区别和联系&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;实例1
+    &lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;import numpy as np
+data=[-1,-2,1,2]  #列表list
+np_array=np.array(data)# numpy数组
+print(
+  '\n data',data,
+  '\n np_array',np_array
+)
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;p&gt;打印如下:&lt;/p&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; data [-1, -2, 1, 2] 
+ np_array [-1 -2  1  2]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;实例2
+    &lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;import numpy as np
+np_array=np.arange(4) #numpy数组
+data=np_array.tolist() # 列表list
+print(
+  '\n data',data,
+  '\n np_array',np_array
+)
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;p&gt;打印如下:&lt;/p&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; data [0, 1, 2, 3] 
+ np_array [0 1 2 3]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;区别 
+python 列表和numpy数组都是用中括号包住,但前者各成员直接用逗号隔开,后者用空格隔开&lt;/li&gt;
+  &lt;li&gt;联系 
+从列表list转成 numpy数组用 np.array()
+从numpy数组转列表用.tolist
+—&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;tensor-vs-numpy-array&quot;&gt;tensor vs numpy array&lt;/h4&gt;
+&lt;p&gt;从数据结构上来看，张量就是多维数组。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;区别: numpy array 用空格间隔开成员,tensor 用逗号间隔开并与小括号+中括号包裹
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; numpy array     [0 1 2 3]
+ tensor         ([0, 1, 2, 3])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;联系
+Tensor 转 numpy array 用 .numpy()
+numpy array 转 Tensor用 torch.from_numpy()
+—&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;tensor-vs-python-list&quot;&gt;tensor vs python list&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;实例1
+    &lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;import numpy as np
+import torch
+np_data=np.arange(4) # numpy array
+tensor=torch.from_numpy(np_data) #tensor
+data=tensor.numpy().tolist() # 列表list
+print(
+  '\n tensor',tensor,
+  '\n data', data
+)
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;p&gt;打印如下:&lt;/p&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; tensor tensor([0, 1, 2, 3]) 
+ data [0, 1, 2, 3]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;实例2
+    &lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;import numpy as np
+import torch
+data=[0, 1, 2, 3]# 列表list
+tensor=torch.Tensor(data) #tensor
+print(
+  '\n data', data,
+  '\n tensor',tensor
+
+)
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;p&gt;打印如下:&lt;/p&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;data [0, 1, 2, 3] 
+tensor tensor([0., 1., 2., 3.])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;ul&gt;
+      &lt;li&gt;区别
+Tensor比 list多个小括号,&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;font color=&quot;red&quot;&gt; 注意:以上讲的numpy array(中括号,空格)和Tensor(小括号,中括号,逗号)的格式都是说的输出显示格式,以上格式并不能作为输入进行赋值或者初始化,只有list的格式(中括号,逗号)才能作为输入 &lt;/font&gt;
+    &lt;ul&gt;
+      &lt;li&gt;联系
+Tensor 转 list :先Tensor转numpy再转列表 .numpy().tolist()
+list 转Tensor : torch.Tensor()&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">pytorch 和numpy的转换</summary></entry><entry><title type="html">矩阵的乘法</title><link href="http://localhost:4000/pytorch_t2/" rel="alternate" type="text/html" title="矩阵的乘法" /><published>2020-01-07T08:05:00+08:00</published><updated>2020-01-07T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t2</id><content type="html" xml:base="http://localhost:4000/pytorch_t2/">&lt;h4 id=&quot;矩阵的乘法矩阵的点乘和叉乘&quot;&gt;矩阵的乘法,矩阵的点乘和叉乘&lt;/h4&gt;
+&lt;hr /&gt;
+&lt;h5 id=&quot;矩阵的乘法矩阵的叉乘&quot;&gt;矩阵的乘法/矩阵的叉乘??&lt;/h5&gt;
+&lt;pre&gt;&lt;code class=&quot;language-MATH&quot;&gt;A=\left[ \begin{matrix} 1 &amp;amp; 2 \\ 3 &amp;amp; 4\end{matrix} \right]
+B=\left[ \begin{matrix} 1 &amp;amp; 2 \\ 3 &amp;amp; 4\end{matrix} \right]
+AB=\left[ \begin{matrix} 1*1+2*3 &amp;amp; 1*2+2*4 \\ 3*1+4*3&amp;amp; 3*2+4*4\end{matrix} \right]=\left[ \begin{matrix} 7 &amp;amp; 9 \\ 15&amp;amp; 22\end{matrix} \right]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;torch.mm 矩阵相乘&lt;/li&gt;
+  &lt;li&gt;代码运行如下
+```Python
+import numpy as np
+import torch
+data=[[1, 2],[3, 4]]# 列表list
+tensor=torch.Tensor(data) #tensor&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;print(
+    ‘\n np.matmul’, np.matmul(data,data),#矩阵乘法
+    ‘\n np.multiply’, np.multiply(data,data),#矩阵点乘
+    ‘\n np.dot’, np.dot(data,data),#矩阵叉乘 =矩阵乘法
+    ‘\n torch.mm’,torch.mm(tensor,tensor), #矩阵乘法
+    ‘\n torch.mul’,torch.mul(tensor,tensor), #矩阵点乘
+    ‘\n torch.dot’,torch.dot(torch.from_numpy(np.array(data).flatten()),torch.from_numpy(np.array(data).flatten())) # torch.dot 只能适用于1维的矩阵
+)&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;打印如下:
+```shell
+np.matmul [[ 7 10][15 22]] 
+np.multiply [[ 1  4][ 9 16]] 
+np.dot [[ 7 10][15 22]] 
+torch.mm tensor([[ 7., 10.],[15., 22.]]) 
+torch.mul tensor([[ 1.,  4.],[ 9., 16.]]) 
+torch.dot tensor(30)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h5 id=&quot;矩阵的点乘哈达马积&quot;&gt;矩阵的点乘/哈达马积&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;torch.mul 矩阵点乘&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-MATH&quot;&gt;A=\left[ \begin{matrix} 1 &amp;amp; 2 \\ 3 &amp;amp; 4\end{matrix} \right]
+B=\left[ \begin{matrix} 1 &amp;amp; 2 \\ 3 &amp;amp; 4\end{matrix} \right]
+A*B=\left[ \begin{matrix} 1*1 &amp;amp; 2*2 \\ 3*3&amp;amp; 4*4\end{matrix} \right]=\left[ \begin{matrix} 1 &amp;amp; 4 \\ 9&amp;amp; 16\end{matrix} \right]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h5 id=&quot;克罗内克积&quot;&gt;克罗内克积&lt;/h5&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">矩阵的乘法,矩阵的点乘和叉乘 矩阵的乘法/矩阵的叉乘?? A=\left[ \begin{matrix} 1 &amp;amp; 2 \\ 3 &amp;amp; 4\end{matrix} \right] B=\left[ \begin{matrix} 1 &amp;amp; 2 \\ 3 &amp;amp; 4\end{matrix} \right] AB=\left[ \begin{matrix} 1*1+2*3 &amp;amp; 1*2+2*4 \\ 3*1+4*3&amp;amp; 3*2+4*4\end{matrix} \right]=\left[ \begin{matrix} 7 &amp;amp; 9 \\ 15&amp;amp; 22\end{matrix} \right]</summary></entry><entry><title type="html">激励函数</title><link href="http://localhost:4000/pytorch_t3/" rel="alternate" type="text/html" title="激励函数" /><published>2020-01-07T08:05:00+08:00</published><updated>2020-01-07T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t3</id><content type="html" xml:base="http://localhost:4000/pytorch_t3/">&lt;h3 id=&quot;常用的激励函数relu-sigmoid-tanh-softplus&quot;&gt;常用的激励函数relu, sigmoid, tanh, softplus&lt;/h3&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch.nn.functional&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linspace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+
+&lt;span class=&quot;n&quot;&gt;y_relu&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;relu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;y_sigmoid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sigmoid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;#        F.sigmoid(x).numpy()
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_tanh&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tanh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;#F.tanh(x).numpy()
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_softplus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;softplus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figsize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;# 图片编号为1,尺寸为宽高8*6英寸,编号相同即在同一张图片上显示
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;221&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_relu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'red'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ylim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                          &lt;span class=&quot;c1&quot;&gt;#y轴的范围为-1到5
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;legend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'best'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                  &lt;span class=&quot;c1&quot;&gt;#给图加上图例,loc为位置
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;222&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_sigmoid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'red'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'sigmoid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ylim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                      &lt;span class=&quot;c1&quot;&gt;#y轴的范围为-0.1到1.1
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;legend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'best'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                  &lt;span class=&quot;c1&quot;&gt;#给图加上图例,loc为位置
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;223&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_tanh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'red'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'tanh'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ylim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                        &lt;span class=&quot;c1&quot;&gt;#y轴的范围为-1.1到1.1
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;legend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'best'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                    &lt;span class=&quot;c1&quot;&gt;#给图加上图例,loc为位置
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;224&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_softplus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'red'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'softplus'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ylim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                          &lt;span class=&quot;c1&quot;&gt;#y轴的范围为-1.1到1.1
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;legend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'upper left'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;              &lt;span class=&quot;c1&quot;&gt;#给图加上图例,loc为位置
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;显示图片如下&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Afunction.png&quot; alt=&quot;baby&quot; /&gt;&lt;/p&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">常用的激励函数relu, sigmoid, tanh, softplus ```python import torch import torch.nn.functional as F import matplotlib.pyplot as plt x=torch.linspace(-5,5,200) # x_np=x.numpy()</summary></entry><entry><title type="html">githubio</title><link href="http://localhost:4000/githubio/" rel="alternate" type="text/html" title="githubio" /><published>2019-12-25T08:05:00+08:00</published><updated>2019-12-25T08:05:00+08:00</updated><id>http://localhost:4000/githubio</id><content type="html" xml:base="http://localhost:4000/githubio/">&lt;h2 id=&quot;1-github-io主流框架&quot;&gt;1 github io主流框架&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;github推荐的jekyll&lt;/li&gt;
   &lt;li&gt;Hexo&lt;/li&gt;
@@ -120,7 +471,7 @@ pip 19.3.1 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 sh pycharm.sh &amp;amp;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;212-配置&quot;&gt;2.1.2 配置&lt;/h3&gt;
+&lt;h3 id=&quot;212-配置ls&quot;&gt;2.1.2 配置ls&lt;/h3&gt;
 
 &lt;p&gt;进入File -&amp;gt; Settings -&amp;gt; project:Project Interpreter&lt;/p&gt;
 
@@ -200,19 +551,33 @@ pip install --user packagename
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  pip list
   Package     Version  
   ----------- ---------
-  numpy       1.17.3   
-  Pillow      6.2.1    
-  pip         19.3.1   
-  setuptools  41.2.0   
-  six         1.12.0   
-  torch       1.3.0+cpu
-  torchvision 0.4.1+cpu
-  virtualenv  16.7.7   
+  numpy                1.17.3   
+  Pillow               6.2.1    
+  pip                  19.3.1   
+  setuptools           41.2.0   
+  six                  1.12.0   
+  tensorboard          2.0.1    
+  tensorflow           2.0.0    
+  tensorflow-estimator 2.0.1  
+  torch                1.3.0+cpu
+  torchvision          0.4.1+cpu
+  virtualenv           16.7.7   
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;ul&gt;
   &lt;li&gt;pip安装包路径，在Python的安装路径下
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python3/lib/python3.7/site-packages
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# cd python3/lib/python3.7/site-packages
+# ls
+# 
+ tensorboard
+ tensorboard-2.0.1.dist-info
+ tensorflow
+ tensorflow-2.0.0.dist-info
+ tensorflow_core
+ tensorflow_estimator
+ tensorflow_estimator-2.0.1.dist-info
+ torch
+ torchvision
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -229,7 +594,8 @@ pip install --user packagename
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-2019.10-Linux-x86_64.sh
 sh Anaconda3-2019.10-Linux-x86_64.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;注：anaconda中已包含python和conda,conda下载的包默认链接至自带的Python中，可以通过&lt;/p&gt;
+&lt;p&gt;注：anaconda中已包含python和conda,
+conda下载的包默认链接至自带的Python中，可以通过&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;conda安装包清单
@@ -240,7 +606,7 @@ sh Anaconda3-2019.10-Linux-x86_64.sh
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;anaconda3/lib/python3.7/site-packages
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>wellstone-cheng</name></author><category term="python" /><summary type="html">1.Python 安装与卸载</summary></entry><entry><title type="html">pytorch</title><link href="http://localhost:4000/pytorch/" rel="alternate" type="text/html" title="pytorch" /><published>2019-10-27T08:05:00+08:00</published><updated>2019-10-27T08:05:00+08:00</updated><id>http://localhost:4000/pytorch</id><content type="html" xml:base="http://localhost:4000/pytorch/">&lt;h1 id=&quot;1-pytorch-安装&quot;&gt;1 pytorch 安装&lt;/h1&gt;
+&lt;/ul&gt;</content><author><name>wellstone-cheng</name></author><category term="python" /><summary type="html">1.Python 安装与卸载</summary></entry><entry><title type="html">pytorch 安装</title><link href="http://localhost:4000/pytorch_t0/" rel="alternate" type="text/html" title="pytorch 安装" /><published>2019-10-27T08:05:00+08:00</published><updated>2019-10-27T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t0</id><content type="html" xml:base="http://localhost:4000/pytorch_t0/">&lt;h1 id=&quot;1-pytorch-安装&quot;&gt;1 pytorch 安装&lt;/h1&gt;
 
 &lt;h2 id=&quot;11-基于docker安装&quot;&gt;1.1 基于docker安装&lt;/h2&gt;
 
@@ -296,7 +662,7 @@ print(x)
     &lt;p&gt;先安装python，参照python study篇章&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;直接安装tensorflow&lt;/p&gt;
+    &lt;p&gt;然后再直接安装tensorflow&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
