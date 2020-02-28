@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>tensorflow migrate from v1 to v2 - Blog - wellstone_cheng</title>
+	<meta name="description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicon/apple-touch-icon-114x114.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#311e3e">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#311e3e">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#311e3e">
+
+
+
+
+	<!-- Google Fonts 1
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">-->
+
+
+
+
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"> </script> -->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+	<!--百度统计-->
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "https://hm.baidu.com/hm.js?";
+		  var s = document.getElementsByTagName("script")[0];
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+
+
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+	    google_ad_client: "ca-pub-4924092018203651",
+	    enable_page_level_ads: true
+	  });
+	</script>
+
+</head>
+
+<body>
+  <div class="flex-container">
+  <header class="main-header">
+  <div class="wrapper">
+    <div class="header-flex">
+      <div class="menu-icon-container">
+        <span class="menu-icon"><i class="fa fa-bars" aria-hidden="true"></i></span>
+      </div>
+      <nav class="main-nav">
+        <span class="menu-icon-close"><i class="fa fa-times" aria-hidden="true"></i></span>
+        <!--<ul style="height:800px;overflow-y:scroll;overflow-y:auto;"> -->
+        <ul>
+          
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+			 <li><a  href="myblog/python"  data-hover="python">python(2)</a></li>
+		 
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+			 <li><a  href="myblog/pytorch"  data-hover="pytorch">pytorch(7)</a></li>
+		 
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+			 <li><a  href="myblog/tensorflow"  data-hover="tensorflow">tensorflow(3)</a></li>
+		 
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+			 <li><a  href="myblog/githubio"  data-hover="githubio">githubio(1)</a></li>
+		 
+          <!--<li style="margin-bottom:200px;"><a href="/about">About(1)</a></li>-->
+        </ul>
+      </nav>
+      <p class="logo"><a href="/">wellstone_cheng</a></p>
+
+
+		<div class="navbar-container">
+
+		<div class="search-icon"><a><i class="fa fa-search" aria-hidden="true"></i></a></div>
+
+			<div class="navbar-menu">
+			   
+				<a href="https://www.wellstone-cheng.github.io"  data-hover="Home">Home</a>  <!--title="访问 Home"-->
+				<!--<a href="https://www.wellstone-cheng.github.io">Home</a>-->
+					
+				<a href="/blogdemo/about"  data-hover="About">About</a>  <!--title="访问 About"-->
+				<!--<a href="/blogdemo/about">About</a>-->
+					
+			</div>
+
+
+			<div class="navbar-mobile-menu" onclick="">
+				<span class="icon-menu cross"><span class="middle"></span></span>
+				<ul>
+				   
+					 <li><a href="https://www.wellstone-cheng.github.io"data-hover="Home">Home</a></li>  <!--title="访问 Home"-->
+					 <!--<li><a href="https://www.wellstone-cheng.github.io">Home</a></li>-->
+				   
+					 <li><a href="/blogdemo/about"data-hover="About">About</a></li>  <!--title="访问 About"-->
+					 <!--<li><a href="/blogdemo/about">About</a></li>-->
+				   
+				</ul>
+			</div>
+
+
+
+		</div>
+
+    <!--  <div class="search-icon-container">
+	    <a href="/" style="text-decoration: none; color: inherit;margin-right:20px;">Home</a>
+		<a href="/about" style=" text-decoration: none; color: inherit;margin-right:20px;">About</a>
+        <span class="search-icon"><a><i class="fa fa-search" aria-hidden="true"></i></a></span>
+      </div> -->
+
+
+    </div>
+  </div>
+</header> <!-- End Header -->
+
+  <article class="article-page">
+    <div class="wrapper">
+      <div class="page-content">
+        <div class="header-page">
+          <h1 class="page-title">tensorflow migrate from v1 to v2</h1>
+          <div class="page-date"><time datetime="2019-10-27 08:05:00 +0800">2019, Oct 27</time>
+		  <span id="busuanzi_container_page_pv"> | 访问量：<span id="busuanzi_value_page_pv"></span> 次</span>
+		  </div>
+        </div>
+        <font color="red">此篇仅使用Tensorflow 低级的API,不适用高级的API(tf.keras)</font>
+
+<h2 id="tensorflow-20同1x之间的重要区别">TensorFlow 2.0同1.x之间的重要区别</h2>
+
+<ul>
+  <li>在API层面的类、方法有了较大的变化，这个需要在使用中慢慢熟悉</li>
+  <li>取消了Session机制，每一条命令直接执行，而不需要等到Session.run</li>
+  <li>因为取消了Session机制，原有的数学模型定义，改为使用Python函数编写。原来的feed_dict和tf.placeholder，成为了函数的输入部分；原来的fetches，则成为了函数的返回值</li>
+  <li>使用keras的模型体系对原有的TensorFlow API进行高度的抽象，使用更容易</li>
+  <li>使用tf.keras.Model.fit来替代原有的训练循环</li>
+</ul>
+
+<h2 id="1-安装了v2x的tensorflow使用v1x的代码">1. 安装了V2.x的tensorflow,使用V1.x的代码</h2>
+<h3 id="11-使用tensorflowcompatv1全局替换">1.1 使用tensorflow.compat.v1全局替换</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">tensorflow.compat.v1</span> <span class="k">as</span> <span class="n">tf</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">disable_v2_behavior</span><span class="p">()</span>
+
+</code></pre></div></div>
+<h3 id="12-使用tfcompatv1xxxx替代tfxxxx">1.2 使用tf.compat.v1.xxxx替代tf.xxxx</h3>
+<p>修复下列报错</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AttributeError: module <span class="s1">'tensorflow'</span> has no attribute xxxx
+</code></pre></div></div>
+
+<p>注: 从TensorFlow2.0开始，默认情况下启用了Eager Execution;Tensorflow1.x 许添加相关代码执行.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 启用动态图机制
+</span><span class="n">tf</span><span class="o">.</span><span class="n">enable_eager_execution</span><span class="p">()</span>
+</code></pre></div></div>
+<h2 id="2-安装了v2x的tensorflow移植v1x的代码至v2x">2. 安装了V2.x的tensorflow,移植V1.x的代码至V2.x</h2>
+<h3 id="21-使用迁移工具tf_upgrade_v2转换v1x代码至v2x代码">2.1 使用迁移工具tf_upgrade_v2转换V1.x代码至V2.x代码</h3>
+<ul>
+  <li><strong>命令</strong>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 转化整个工程</span>
+tf_upgrade_v2 <span class="nt">--intree</span> my_project/ <span class="nt">--outtree</span> my_project_v2/ <span class="nt">--reportfile</span> report.txt
+<span class="c"># 转化单个文件</span>
+tf_upgrade_v2 <span class="nt">--infile</span> first-tf.py <span class="nt">--outfile</span> first-tf-v2.py
+</code></pre></div>    </div>
+  </li>
+  <li><strong>效果</strong>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">name_scope</span><span class="p">(</span><span class="s">'loss'</span><span class="p">):</span>
+  <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">ys</span> <span class="o">-</span> <span class="n">prediction</span><span class="p">),</span><span class="n">reduction_indices</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</code></pre></div>    </div>
+    <p>变成如下:</p>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">compat</span><span class="o">.</span><span class="n">v1</span><span class="o">.</span><span class="n">name_scope</span><span class="p">(</span><span class="s">'loss'</span><span class="p">):</span>
+  <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">input_tensor</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">input_tensor</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">ys</span> <span class="o">-</span> <span class="n">prediction</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>结论</strong>
+    <ul>
+      <li>使用tf.compat.v1.xxxx替代tf.xxxx</li>
+      <li>函数入参变化</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="22-重构v1x代码">2.2 重构V1.x代码</h3>
+
+<p>V1.x代码</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.7</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="mf">0.3</span><span class="p">))</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="mf">0.3</span><span class="p">))</span>
+
+<span class="n">y_value</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">y_value</span> <span class="o">-</span> <span class="n">y</span><span class="p">))</span>
+<span class="c1"># TensorFlow内置的梯度下降算法，每步长0.5
+</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">GradientDescentOptimizer</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="c1"># 代价函数值最小化的时候，代表求得解
+</span><span class="n">train</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+
+<span class="c1"># 初始化所有变量，也就是上面定义的a/b两个变量
+</span><span class="n">init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">()</span>
+
+<span class="c1"># 启动图
+</span><span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="c1"># 真正的执行初始化变量，还是老话，上面只是定义模型，并没有真正开始执行
+</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">init</span><span class="p">)</span>
+<span class="c1"># 重复梯度下降200次，每隔5次打印一次结果
+</span><span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">):</span>
+    <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">print</span>
+        <span class="n">step</span><span class="p">,</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">loss</span><span class="p">),</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+<p>重构后</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.7</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="mf">0.3</span><span class="p">))</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="mf">0.3</span><span class="p">))</span>
+
+<span class="o">@</span><span class="n">tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span>
+<span class="c1"># 定义代价函数，也是python函数
+</span><span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">predicted_y</span><span class="p">,</span> <span class="n">desired_y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">predicted_y</span> <span class="o">-</span> <span class="n">desired_y</span><span class="p">))</span>
+
+<span class="c1"># TensorFlow内置Adam算法，每步长0.1
+</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="c1"># 还可以选用TensorFlow内置SGD(随机最速下降)算法，每步长0.001
+# 不同算法要使用适当的步长，步长过大会导致模型无法收敛
+# optimizer = tf.optimizers.SGD(0.001)
+</span>
+<span class="c1"># 重复梯度下降200次，每隔5次打印一次结果
+</span><span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">t</span><span class="p">:</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># 进行一次计算
+</span>        <span class="n">current_loss</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># 得到当前损失值
+</span>        <span class="n">grads</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">current_loss</span><span class="p">,</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>  <span class="c1"># 调整模型中的权重、偏移值
+</span>        <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]))</span>  <span class="c1"># 调整之后的值代回到模型
+</span>    <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># 每5次迭代显示一次结果
+</span>        <span class="k">print</span><span class="p">(</span><span class="s">"Step:</span><span class="si">%</span><span class="s">d loss:</span><span class="si">%%%2.5</span><span class="s">f weight:</span><span class="si">%2.7</span><span class="s">f bias:</span><span class="si">%2.7</span><span class="s">f "</span> <span class="o">%</span>
+              <span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">current_loss</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">a</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">b</span><span class="o">.</span><span class="n">numpy</span><span class="p">()))</span>
+
+</code></pre></div></div>
+
+  </article>
+  <div class="search-box">
+  <div class="wrapper">
+    <div class="search-grid">
+      <form class="search-form">
+        <div id="search-container">
+          <input type="text" id="search-input" class="search" placeholder="Search">
+        </div>
+      </form>
+      <ul id="results-container" class="results-search"  style="height:400px;overflow-y:scroll;overflow-y:auto;"></ul>
+      <div class="icon-close-container">
+        <span class="search-icon-close"><i class="fa fa-times" aria-hidden="true"></i></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <footer class="main-footer">
+	<div class="footer-social">
+		<div class="footer-container clearfix">
+			<div class="social-list">
+			</div>
+		</div>
+	</div>
+
+	<div class="copyright">
+		<p>2020 &copy; wellstone_cheng</p>
+	</div>
+
+</footer> <!-- End Footer -->
+
+</div>
+
+  
+  
+<div class="top" title="Top"><i class="fa fa-chevron-up" aria-hidden="true"></i></div> <!-- End Top Scroll -->
+  <!-- JS -->
+<script src="/assets/js/jquery-3.2.1.min.js"></script>
+<script src="/assets/js/jekyll-search.js"></script>
+<script>
+  SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json',
+    searchResultTemplate: '<li><a href="{url}" title="{desc}">{title}</a></li>',
+    noResultsText: 'No results found',
+    fuzzy: false,
+    exclude: ['Welcome']
+  });
+</script>
+<script src="/assets/js/main.js"></script>
+
+  <!--<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script> <!-- End Analytics -->
+
+</body>
+</html>

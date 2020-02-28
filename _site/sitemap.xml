@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/python/</loc>
+<loc>http://localhost:4000/python_t0/</loc>
+<lastmod>2019-10-27T08:05:00+08:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/python_t1/</loc>
 <lastmod>2019-10-27T08:05:00+08:00</lastmod>
 </url>
 <url>
@@ -9,7 +13,15 @@
 <lastmod>2019-10-27T08:05:00+08:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/tensorflow/</loc>
+<loc>http://localhost:4000/tensorflow_t0/</loc>
+<lastmod>2019-10-27T08:05:00+08:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/tensorflow_t1/</loc>
+<lastmod>2019-10-27T08:05:00+08:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/tensorflow_t2/</loc>
 <lastmod>2019-10-27T08:05:00+08:00</lastmod>
 </url>
 <url>
@@ -31,6 +43,14 @@
 <url>
 <loc>http://localhost:4000/pytorch_t4/</loc>
 <lastmod>2020-01-17T08:05:00+08:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/pytorch_t5/</loc>
+<lastmod>2020-01-22T08:05:00+08:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/pytorch_t6/</loc>
+<lastmod>2020-01-22T08:05:00+08:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/assets/img/blog/androidoriginal/jni/jniconfig/2018-03-07-android-jni-mk/</loc>

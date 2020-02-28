@@ -100,7 +100,7 @@
 
             
 
-			 <li><a  href="myblog/python"  data-hover="python">python(1)</a></li>
+			 <li><a  href="myblog/python"  data-hover="python">python(2)</a></li>
 		 
             
 
@@ -128,7 +128,7 @@
 
             
 
-			 <li><a  href="myblog/pytorch"  data-hover="pytorch">pytorch(5)</a></li>
+			 <li><a  href="myblog/pytorch"  data-hover="pytorch">pytorch(7)</a></li>
 		 
             
 
@@ -156,7 +156,7 @@
 
             
 
-			 <li><a  href="myblog/tensorflow"  data-hover="tensorflow">tensorflow(1)</a></li>
+			 <li><a  href="myblog/tensorflow"  data-hover="tensorflow">tensorflow(3)</a></li>
 		 
             
 
@@ -244,102 +244,118 @@
 		  <span id="busuanzi_container_page_pv"> | 访问量：<span id="busuanzi_value_page_pv"></span> 次</span>
 		  </div>
         </div>
-        <h4 id="所用函数">所用函数</h4>
+        <hr />
+
+<h2 id="所用函数">所用函数</h2>
+
 <ul>
-  <li>torch.unsqueeze
-torch.unsqueeze(input, dim, out=None) → Tensor
-对数据维度进行扩充,dim维扩维数
+  <li>
+    <p><strong>torch.unsqueeze</strong></p>
+
+    <p>torch.unsqueeze(input, dim, out=None) → Tensor
+对数据维度进行扩充,dim维扩维数</p>
     <font color="red"> torch只会处理2维的数据??? </font>
     <p>Returns a new tensor with a dimension of size one inserted at the specified position.</p>
 
     <p>实例如下:</p>
-    <pre><code class="language-Python">import torch
-x=[1,2,3,4]
-x_tenser=torch.Tensor(x)
-x_tenser_0=torch.unsqueeze(x_tenser,0)
-x_tenser_1=torch.unsqueeze(x_tenser,1)
-print(
-  '\n x',x,
-  '\n x_tenser',x_tenser,
-  '\n x_tenser_0',x_tenser_0,
-  '\n x_tenser_1',x_tenser_1
-)
-</code></pre>
-    <p>打印如下</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> x <span class="o">[</span>1, 2, 3, 4] 
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">x_tenser</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x_tenser_0</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">x_tenser</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">x_tenser_1</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">x_tenser</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span>
+    <span class="s">'</span><span class="se">\n</span><span class="s"> x'</span><span class="p">,</span><span class="n">x</span><span class="p">,</span>
+    <span class="s">'</span><span class="se">\n</span><span class="s"> x_tenser'</span><span class="p">,</span><span class="n">x_tenser</span><span class="p">,</span>
+    <span class="s">'</span><span class="se">\n</span><span class="s"> x_tenser_0'</span><span class="p">,</span><span class="n">x_tenser_0</span><span class="p">,</span>
+    <span class="s">'</span><span class="se">\n</span><span class="s"> x_tenser_1'</span><span class="p">,</span><span class="n">x_tenser_1</span>
+<span class="p">)</span>
+</code></pre></div></div>
+<p>打印如下</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> x <span class="o">[</span>1, 2, 3, 4] 
  x_tenser tensor<span class="o">([</span>1., 2., 3., 4.]<span class="o">)</span> 
  x_tenser_0 tensor<span class="o">([[</span>1., 2., 3., 4.]]<span class="o">)</span> 
  x_tenser_1 tensor<span class="o">([[</span>1.],[2.],[3.],[4.]]<span class="o">)</span>
-</code></pre></div>    </div>
-  </li>
+</code></pre></div></div>
+<ul>
   <li>
-    <p>torch.linspace
-torch.linspace(start, end, steps=100, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) → Tensor
+    <p><strong>torch.linspace</strong></p>
+
+    <p>torch.linspace(start, end, steps=100, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) → Tensor
 Returns a one-dimensional tensor of steps equally spaced points between start and end.
 The output tensor is 1-D of size steps.</p>
   </li>
-  <li>torch.nn.Linear
-CLASS torch.nn.Linear(in_features, out_features, bias=True)</li>
+  <li>
+    <p><strong>torch.nn.Linear</strong></p>
+
+    <p>CLASS torch.nn.Linear(in_features, out_features, bias=True)</p>
+  </li>
 </ul>
 
-<h4 id="建立数据集">建立数据集</h4>
-<pre><code class="language-Python">import torch
-import matplotlib.pyplot as plt
-x_l=torch.linspace(-1,1,100)
-x=torch.unsqueeze(x_l,dim=1) #torch.unsqueeze对数据维度进行扩充
-y=x.pow(2)+0.2*torch.rand(x.size())# pow 幂
-plt.scatter(x.numpy(),y.numpy())
-plt.show()
-</code></pre>
+<hr />
+
+<h2 id="建立数据集">建立数据集</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">x_l</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">x_l</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#torch.unsqueeze对数据维度进行扩充
+</span><span class="n">y</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mf">0.2</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">())</span><span class="c1"># pow 幂
+</span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span><span class="n">y</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
 <p>显示图片如下</p>
 
 <p><img src="/assets/img/scatter.png" alt="baby" /></p>
 
-<h4 id="回归">回归</h4>
+<hr />
+
+<h2 id="回归">回归</h2>
 
 <p>代码如下</p>
 
-<pre><code class="language-Python">import torch
-import matplotlib.pyplot as plt
-import torch.nn.functional as F
-x = torch.unsqueeze(torch.linspace(-1, 1, 100), dim=1)  # x data (tensor), shape=(100, 1)
-y = x.pow(2) + 0.2*torch.rand(x.size())                 # noisy y data (tensor), shape=(100, 1)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="n">F</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># x data (tensor), shape=(100, 1)
+</span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.2</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>                 <span class="c1"># noisy y data (tensor), shape=(100, 1)
+</span>
+<span class="k">class</span> <span class="nc">Net</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n_feature</span><span class="p">,</span><span class="n">n_hidden</span><span class="p">,</span><span class="n">n_output</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Net</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">n_feature</span><span class="p">,</span><span class="n">n_hidden</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span><span class="n">n_output</span><span class="p">)</span>
 
-class Net(torch.nn.Module):
-    def __init__(self,n_feature,n_hidden,n_output):
-        super(Net,self).__init__()
-        self.hidden=torch.nn.Linear(n_feature,n_hidden)
-        self.predict=torch.nn.Linear(n_hidden,n_output)
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
 
-    def forward(self, x):
-        x = F.relu(self.hidden(x))
-        x = self.predict(x)
-        return x
+<span class="n">net</span> <span class="o">=</span> <span class="n">Net</span><span class="p">(</span><span class="n">n_feature</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_hidden</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">n_output</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
 
-net = Net(n_feature=1,n_hidden=10,n_output=1)
-print(net)
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">loss_func</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
 
-optimizer = torch.optim.SGD(net.parameters(),lr=0.2)
-loss_func = torch.nn.MSELoss()
+<span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
 
-plt.ion()
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">):</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_func</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span><span class="n">y</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span><span class="n">prediction</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span><span class="s">'r-'</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s">'Loss=</span><span class="si">%.4</span><span class="s">f'</span> <span class="o">%</span> <span class="n">loss</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s">'size'</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="s">'color'</span><span class="p">:</span>  <span class="s">'red'</span><span class="p">})</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
 
-for t in range(2000):
-    prediction = net(x)
-    loss = loss_func(prediction,y)
-    optimizer.zero_grad()
-    loss.backward()
-    optimizer.step()
-    if t % 5 == 0:
-        plt.cla()
-        plt.scatter(x.numpy(),y.numpy())
-        plt.plot(x.numpy(),prediction.data.numpy(),'r-',lw=5)
-        plt.text(0.5,0,'Loss=%.4f' % loss.data.numpy(), fontdict={'size': 20, 'color':  'red'})
-        plt.pause(0.1)
-
-plt.ioff()
-plt.show()
-</code></pre>
+<span class="n">plt</span><span class="o">.</span><span class="n">ioff</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
 <p>显示图片如下</p>
 
 <p><img src="/assets/img/regression.png" alt="baby" /></p>

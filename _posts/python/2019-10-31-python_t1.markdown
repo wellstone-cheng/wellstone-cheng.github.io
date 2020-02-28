@@ -1,0 +1,101 @@
+---
+layout: post
+title: python语法
+date: 2019-10-27 00:05:00
+author: wellstone-cheng
+img: python.jpeg
+python: true
+tags: [python]
+---
+
+## 1.import 和 from import
+
+* **import**
+  import module
+
+* **from import**
+  from module import name
+  模块里导入指定的模块属性, 也就是把指定名称导入到当前作用域
+---
+## 2 try ... except ... final
+Python开发中 ，常见错误类型有两种 ：语法错误和异常。语法错误是程序没有运行时，由开发IDE环境检测到错误;而异常就是指程序运行时检测到的错误。
+如果在执行try子句的过程中发生了异常，那么try子句余下的部分将被忽略。如果异常的类型和 **except 之后的名称相符**，那么对应的except子句将被执行。最后执行 try 语句之外的代码.
+在程序中，如果一个段代码必须要执行，即无论异常是否产生都要执行，那么此时就需要使用finally。 比如文件关闭，释放锁，把数据库连接返还给连接池等,注意：finally是可选的选项。
+
+---
+## 3 with / with as
+### 3.1 构造
+如果要在 with 后面，对象必须要实现 __enter__和 __exit__方法
+如:
+``` python
+class Demo(object):
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def test(self):
+        1 / 0
+        print('我是test方法')
+
+    def __enter__(self):
+        print('我是enter方法，我被执行了')
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        print('我是exit方法，我被执行了')
+        print('exc_type={},exc_val={},exc_tb={}'.format(exc_type, exc_val, exc_tb))
+with Demo('zhangsan', 15) as d:
+    d.test()
+```
+紧跟with后面的语句被求值后，返回对象的__enter__() 方法被调用，这个方法的返回值将被赋值给as后面的变量。 
+当with后面的代码块全部被执行完之后，将调用前面返回对象的__exit__()方法。
+### 3.2 功能
+* 赋值
+``` python 
+with tf.Session() as sess:
+```
+等价于
+``` python
+sess = tf.Session()
+```
+
+* 判断
+``` python
+def m2():
+    f = open("output.txt", "w")
+    try:
+        f.write("python之禅")
+    except IOError:
+        print("oops error")
+    finally:
+        f.close()
+```
+等价于
+``` python
+def m2():
+    with open("output.txt", "w") as f:
+        f.write("Python之禅")
+```
+open 方法的返回值赋值给变量 f，当离开 with 代码块的时候，系统会自动调用 f.close() 方法， with 的作用和使用 try/finally 语句是一样的.with关键字能够自动帮忙执行 close 方法,不能处理异常.
+
+---
+
+## 4 print vs tf.print
+tf.Print(input, data, message=None, first_n=None, summarize=None, name=None)
+
+``` python
+PRINT:  tf.Tensor([[22. 22.][23. 13.]], shape=(2, 2), dtype=float32)
+TF-PRINT:  [[22 22][23 13]][[22. 22.][23. 13.]]
+```
+## 5 python 的列表(list)与元组(tuple)
+* 列表(list):列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出现。
+如下:
+``` python
+list1 = [1, 2, 3, 4, 5 ]
+```
+* 元组(tuple):Python的元组与列表类似，不同之处在于元组的元素不能修改。
+元组使用小括号，列表使用方括号。
+如下:
+``` python
+list1 = (1, 2, 3, 4, 5 )
+```

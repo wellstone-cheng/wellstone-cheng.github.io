@@ -100,7 +100,7 @@
 
             
 
-			 <li><a  href="myblog/python"  data-hover="python">python(1)</a></li>
+			 <li><a  href="myblog/python"  data-hover="python">python(2)</a></li>
 		 
             
 
@@ -128,7 +128,7 @@
 
             
 
-			 <li><a  href="myblog/pytorch"  data-hover="pytorch">pytorch(5)</a></li>
+			 <li><a  href="myblog/pytorch"  data-hover="pytorch">pytorch(7)</a></li>
 		 
             
 
@@ -156,7 +156,7 @@
 
             
 
-			 <li><a  href="myblog/tensorflow"  data-hover="tensorflow">tensorflow(1)</a></li>
+			 <li><a  href="myblog/tensorflow"  data-hover="tensorflow">tensorflow(3)</a></li>
 		 
             
 
@@ -300,7 +300,7 @@
 
 <hr />
 
-<h5 id="python-的列表list与元组tuple">python 的列表(list)与元组(tuple)</h5>
+<h3 id="python-的列表list与元组tuple">python 的列表(list)与元组(tuple)</h3>
 <ul>
   <li>列表(list):列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出现。
 如下:
@@ -315,31 +315,31 @@
   </li>
 </ul>
 
-<h4 id="python-列表与numpy数组的区别和联系">Python 列表与numpy数组的区别和联系</h4>
+<h3 id="python-列表与numpy数组的区别和联系">Python 列表与numpy数组的区别和联系</h3>
 <ul>
   <li>实例1
-    <pre><code class="language-Python">import numpy as np
-data=[-1,-2,1,2]  #列表list
-np_array=np.array(data)# numpy数组
-print(
-  '\n data',data,
-  '\n np_array',np_array
-)
-</code></pre>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>  <span class="c1">#列表list
+</span><span class="n">np_array</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="c1"># numpy数组
+</span><span class="k">print</span><span class="p">(</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> data'</span><span class="p">,</span><span class="n">data</span><span class="p">,</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> np_array'</span><span class="p">,</span><span class="n">np_array</span>
+<span class="p">)</span>
+</code></pre></div>    </div>
     <p>打印如下:</p>
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> data [-1, -2, 1, 2] 
  np_array [-1 -2  1  2]
 </code></pre></div>    </div>
   </li>
   <li>实例2
-    <pre><code class="language-Python">import numpy as np
-np_array=np.arange(4) #numpy数组
-data=np_array.tolist() # 列表list
-print(
-  '\n data',data,
-  '\n np_array',np_array
-)
-</code></pre>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">np_array</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1">#numpy数组
+</span><span class="n">data</span><span class="o">=</span><span class="n">np_array</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="c1"># 列表list
+</span><span class="k">print</span><span class="p">(</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> data'</span><span class="p">,</span><span class="n">data</span><span class="p">,</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> np_array'</span><span class="p">,</span><span class="n">np_array</span>
+<span class="p">)</span>
+</code></pre></div>    </div>
     <p>打印如下:</p>
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> data [0, 1, 2, 3] 
  np_array [0 1 2 3]
@@ -353,7 +353,7 @@ python 列表和numpy数组都是用中括号包住,但前者各成员直接用�
 —</li>
 </ul>
 
-<h4 id="tensor-vs-numpy-array">tensor vs numpy array</h4>
+<h3 id="tensor-vs-numpy-array">tensor vs numpy array</h3>
 <p>从数据结构上来看，张量就是多维数组。</p>
 <ul>
   <li>区别: numpy array 用空格间隔开成员,tensor 用逗号间隔开并与小括号+中括号包裹
@@ -367,35 +367,35 @@ numpy array 转 Tensor用 torch.from_numpy()
 —</li>
 </ul>
 
-<h4 id="tensor-vs-python-list">tensor vs python list</h4>
+<h3 id="tensor-vs-python-list">tensor vs python list</h3>
 <ul>
   <li>实例1
-    <pre><code class="language-Python">import numpy as np
-import torch
-np_data=np.arange(4) # numpy array
-tensor=torch.from_numpy(np_data) #tensor
-data=tensor.numpy().tolist() # 列表list
-print(
-  '\n tensor',tensor,
-  '\n data', data
-)
-</code></pre>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">np_data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># numpy array
+</span><span class="n">tensor</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np_data</span><span class="p">)</span> <span class="c1">#tensor
+</span><span class="n">data</span><span class="o">=</span><span class="n">tensor</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="c1"># 列表list
+</span><span class="k">print</span><span class="p">(</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> tensor'</span><span class="p">,</span><span class="n">tensor</span><span class="p">,</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> data'</span><span class="p">,</span> <span class="n">data</span>
+<span class="p">)</span>
+</code></pre></div>    </div>
     <p>打印如下:</p>
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> tensor tensor([0, 1, 2, 3]) 
  data [0, 1, 2, 3]
 </code></pre></div>    </div>
   </li>
   <li>实例2
-    <pre><code class="language-Python">import numpy as np
-import torch
-data=[0, 1, 2, 3]# 列表list
-tensor=torch.Tensor(data) #tensor
-print(
-  '\n data', data,
-  '\n tensor',tensor
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span><span class="c1"># 列表list
+</span><span class="n">tensor</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1">#tensor
+</span><span class="k">print</span><span class="p">(</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> data'</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> tensor'</span><span class="p">,</span><span class="n">tensor</span>
 
-)
-</code></pre>
+<span class="p">)</span>
+</code></pre></div>    </div>
     <p>打印如下:</p>
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data [0, 1, 2, 3] 
 tensor tensor([0., 1., 2., 3.])

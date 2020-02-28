@@ -1,6 +1,22 @@
 [
   
     {
+      "title"    : "pytorch的网络可视化",
+      "category" : "",
+      "tags"     : "pytorch",
+      "url"      : "/pytorch_t6/",
+      "date"     : "2020-01-22 08:05:00 +0800"
+    } ,
+  
+    {
+      "title"    : "构建网络模型的几种方法",
+      "category" : "",
+      "tags"     : "pytorch",
+      "url"      : "/pytorch_t5/",
+      "date"     : "2020-01-22 08:05:00 +0800"
+    } ,
+  
+    {
       "title"    : "关系拟合(回归)",
       "category" : "",
       "tags"     : "pytorch",
@@ -41,10 +57,26 @@
     } ,
   
     {
+      "title"    : "tensorflow 使用要点",
+      "category" : "",
+      "tags"     : "tensorflow",
+      "url"      : "/tensorflow_t2/",
+      "date"     : "2019-10-27 08:05:00 +0800"
+    } ,
+  
+    {
+      "title"    : "tensorflow migrate from v1 to v2",
+      "category" : "",
+      "tags"     : "tensorflow",
+      "url"      : "/tensorflow_t1/",
+      "date"     : "2019-10-27 08:05:00 +0800"
+    } ,
+  
+    {
       "title"    : "tensorflow的安装",
       "category" : "",
       "tags"     : "tensorflow",
-      "url"      : "/tensorflow/",
+      "url"      : "/tensorflow_t0/",
       "date"     : "2019-10-27 08:05:00 +0800"
     } ,
   
@@ -57,10 +89,18 @@
     } ,
   
     {
-      "title"    : "python",
+      "title"    : "python语法",
       "category" : "",
       "tags"     : "python",
-      "url"      : "/python/",
+      "url"      : "/python_t1/",
+      "date"     : "2019-10-27 08:05:00 +0800"
+    } ,
+  
+    {
+      "title"    : "python 安装",
+      "category" : "",
+      "tags"     : "python",
+      "url"      : "/python_t0/",
       "date"     : "2019-10-27 08:05:00 +0800"
     } 
   

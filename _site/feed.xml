@@ -1,103 +1,117 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-19T06:59:45+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Blog - wellstone_cheng</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-</subtitle><author><name>wellstone_cheng</name></author><entry><title type="html">关系拟合(回归)</title><link href="http://localhost:4000/pytorch_t4/" rel="alternate" type="text/html" title="关系拟合(回归)" /><published>2020-01-17T08:05:00+08:00</published><updated>2020-01-17T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t4</id><content type="html" xml:base="http://localhost:4000/pytorch_t4/">&lt;h4 id=&quot;所用函数&quot;&gt;所用函数&lt;/h4&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-02-06T13:58:28+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Blog - wellstone_cheng</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</subtitle><author><name>wellstone_cheng</name></author><entry><title type="html">构建网络模型的几种方法</title><link href="http://localhost:4000/pytorch_t5/" rel="alternate" type="text/html" title="构建网络模型的几种方法" /><published>2020-01-22T08:05:00+08:00</published><updated>2020-01-22T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t5</id><content type="html" xml:base="http://localhost:4000/pytorch_t5/"></content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html"></summary></entry><entry><title type="html">pytorch的网络可视化</title><link href="http://localhost:4000/pytorch_t6/" rel="alternate" type="text/html" title="pytorch的网络可视化" /><published>2020-01-22T08:05:00+08:00</published><updated>2020-01-22T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t6</id><content type="html" xml:base="http://localhost:4000/pytorch_t6/"></content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html"></summary></entry><entry><title type="html">关系拟合(回归)</title><link href="http://localhost:4000/pytorch_t4/" rel="alternate" type="text/html" title="关系拟合(回归)" /><published>2020-01-17T08:05:00+08:00</published><updated>2020-01-17T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t4</id><content type="html" xml:base="http://localhost:4000/pytorch_t4/">&lt;hr /&gt;
+&lt;h2 id=&quot;所用函数&quot;&gt;所用函数&lt;/h2&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;torch.unsqueeze
-torch.unsqueeze(input, dim, out=None) → Tensor
-对数据维度进行扩充,dim维扩维数
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;torch.unsqueeze&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;torch.unsqueeze(input, dim, out=None) → Tensor
+对数据维度进行扩充,dim维扩维数&lt;/p&gt;
     &lt;font color=&quot;red&quot;&gt; torch只会处理2维的数据??? &lt;/font&gt;
     &lt;p&gt;Returns a new tensor with a dimension of size one inserted at the specified position.&lt;/p&gt;
 
     &lt;p&gt;实例如下:&lt;/p&gt;
-    &lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;import torch
-x=[1,2,3,4]
-x_tenser=torch.Tensor(x)
-x_tenser_0=torch.unsqueeze(x_tenser,0)
-x_tenser_1=torch.unsqueeze(x_tenser,1)
-print(
-  '\n x',x,
-  '\n x_tenser',x_tenser,
-  '\n x_tenser_0',x_tenser_0,
-  '\n x_tenser_1',x_tenser_1
-)
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;p&gt;打印如下&lt;/p&gt;
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; x &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;1, 2, 3, 4] 
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;x_tenser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;x_tenser_0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unsqueeze&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_tenser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;x_tenser_1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unsqueeze&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_tenser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; x'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; x_tenser'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_tenser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; x_tenser_0'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_tenser_0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; x_tenser_1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_tenser_1&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;打印如下&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; x &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;1, 2, 3, 4] 
  x_tenser tensor&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;1., 2., 3., 4.]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
  x_tenser_0 tensor&lt;span class=&quot;o&quot;&gt;([[&lt;/span&gt;1., 2., 3., 4.]]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
  x_tenser_1 tensor&lt;span class=&quot;o&quot;&gt;([[&lt;/span&gt;1.],[2.],[3.],[4.]]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;torch.linspace
-torch.linspace(start, end, steps=100, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) → Tensor
+    &lt;p&gt;&lt;strong&gt;torch.linspace&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;torch.linspace(start, end, steps=100, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) → Tensor
 Returns a one-dimensional tensor of steps equally spaced points between start and end.
 The output tensor is 1-D of size steps.&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;torch.nn.Linear
-CLASS torch.nn.Linear(in_features, out_features, bias=True)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;torch.nn.Linear&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;CLASS torch.nn.Linear(in_features, out_features, bias=True)&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;建立数据集&quot;&gt;建立数据集&lt;/h4&gt;
-&lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;import torch
-import matplotlib.pyplot as plt
-x_l=torch.linspace(-1,1,100)
-x=torch.unsqueeze(x_l,dim=1) #torch.unsqueeze对数据维度进行扩充
-y=x.pow(2)+0.2*torch.rand(x.size())# pow 幂
-plt.scatter(x.numpy(),y.numpy())
-plt.show()
-&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;建立数据集&quot;&gt;建立数据集&lt;/h2&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;x_l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linspace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unsqueeze&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#torch.unsqueeze对数据维度进行扩充
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# pow 幂
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scatter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;显示图片如下&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/scatter.png&quot; alt=&quot;baby&quot; /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;回归&quot;&gt;回归&lt;/h4&gt;
+&lt;hr /&gt;
+&lt;h2 id=&quot;回归&quot;&gt;回归&lt;/h2&gt;
 
 &lt;p&gt;代码如下&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;import torch
-import matplotlib.pyplot as plt
-import torch.nn.functional as F
-x = torch.unsqueeze(torch.linspace(-1, 1, 100), dim=1)  # x data (tensor), shape=(100, 1)
-y = x.pow(2) + 0.2*torch.rand(x.size())                 # noisy y data (tensor), shape=(100, 1)
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch.nn.functional&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unsqueeze&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linspace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# x data (tensor), shape=(100, 1)
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;# noisy y data (tensor), shape=(100, 1)
+&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Net&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_feature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Net&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hidden&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Linear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_feature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Linear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-class Net(torch.nn.Module):
-    def __init__(self,n_feature,n_hidden,n_output):
-        super(Net,self).__init__()
-        self.hidden=torch.nn.Linear(n_feature,n_hidden)
-        self.predict=torch.nn.Linear(n_hidden,n_output)
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;relu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
 
-    def forward(self, x):
-        x = F.relu(self.hidden(x))
-        x = self.predict(x)
-        return x
+&lt;span class=&quot;n&quot;&gt;net&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Net&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_feature&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_hidden&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-net = Net(n_feature=1,n_hidden=10,n_output=1)
-print(net)
+&lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;optim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SGD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;loss_func&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MSELoss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 
-optimizer = torch.optim.SGD(net.parameters(),lr=0.2)
-loss_func = torch.nn.MSELoss()
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 
-plt.ion()
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;prediction&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;loss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loss_func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prediction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zero_grad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;loss&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;step&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scatter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prediction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'r-'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Loss=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%.4&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;f'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loss&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fontdict&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'size'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'color'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;'red'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pause&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-for t in range(2000):
-    prediction = net(x)
-    loss = loss_func(prediction,y)
-    optimizer.zero_grad()
-    loss.backward()
-    optimizer.step()
-    if t % 5 == 0:
-        plt.cla()
-        plt.scatter(x.numpy(),y.numpy())
-        plt.plot(x.numpy(),prediction.data.numpy(),'r-',lw=5)
-        plt.text(0.5,0,'Loss=%.4f' % loss.data.numpy(), fontdict={'size': 20, 'color':  'red'})
-        plt.pause(0.1)
-
-plt.ioff()
-plt.show()
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ioff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;显示图片如下&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/regression.png&quot; alt=&quot;baby&quot; /&gt;&lt;/p&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">所用函数 torch.unsqueeze torch.unsqueeze(input, dim, out=None) → Tensor 对数据维度进行扩充,dim维扩维数 torch只会处理2维的数据??? Returns a new tensor with a dimension of size one inserted at the specified position.</summary></entry><entry><title type="html">Tensor, Numpy array, List</title><link href="http://localhost:4000/pytorch_t1/" rel="alternate" type="text/html" title="Tensor, Numpy array, List" /><published>2020-01-07T08:05:00+08:00</published><updated>2020-01-07T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t1</id><content type="html" xml:base="http://localhost:4000/pytorch_t1/">&lt;h3 id=&quot;pytorch-和numpy的转换&quot;&gt;pytorch 和numpy的转换&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/regression.png&quot; alt=&quot;baby&quot; /&gt;&lt;/p&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">所用函数</summary></entry><entry><title type="html">Tensor, Numpy array, List</title><link href="http://localhost:4000/pytorch_t1/" rel="alternate" type="text/html" title="Tensor, Numpy array, List" /><published>2020-01-07T08:05:00+08:00</published><updated>2020-01-07T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t1</id><content type="html" xml:base="http://localhost:4000/pytorch_t1/">&lt;h3 id=&quot;pytorch-和numpy的转换&quot;&gt;pytorch 和numpy的转换&lt;/h3&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
@@ -153,7 +167,7 @@ plt.show()
 
 &lt;hr /&gt;
 
-&lt;h5 id=&quot;python-的列表list与元组tuple&quot;&gt;python 的列表(list)与元组(tuple)&lt;/h5&gt;
+&lt;h3 id=&quot;python-的列表list与元组tuple&quot;&gt;python 的列表(list)与元组(tuple)&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;列表(list):列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出现。
 如下:
@@ -168,31 +182,31 @@ plt.show()
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;python-列表与numpy数组的区别和联系&quot;&gt;Python 列表与numpy数组的区别和联系&lt;/h4&gt;
+&lt;h3 id=&quot;python-列表与numpy数组的区别和联系&quot;&gt;Python 列表与numpy数组的区别和联系&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;实例1
-    &lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;import numpy as np
-data=[-1,-2,1,2]  #列表list
-np_array=np.array(data)# numpy数组
-print(
-  '\n data',data,
-  '\n np_array',np_array
-)
-&lt;/code&gt;&lt;/pre&gt;
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;#列表list
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np_array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# numpy数组
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; data'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; np_array'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np_array&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
     &lt;p&gt;打印如下:&lt;/p&gt;
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; data [-1, -2, 1, 2] 
  np_array [-1 -2  1  2]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;实例2
-    &lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;import numpy as np
-np_array=np.arange(4) #numpy数组
-data=np_array.tolist() # 列表list
-print(
-  '\n data',data,
-  '\n np_array',np_array
-)
-&lt;/code&gt;&lt;/pre&gt;
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;np_array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#numpy数组
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np_array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tolist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 列表list
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; data'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; np_array'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np_array&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
     &lt;p&gt;打印如下:&lt;/p&gt;
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; data [0, 1, 2, 3] 
  np_array [0 1 2 3]
@@ -206,7 +220,7 @@ python 列表和numpy数组都是用中括号包住,但前者各成员直接用�
 —&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;tensor-vs-numpy-array&quot;&gt;tensor vs numpy array&lt;/h4&gt;
+&lt;h3 id=&quot;tensor-vs-numpy-array&quot;&gt;tensor vs numpy array&lt;/h3&gt;
 &lt;p&gt;从数据结构上来看，张量就是多维数组。&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;区别: numpy array 用空格间隔开成员,tensor 用逗号间隔开并与小括号+中括号包裹
@@ -220,35 +234,35 @@ numpy array 转 Tensor用 torch.from_numpy()
 —&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;tensor-vs-python-list&quot;&gt;tensor vs python list&lt;/h4&gt;
+&lt;h3 id=&quot;tensor-vs-python-list&quot;&gt;tensor vs python list&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;实例1
-    &lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;import numpy as np
-import torch
-np_data=np.arange(4) # numpy array
-tensor=torch.from_numpy(np_data) #tensor
-data=tensor.numpy().tolist() # 列表list
-print(
-  '\n tensor',tensor,
-  '\n data', data
-)
-&lt;/code&gt;&lt;/pre&gt;
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;np_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# numpy array
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#tensor
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tolist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 列表list
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; tensor'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; data'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
     &lt;p&gt;打印如下:&lt;/p&gt;
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; tensor tensor([0, 1, 2, 3]) 
  data [0, 1, 2, 3]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;实例2
-    &lt;pre&gt;&lt;code class=&quot;language-Python&quot;&gt;import numpy as np
-import torch
-data=[0, 1, 2, 3]# 列表list
-tensor=torch.Tensor(data) #tensor
-print(
-  '\n data', data,
-  '\n tensor',tensor
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 列表list
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#tensor
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; data'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; tensor'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;
 
-)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
     &lt;p&gt;打印如下:&lt;/p&gt;
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;data [0, 1, 2, 3] 
 tensor tensor([0., 1., 2., 3.])
@@ -264,55 +278,62 @@ Tensor 转 list :先Tensor转numpy再转列表 .numpy().tolist()
 list 转Tensor : torch.Tensor()&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">pytorch 和numpy的转换</summary></entry><entry><title type="html">矩阵的乘法</title><link href="http://localhost:4000/pytorch_t2/" rel="alternate" type="text/html" title="矩阵的乘法" /><published>2020-01-07T08:05:00+08:00</published><updated>2020-01-07T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t2</id><content type="html" xml:base="http://localhost:4000/pytorch_t2/">&lt;h4 id=&quot;矩阵的乘法矩阵的点乘和叉乘&quot;&gt;矩阵的乘法,矩阵的点乘和叉乘&lt;/h4&gt;
+&lt;/ul&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">pytorch 和numpy的转换</summary></entry><entry><title type="html">矩阵的乘法</title><link href="http://localhost:4000/pytorch_t2/" rel="alternate" type="text/html" title="矩阵的乘法" /><published>2020-01-07T08:05:00+08:00</published><updated>2020-01-07T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t2</id><content type="html" xml:base="http://localhost:4000/pytorch_t2/">&lt;h2 id=&quot;矩阵的乘法矩阵的点乘和叉乘&quot;&gt;矩阵的乘法,矩阵的点乘和叉乘&lt;/h2&gt;
 &lt;hr /&gt;
-&lt;h5 id=&quot;矩阵的乘法矩阵的叉乘&quot;&gt;矩阵的乘法/矩阵的叉乘??&lt;/h5&gt;
-&lt;pre&gt;&lt;code class=&quot;language-MATH&quot;&gt;A=\left[ \begin{matrix} 1 &amp;amp; 2 \\ 3 &amp;amp; 4\end{matrix} \right]
+&lt;h3 id=&quot;矩阵的乘法矩阵的叉乘&quot;&gt;矩阵的乘法/矩阵的叉乘??&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/mm.png&quot; alt=&quot;baby&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-math&quot;&gt;A=\left[ \begin{matrix} 1 &amp;amp; 2 \\ 3 &amp;amp; 4\end{matrix} \right]
 B=\left[ \begin{matrix} 1 &amp;amp; 2 \\ 3 &amp;amp; 4\end{matrix} \right]
 AB=\left[ \begin{matrix} 1*1+2*3 &amp;amp; 1*2+2*4 \\ 3*1+4*3&amp;amp; 3*2+4*4\end{matrix} \right]=\left[ \begin{matrix} 7 &amp;amp; 9 \\ 15&amp;amp; 22\end{matrix} \right]
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
   &lt;li&gt;torch.mm 矩阵相乘&lt;/li&gt;
-  &lt;li&gt;代码运行如下
-```Python
-import numpy as np
-import torch
-data=[[1, 2],[3, 4]]# 列表list
-tensor=torch.Tensor(data) #tensor&lt;/li&gt;
+  &lt;li&gt;代码运行如下&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;print(
-    ‘\n np.matmul’, np.matmul(data,data),#矩阵乘法
-    ‘\n np.multiply’, np.multiply(data,data),#矩阵点乘
-    ‘\n np.dot’, np.dot(data,data),#矩阵叉乘 =矩阵乘法
-    ‘\n torch.mm’,torch.mm(tensor,tensor), #矩阵乘法
-    ‘\n torch.mul’,torch.mul(tensor,tensor), #矩阵点乘
-    ‘\n torch.dot’,torch.dot(torch.from_numpy(np.array(data).flatten()),torch.from_numpy(np.array(data).flatten())) # torch.dot 只能适用于1维的矩阵
-)&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;打印如下:
-```shell
-np.matmul [[ 7 10][15 22]] 
-np.multiply [[ 1  4][ 9 16]] 
-np.dot [[ 7 10][15 22]] 
-torch.mm tensor([[ 7., 10.],[15., 22.]]) 
-torch.mul tensor([[ 1.,  4.],[ 9., 16.]]) 
-torch.dot tensor(30)
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 列表list
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#tensor
+&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; np.matmul'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matmul&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#矩阵乘法
+&lt;/span&gt;    &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; np.multiply'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;multiply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#矩阵点乘
+&lt;/span&gt;    &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; np.dot'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#矩阵叉乘 =矩阵乘法
+&lt;/span&gt;    &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; torch.mm'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#矩阵乘法
+&lt;/span&gt;    &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; torch.mul'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mul&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#矩阵点乘
+&lt;/span&gt;    &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; torch.dot'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# torch.dot 只能适用于1维的矩阵
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;打印如下:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;np.matmul &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt; 7 10][15 22]] 
+np.multiply &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt; 1  4][ 9 16]] 
+np.dot &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt; 7 10][15 22]] 
+torch.mm tensor&lt;span class=&quot;o&quot;&gt;([[&lt;/span&gt; 7., 10.],[15., 22.]]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+torch.mul tensor&lt;span class=&quot;o&quot;&gt;([[&lt;/span&gt; 1.,  4.],[ 9., 16.]]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+torch.dot tensor&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;30&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;hr /&gt;
-&lt;h5 id=&quot;矩阵的点乘哈达马积&quot;&gt;矩阵的点乘/哈达马积&lt;/h5&gt;
+&lt;h3 id=&quot;矩阵的点乘哈达马积&quot;&gt;矩阵的点乘/哈达马积&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;torch.mul 矩阵点乘&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-MATH&quot;&gt;A=\left[ \begin{matrix} 1 &amp;amp; 2 \\ 3 &amp;amp; 4\end{matrix} \right]
+&lt;p&gt;&lt;img src=&quot;/assets/img/mul.png&quot; alt=&quot;baby&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-math&quot;&gt;A=\left[ \begin{matrix} 1 &amp;amp; 2 \\ 3 &amp;amp; 4\end{matrix} \right]
 B=\left[ \begin{matrix} 1 &amp;amp; 2 \\ 3 &amp;amp; 4\end{matrix} \right]
 A*B=\left[ \begin{matrix} 1*1 &amp;amp; 2*2 \\ 3*3&amp;amp; 4*4\end{matrix} \right]=\left[ \begin{matrix} 1 &amp;amp; 4 \\ 9&amp;amp; 16\end{matrix} \right]
 &lt;/code&gt;&lt;/pre&gt;
 &lt;hr /&gt;
-&lt;h5 id=&quot;克罗内克积&quot;&gt;克罗内克积&lt;/h5&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">矩阵的乘法,矩阵的点乘和叉乘 矩阵的乘法/矩阵的叉乘?? A=\left[ \begin{matrix} 1 &amp;amp; 2 \\ 3 &amp;amp; 4\end{matrix} \right] B=\left[ \begin{matrix} 1 &amp;amp; 2 \\ 3 &amp;amp; 4\end{matrix} \right] AB=\left[ \begin{matrix} 1*1+2*3 &amp;amp; 1*2+2*4 \\ 3*1+4*3&amp;amp; 3*2+4*4\end{matrix} \right]=\left[ \begin{matrix} 7 &amp;amp; 9 \\ 15&amp;amp; 22\end{matrix} \right]</summary></entry><entry><title type="html">激励函数</title><link href="http://localhost:4000/pytorch_t3/" rel="alternate" type="text/html" title="激励函数" /><published>2020-01-07T08:05:00+08:00</published><updated>2020-01-07T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t3</id><content type="html" xml:base="http://localhost:4000/pytorch_t3/">&lt;h3 id=&quot;常用的激励函数relu-sigmoid-tanh-softplus&quot;&gt;常用的激励函数relu, sigmoid, tanh, softplus&lt;/h3&gt;
+&lt;h3 id=&quot;克罗内克积&quot;&gt;克罗内克积&lt;/h3&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">矩阵的乘法,矩阵的点乘和叉乘 矩阵的乘法/矩阵的叉乘??</summary></entry><entry><title type="html">激励函数</title><link href="http://localhost:4000/pytorch_t3/" rel="alternate" type="text/html" title="激励函数" /><published>2020-01-07T08:05:00+08:00</published><updated>2020-01-07T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t3</id><content type="html" xml:base="http://localhost:4000/pytorch_t3/">&lt;h2 id=&quot;常用的激励函数relu-sigmoid-tanh-softplus&quot;&gt;常用的激励函数relu, sigmoid, tanh, softplus&lt;/h2&gt;
+
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch.nn.functional&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;
@@ -350,7 +371,7 @@ A*B=\left[ \begin{matrix} 1*1 &amp;amp; 2*2 \\ 3*3&amp;amp; 4*4\end{matrix} \rig
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;显示图片如下&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/Afunction.png&quot; alt=&quot;baby&quot; /&gt;&lt;/p&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">常用的激励函数relu, sigmoid, tanh, softplus ```python import torch import torch.nn.functional as F import matplotlib.pyplot as plt x=torch.linspace(-5,5,200) # x_np=x.numpy()</summary></entry><entry><title type="html">githubio</title><link href="http://localhost:4000/githubio/" rel="alternate" type="text/html" title="githubio" /><published>2019-12-25T08:05:00+08:00</published><updated>2019-12-25T08:05:00+08:00</updated><id>http://localhost:4000/githubio</id><content type="html" xml:base="http://localhost:4000/githubio/">&lt;h2 id=&quot;1-github-io主流框架&quot;&gt;1 github io主流框架&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/Afunction.png&quot; alt=&quot;baby&quot; /&gt;&lt;/p&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">常用的激励函数relu, sigmoid, tanh, softplus</summary></entry><entry><title type="html">githubio</title><link href="http://localhost:4000/githubio/" rel="alternate" type="text/html" title="githubio" /><published>2019-12-25T08:05:00+08:00</published><updated>2019-12-25T08:05:00+08:00</updated><id>http://localhost:4000/githubio</id><content type="html" xml:base="http://localhost:4000/githubio/">&lt;h2 id=&quot;1-github-io主流框架&quot;&gt;1 github io主流框架&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;github推荐的jekyll&lt;/li&gt;
   &lt;li&gt;Hexo&lt;/li&gt;
@@ -378,7 +399,7 @@ A*B=\left[ \begin{matrix} 1*1 &amp;amp; 2*2 \\ 3*3&amp;amp; 4*4\end{matrix} \rig
 title: wellstone-cheng
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h2 id=&quot;3-调试工具&quot;&gt;3 调试工具&lt;/h2&gt;
-&lt;h3 id=&quot;31-利用chrome或者firefox可以更好的调整页面设计&quot;&gt;3.1 利用chrome或者Firefox可以更好的调整页面设计&lt;/h3&gt;</content><author><name>wellstone-cheng</name></author><category term="githubio" /><summary type="html">1 github io主流框架 github推荐的jekyll Hexo pandoc 2 基于jekyll jekylly是一种静态网页生成器，包含一些用markdown语法写的文件的文件夹；通过markdown和Liquid转换器 生成一个网站.</summary></entry><entry><title type="html">python</title><link href="http://localhost:4000/python/" rel="alternate" type="text/html" title="python" /><published>2019-10-27T08:05:00+08:00</published><updated>2019-10-27T08:05:00+08:00</updated><id>http://localhost:4000/python</id><content type="html" xml:base="http://localhost:4000/python/">&lt;h1 id=&quot;1python-安装与卸载&quot;&gt;1.Python 安装与卸载&lt;/h1&gt;
+&lt;h3 id=&quot;31-利用chrome或者firefox可以更好的调整页面设计&quot;&gt;3.1 利用chrome或者Firefox可以更好的调整页面设计&lt;/h3&gt;</content><author><name>wellstone-cheng</name></author><category term="githubio" /><summary type="html">1 github io主流框架 github推荐的jekyll Hexo pandoc 2 基于jekyll jekylly是一种静态网页生成器，包含一些用markdown语法写的文件的文件夹；通过markdown和Liquid转换器 生成一个网站.</summary></entry><entry><title type="html">python 安装</title><link href="http://localhost:4000/python_t0/" rel="alternate" type="text/html" title="python 安装" /><published>2019-10-27T08:05:00+08:00</published><updated>2019-10-27T08:05:00+08:00</updated><id>http://localhost:4000/python_t0</id><content type="html" xml:base="http://localhost:4000/python_t0/">&lt;h1 id=&quot;1python-安装与卸载&quot;&gt;1.Python 安装与卸载&lt;/h1&gt;
 
 &lt;h2 id=&quot;11-先卸载已安装的python版本&quot;&gt;1.1 先卸载已安装的Python版本&lt;/h2&gt;
 &lt;ul&gt;
@@ -606,7 +627,78 @@ conda下载的包默认链接至自带的Python中，可以通过&lt;/p&gt;
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;anaconda3/lib/python3.7/site-packages
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>wellstone-cheng</name></author><category term="python" /><summary type="html">1.Python 安装与卸载</summary></entry><entry><title type="html">pytorch 安装</title><link href="http://localhost:4000/pytorch_t0/" rel="alternate" type="text/html" title="pytorch 安装" /><published>2019-10-27T08:05:00+08:00</published><updated>2019-10-27T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t0</id><content type="html" xml:base="http://localhost:4000/pytorch_t0/">&lt;h1 id=&quot;1-pytorch-安装&quot;&gt;1 pytorch 安装&lt;/h1&gt;
+&lt;/ul&gt;</content><author><name>wellstone-cheng</name></author><category term="python" /><summary type="html">1.Python 安装与卸载</summary></entry><entry><title type="html">python语法</title><link href="http://localhost:4000/python_t1/" rel="alternate" type="text/html" title="python语法" /><published>2019-10-27T08:05:00+08:00</published><updated>2019-10-27T08:05:00+08:00</updated><id>http://localhost:4000/python_t1</id><content type="html" xml:base="http://localhost:4000/python_t1/">&lt;h2 id=&quot;1import-和-from-import&quot;&gt;1.import 和 from import&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;import&lt;/strong&gt;
+import module&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;from import&lt;/strong&gt;
+from module import name
+模块里导入指定的模块属性, 也就是把指定名称导入到当前作用域
+—&lt;/p&gt;
+    &lt;h2 id=&quot;2-try--except--final&quot;&gt;2 try … except … final&lt;/h2&gt;
+    &lt;p&gt;Python开发中 ，常见错误类型有两种 ：语法错误和异常。语法错误是程序没有运行时，由开发IDE环境检测到错误;而异常就是指程序运行时检测到的错误。
+如果在执行try子句的过程中发生了异常，那么try子句余下的部分将被忽略。如果异常的类型和 &lt;strong&gt;except 之后的名称相符&lt;/strong&gt;，那么对应的except子句将被执行。最后执行 try 语句之外的代码.
+在程序中，如果一个段代码必须要执行，即无论异常是否产生都要执行，那么此时就需要使用finally。 比如文件关闭，释放锁，把数据库连接返还给连接池等,注意：finally是可选的选项。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;3-with--with-as&quot;&gt;3 with / with as&lt;/h2&gt;
+&lt;h3 id=&quot;31-构造&quot;&gt;3.1 构造&lt;/h3&gt;
+&lt;p&gt;如果要在 with 后面，对象必须要实现 __enter__和 __exit__方法
+如:&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Demo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'我是test方法'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__enter__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'我是enter方法，我被执行了'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__exit__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exc_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exc_val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exc_tb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'我是exit方法，我被执行了'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'exc_type={},exc_val={},exc_tb={}'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exc_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exc_val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exc_tb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Demo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'zhangsan'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;紧跟with后面的语句被求值后，返回对象的__enter__() 方法被调用，这个方法的返回值将被赋值给as后面的变量。 
+当with后面的代码块全部被执行完之后，将调用前面返回对象的__exit__()方法。&lt;/p&gt;
+&lt;h3 id=&quot;32-功能&quot;&gt;3.2 功能&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;赋值
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;等价于&lt;/p&gt;
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;sess&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;判断
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;m2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;output.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;w&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;python之禅&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;IOError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;oops error&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;等价于&lt;/p&gt;
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;m2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;output.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;w&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Python之禅&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;open 方法的返回值赋值给变量 f，当离开 with 代码块的时候，系统会自动调用 f.close() 方法， with 的作用和使用 try/finally 语句是一样的.with关键字能够自动帮忙执行 close 方法,不能处理异常.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>wellstone-cheng</name></author><category term="python" /><summary type="html">1.import 和 from import</summary></entry><entry><title type="html">pytorch 安装</title><link href="http://localhost:4000/pytorch_t0/" rel="alternate" type="text/html" title="pytorch 安装" /><published>2019-10-27T08:05:00+08:00</published><updated>2019-10-27T08:05:00+08:00</updated><id>http://localhost:4000/pytorch_t0</id><content type="html" xml:base="http://localhost:4000/pytorch_t0/">&lt;h1 id=&quot;1-pytorch-安装&quot;&gt;1 pytorch 安装&lt;/h1&gt;
 
 &lt;h2 id=&quot;11-基于docker安装&quot;&gt;1.1 基于docker安装&lt;/h2&gt;
 
@@ -647,206 +739,4 @@ print(x)
       [0.5192, 0.0422, 0.6586]])
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">1 pytorch 安装 1.1 基于docker安装</summary></entry><entry><title type="html">tensorflow的安装</title><link href="http://localhost:4000/tensorflow/" rel="alternate" type="text/html" title="tensorflow的安装" /><published>2019-10-27T08:05:00+08:00</published><updated>2019-10-27T08:05:00+08:00</updated><id>http://localhost:4000/tensorflow</id><content type="html" xml:base="http://localhost:4000/tensorflow/">&lt;h1 id=&quot;1-tensorflow-安装&quot;&gt;1 Tensorflow 安装&lt;/h1&gt;
-
-&lt;h2 id=&quot;11-基于docker安装&quot;&gt;1.1 基于docker安装&lt;/h2&gt;
-&lt;p&gt;docker方式安装，并以jupyter server运行，可以通过网页远程访问&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -it -p 8888:8888 tensorflow/tensorflow:nightly-py3-jupyter
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;注：可以在jupyter页面通过new Terminal打开终端进行操作。&lt;/p&gt;
-
-&lt;h2 id=&quot;12-基于python安装&quot;&gt;1.2 基于Python安装&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;先安装python，参照python study篇章&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;然后再直接安装tensorflow&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; pip3 install --user --upgrade tensorflow  # install in $HOME
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;验证安装&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python3 -c &quot;import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;13-本地基于pip虚拟环境安装&quot;&gt;1.3 本地基于pip虚拟环境安装&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;先安装python，参照python study篇章&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;安装virtualenv&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip3 install -U virtualenv 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;启动虚拟环境&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;        virtualenv --system-site-packages -p python3 ./venv
-        source ./venv/bin/activate  # sh, bash, ksh, or zsh
-（venv） pip install --upgrade pip
-（venv） pip list  # show packages installed within the virtual environment
-（venv） deactivate  # don't exit until you're done using TensorFlow
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;在virtualenv安装tensorflow&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;（venv）pip install --upgrade tensorflow
-  Collecting tensorflow
-  Cache entry deserialization failed, entry ignored
-  Downloading https://files.pythonhosted.org/packages/de/f0/96fb2e0412ae9692dbf400e5b04432885f677ad6241c088ccc5fe7724d69/tensorflow-1.14.0-cp36-cp36m-manylinux1_x86_64.whl (109.2MB)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;验证安装&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;（venv）python -c &quot;import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;
-2019-11-02 22:41:53.733300: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
-2019-11-02 22:41:53.752820: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3408000000 Hz
-2019-11-02 22:41:53.753392: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x50a5470 executing computations on platform Host. Devices:
-2019-11-02 22:41:53.753417: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
-tf.Tensor(1447.9882, shape=(), dtype=float32)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;14本地基于conda虚拟环境安装&quot;&gt;1.4本地基于conda虚拟环境安装&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;先安装python，参照python study篇章&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;启动虚拟环境&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;        conda create -n venv pip python=3.7  # select python version
-        source activate venv
-（venv） pip install --ignore-installed --upgrade packageURL
-（venv） source deactivate
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;在virtualenv安装tensorflow&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;（venv）pip install --upgrade tensorflow
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;验证安装&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;（venv）python -c &quot;import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;15-安装过程遇到的问题及解决方案&quot;&gt;1.5 安装过程遇到的问题及解决方案&lt;/h2&gt;
-
-&lt;h3 id=&quot;151-cache-entry-deserialization-failed&quot;&gt;1.5.1 Cache entry deserialization failed&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;error details&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# pip3 install --upgrade tensorflow
-Collecting tensorflow
-  Cache entry deserialization failed, entry ignored
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;sulotion：升级pip&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip3 install --upgrade pip
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;152-futurewarning&quot;&gt;1.5.2 FutureWarning&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;error details&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;环境1 报错信息：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# python3 -c &quot;import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;
-2019-11-03 03:50:03.730110: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
-2019-11-03 03:50:03.750617: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3408000000 Hz
-2019-11-03 03:50:03.751483: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x4ebcdc0 executing computations on platform Host. Devices:
-2019-11-03 03:50:03.751528: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
-tf.Tensor(398.2649, shape=(), dtype=float32)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;环境2 保报错信息：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python3 -c &quot;import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;
-/usr/local/lib/python3.6/dist-packages/tensorflow/python/framework/dtypes.py:516: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
-  _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;-Analysis
-  环境1： Python 3.6.8 + pip 19.3.1 + numpy 1.17.3 +tensorflow 2.0.0 –&amp;gt; no this error
-  环境2： Python 3.6.8 + pip 9.0.1 + numpy 1.17.3 +tensorflow 1.14.0 –&amp;gt; have this error&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;solution
- 将环境2的numpy版本降至1.16.0&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# pip3 install numpy==1.16.0
-# python3 -c &quot;import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;
-Tensor(&quot;Sum:0&quot;, shape=(), dtype=float32)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;153-your-cpu-supports-instructions-that-this-tensorflow-binary-was-not-compiled-to-use-avx2-fma&quot;&gt;1.5.3 Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;error details&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python -c &quot;import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;
-2019-11-02 22:41:53.733300: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
-2019-11-02 22:41:53.752820: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3408000000 Hz
-2019-11-02 22:41:53.753392: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x50a5470 executing computations on platform Host. Devices:
-2019-11-02 22:41:53.753417: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
-tf.Tensor(1447.9882, shape=(), dtype=float32)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Analysis&lt;/p&gt;
-
-    &lt;p&gt;环境3：Python 3.7.5 + pip 19.3.1 + numpy 1.17.3 +tensorflow 2.0.0 –&amp;gt; have this error
-环境2: Python 3.6.8 + pip 9.0.1 + numpy 1.16.0 +tensorflow 1.14.0 –&amp;gt; no this error
-环境4: Python 3.6.8 + pip 19.3.1 + numpy 1.17.3 +tf-nightly 2.1.0 –&amp;gt; have this error,but in jupyter no error&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;solution
- 更换tensorflow版本？&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;16-验证&quot;&gt;1.6 验证&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Python输入&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import tensorflow as tf;
-print(tf.reduce_sum(tf.random.normal([1000, 1000])))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;输出&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tf.Tensor(-380.3409, shape=(), dtype=float32)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>wellstone-cheng</name></author><category term="tensorflow" /><summary type="html">1 Tensorflow 安装</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>wellstone-cheng</name></author><category term="pytorch" /><summary type="html">1 pytorch 安装 1.1 基于docker安装</summary></entry></feed>

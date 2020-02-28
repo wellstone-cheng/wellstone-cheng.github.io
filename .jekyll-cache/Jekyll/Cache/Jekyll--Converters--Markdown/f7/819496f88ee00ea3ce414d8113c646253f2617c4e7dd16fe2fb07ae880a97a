@@ -1,0 +1,169 @@
+I"I<h3 id="pytorch-和numpy的转换">pytorch 和numpy的转换</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">np_date_1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,)</span><span class="c1">#1维数组
+</span><span class="n">np_date_2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="c1"># numpy格式 取6个数据,分为2组,每组3个数据--2维数组
+</span><span class="n">np_date_3</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="c1"># 3维数组
+</span><span class="n">torch_data_1</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np_date_1</span><span class="p">)</span><span class="c1"># 将numpy数据转成tensor格式
+</span><span class="n">tensor2array_1</span><span class="o">=</span> <span class="n">torch_data_1</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="c1">#将Tensor格式转成numpy格式
+</span><span class="n">torch_data_2</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np_date_2</span><span class="p">)</span><span class="c1"># 将numpy数据转成tensor格式
+</span><span class="n">tensor2array_2</span><span class="o">=</span> <span class="n">torch_data_2</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="c1">#将Tensor格式转成numpy格式
+</span><span class="n">torch_data_3</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np_date_3</span><span class="p">)</span><span class="c1"># 将numpy数据转成tensor格式
+</span><span class="n">tensor2array_3</span><span class="o">=</span> <span class="n">torch_data_3</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="c1">#将Tensor格式转成numpy格式
+</span><span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s"> numpy np_date_1'</span><span class="p">,</span><span class="n">np_date_1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s"> torch_data_1'</span><span class="p">,</span><span class="n">torch_data_1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s"> tensor2array_1'</span><span class="p">,</span><span class="n">tensor2array_1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s"> numpy np_date_2'</span><span class="p">,</span><span class="n">np_date_2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s"> torch_data_2'</span><span class="p">,</span><span class="n">torch_data_2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s"> tensor2array_2'</span><span class="p">,</span><span class="n">tensor2array_2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s"> numpy np_date_3'</span><span class="p">,</span><span class="n">np_date_3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s"> torch_data_3'</span><span class="p">,</span><span class="n">torch_data_3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s"> tensor2array_3'</span><span class="p">,</span><span class="n">tensor2array_3</span><span class="p">)</span>
+</code></pre></div></div>
+<p>打印如下</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">numpy</span> <span class="n">np_date_1</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span>
+
+ <span class="n">torch_data_1</span> <span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+ <span class="n">tensor2array_1</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span>
+
+ <span class="n">numpy</span> <span class="n">np_date_2</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">][</span><span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">]]</span>
+
+ <span class="n">torch_data_2</span> <span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+
+ <span class="n">tensor2array_2</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">][</span><span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">]]</span>
+
+ <span class="n">numpy</span> <span class="n">np_date_3</span> <span class="p">[[[</span> <span class="mi">0</span>  <span class="mi">1</span><span class="p">][</span> <span class="mi">2</span>  <span class="mi">3</span><span class="p">][</span> <span class="mi">4</span>  <span class="mi">5</span><span class="p">]]</span>
+                  <span class="p">[[</span> <span class="mi">6</span>  <span class="mi">7</span><span class="p">][</span> <span class="mi">8</span>  <span class="mi">9</span><span class="p">][</span><span class="mi">10</span> <span class="mi">11</span><span class="p">]]</span>
+                  <span class="p">[[</span><span class="mi">12</span> <span class="mi">13</span><span class="p">][</span><span class="mi">14</span> <span class="mi">15</span><span class="p">][</span><span class="mi">16</span> <span class="mi">17</span><span class="p">]]</span>
+                  <span class="p">[[</span><span class="mi">18</span> <span class="mi">19</span><span class="p">][</span><span class="mi">20</span> <span class="mi">21</span><span class="p">][</span><span class="mi">22</span> <span class="mi">23</span><span class="p">]]]</span>
+
+ <span class="n">torch_data_3</span> <span class="n">tensor</span><span class="p">([[[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],[</span> <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">],[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">]],</span>
+                      <span class="p">[[</span> <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">],[</span> <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]],</span>
+                      <span class="p">[[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">],[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">],[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">]],</span>
+                      <span class="p">[[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">],[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">],[</span><span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">]]])</span>
+
+ <span class="n">tensor2array_3</span> <span class="p">[[[</span> <span class="mi">0</span>  <span class="mi">1</span><span class="p">][</span> <span class="mi">2</span>  <span class="mi">3</span><span class="p">][</span> <span class="mi">4</span>  <span class="mi">5</span><span class="p">]]</span>
+                 <span class="p">[[</span> <span class="mi">6</span>  <span class="mi">7</span><span class="p">][</span> <span class="mi">8</span>  <span class="mi">9</span><span class="p">][</span><span class="mi">10</span> <span class="mi">11</span><span class="p">]]</span>
+                 <span class="p">[[</span><span class="mi">12</span> <span class="mi">13</span><span class="p">][</span><span class="mi">14</span> <span class="mi">15</span><span class="p">][</span><span class="mi">16</span> <span class="mi">17</span><span class="p">]]</span>
+                 <span class="p">[[</span><span class="mi">18</span> <span class="mi">19</span><span class="p">][</span><span class="mi">20</span> <span class="mi">21</span><span class="p">][</span><span class="mi">22</span> <span class="mi">23</span><span class="p">]]]</span>
+
+</code></pre></div></div>
+<p>注 ‘[‘为1维, ‘[[‘为2维, ‘[[[‘为3维</p>
+
+<hr />
+
+<h3 id="python-的列表list与元组tuple">python 的列表(list)与元组(tuple)</h3>
+<ul>
+  <li>列表(list):列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出现。
+如下:
+    <pre><code class="language-Python">list1 = [1, 2, 3, 4, 5 ]
+</code></pre>
+  </li>
+  <li>元组(tuple):Python的元组与列表类似，不同之处在于元组的元素不能修改。
+元组使用小括号，列表使用方括号。
+如下:
+    <pre><code class="language-Python">list1 = (1, 2, 3, 4, 5 )
+</code></pre>
+  </li>
+</ul>
+
+<h3 id="python-列表与numpy数组的区别和联系">Python 列表与numpy数组的区别和联系</h3>
+<ul>
+  <li>实例1
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>  <span class="c1">#列表list
+</span><span class="n">np_array</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="c1"># numpy数组
+</span><span class="k">print</span><span class="p">(</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> data'</span><span class="p">,</span><span class="n">data</span><span class="p">,</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> np_array'</span><span class="p">,</span><span class="n">np_array</span>
+<span class="p">)</span>
+</code></pre></div>    </div>
+    <p>打印如下:</p>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> data [-1, -2, 1, 2] 
+ np_array [-1 -2  1  2]
+</code></pre></div>    </div>
+  </li>
+  <li>实例2
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">np_array</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1">#numpy数组
+</span><span class="n">data</span><span class="o">=</span><span class="n">np_array</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="c1"># 列表list
+</span><span class="k">print</span><span class="p">(</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> data'</span><span class="p">,</span><span class="n">data</span><span class="p">,</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> np_array'</span><span class="p">,</span><span class="n">np_array</span>
+<span class="p">)</span>
+</code></pre></div>    </div>
+    <p>打印如下:</p>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> data [0, 1, 2, 3] 
+ np_array [0 1 2 3]
+</code></pre></div>    </div>
+  </li>
+  <li>区别 
+python 列表和numpy数组都是用中括号包住,但前者各成员直接用逗号隔开,后者用空格隔开</li>
+  <li>联系 
+从列表list转成 numpy数组用 np.array()
+从numpy数组转列表用.tolist
+—</li>
+</ul>
+
+<h3 id="tensor-vs-numpy-array">tensor vs numpy array</h3>
+<p>从数据结构上来看，张量就是多维数组。</p>
+<ul>
+  <li>区别: numpy array 用空格间隔开成员,tensor 用逗号间隔开并与小括号+中括号包裹
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> numpy array     [0 1 2 3]
+ tensor         ([0, 1, 2, 3])
+</code></pre></div>    </div>
+  </li>
+  <li>联系
+Tensor 转 numpy array 用 .numpy()
+numpy array 转 Tensor用 torch.from_numpy()
+—</li>
+</ul>
+
+<h3 id="tensor-vs-python-list">tensor vs python list</h3>
+<ul>
+  <li>实例1
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">np_data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># numpy array
+</span><span class="n">tensor</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np_data</span><span class="p">)</span> <span class="c1">#tensor
+</span><span class="n">data</span><span class="o">=</span><span class="n">tensor</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="c1"># 列表list
+</span><span class="k">print</span><span class="p">(</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> tensor'</span><span class="p">,</span><span class="n">tensor</span><span class="p">,</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> data'</span><span class="p">,</span> <span class="n">data</span>
+<span class="p">)</span>
+</code></pre></div>    </div>
+    <p>打印如下:</p>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> tensor tensor([0, 1, 2, 3]) 
+ data [0, 1, 2, 3]
+</code></pre></div>    </div>
+  </li>
+  <li>实例2
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span><span class="c1"># 列表list
+</span><span class="n">tensor</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1">#tensor
+</span><span class="k">print</span><span class="p">(</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> data'</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span>
+  <span class="s">'</span><span class="se">\n</span><span class="s"> tensor'</span><span class="p">,</span><span class="n">tensor</span>
+
+<span class="p">)</span>
+</code></pre></div>    </div>
+    <p>打印如下:</p>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data [0, 1, 2, 3] 
+tensor tensor([0., 1., 2., 3.])
+</code></pre></div>    </div>
+    <ul>
+      <li>区别
+Tensor比 list多个小括号,</li>
+    </ul>
+    <font color="red"> 注意:以上讲的numpy array(中括号,空格)和Tensor(小括号,中括号,逗号)的格式都是说的输出显示格式,以上格式并不能作为输入进行赋值或者初始化,只有list的格式(中括号,逗号)才能作为输入 </font>
+    <ul>
+      <li>联系
+Tensor 转 list :先Tensor转numpy再转列表 .numpy().tolist()
+list 转Tensor : torch.Tensor()</li>
+    </ul>
+  </li>
+</ul>
+:ET

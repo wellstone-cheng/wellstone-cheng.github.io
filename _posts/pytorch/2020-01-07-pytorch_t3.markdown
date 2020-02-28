@@ -7,8 +7,10 @@ img: pytorch.jpeg
 pytorch: true
 tags: [pytorch]
 ---
-### 常用的激励函数relu, sigmoid, tanh, softplus
-```python
+
+## 常用的激励函数relu, sigmoid, tanh, softplus
+
+``` python
 import torch
 import torch.nn.functional as F
 import matplotlib.pyplot as plt

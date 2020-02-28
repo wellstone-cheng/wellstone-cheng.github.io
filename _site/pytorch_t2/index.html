@@ -100,7 +100,7 @@
 
             
 
-			 <li><a  href="myblog/python"  data-hover="python">python(1)</a></li>
+			 <li><a  href="myblog/python"  data-hover="python">python(2)</a></li>
 		 
             
 
@@ -128,7 +128,7 @@
 
             
 
-			 <li><a  href="myblog/pytorch"  data-hover="pytorch">pytorch(5)</a></li>
+			 <li><a  href="myblog/pytorch"  data-hover="pytorch">pytorch(7)</a></li>
 		 
             
 
@@ -156,7 +156,7 @@
 
             
 
-			 <li><a  href="myblog/tensorflow"  data-hover="tensorflow">tensorflow(1)</a></li>
+			 <li><a  href="myblog/tensorflow"  data-hover="tensorflow">tensorflow(3)</a></li>
 		 
             
 
@@ -244,58 +244,64 @@
 		  <span id="busuanzi_container_page_pv"> | 访问量：<span id="busuanzi_value_page_pv"></span> 次</span>
 		  </div>
         </div>
-        <h4 id="矩阵的乘法矩阵的点乘和叉乘">矩阵的乘法,矩阵的点乘和叉乘</h4>
+        <h2 id="矩阵的乘法矩阵的点乘和叉乘">矩阵的乘法,矩阵的点乘和叉乘</h2>
 <hr />
 
-<h5 id="矩阵的乘法矩阵的叉乘">矩阵的乘法/矩阵的叉乘??</h5>
-<pre><code class="language-MATH">A=\left[ \begin{matrix} 1 &amp; 2 \\ 3 &amp; 4\end{matrix} \right]
+<h3 id="矩阵的乘法矩阵的叉乘">矩阵的乘法/矩阵的叉乘??</h3>
+
+<p><img src="/assets/img/mm.png" alt="baby" /></p>
+
+<pre><code class="language-math">A=\left[ \begin{matrix} 1 &amp; 2 \\ 3 &amp; 4\end{matrix} \right]
 B=\left[ \begin{matrix} 1 &amp; 2 \\ 3 &amp; 4\end{matrix} \right]
 AB=\left[ \begin{matrix} 1*1+2*3 &amp; 1*2+2*4 \\ 3*1+4*3&amp; 3*2+4*4\end{matrix} \right]=\left[ \begin{matrix} 7 &amp; 9 \\ 15&amp; 22\end{matrix} \right]
 </code></pre>
 
 <ul>
   <li>torch.mm 矩阵相乘</li>
-  <li>代码运行如下
-```Python
-import numpy as np
-import torch
-data=[[1, 2],[3, 4]]# 列表list
-tensor=torch.Tensor(data) #tensor</li>
+  <li>代码运行如下</li>
 </ul>
 
-<p>print(
-    ‘\n np.matmul’, np.matmul(data,data),#矩阵乘法
-    ‘\n np.multiply’, np.multiply(data,data),#矩阵点乘
-    ‘\n np.dot’, np.dot(data,data),#矩阵叉乘 =矩阵乘法
-    ‘\n torch.mm’,torch.mm(tensor,tensor), #矩阵乘法
-    ‘\n torch.mul’,torch.mul(tensor,tensor), #矩阵点乘
-    ‘\n torch.dot’,torch.dot(torch.from_numpy(np.array(data).flatten()),torch.from_numpy(np.array(data).flatten())) # torch.dot 只能适用于1维的矩阵
-)</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>打印如下:
-```shell
-np.matmul [[ 7 10][15 22]] 
-np.multiply [[ 1  4][ 9 16]] 
-np.dot [[ 7 10][15 22]] 
-torch.mm tensor([[ 7., 10.],[15., 22.]]) 
-torch.mul tensor([[ 1.,  4.],[ 9., 16.]]) 
-torch.dot tensor(30)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">data</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span><span class="c1"># 列表list
+</span><span class="n">tensor</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1">#tensor
+</span>
+<span class="k">print</span><span class="p">(</span>
+    <span class="s">'</span><span class="se">\n</span><span class="s"> np.matmul'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">data</span><span class="p">),</span><span class="c1">#矩阵乘法
+</span>    <span class="s">'</span><span class="se">\n</span><span class="s"> np.multiply'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">data</span><span class="p">),</span><span class="c1">#矩阵点乘
+</span>    <span class="s">'</span><span class="se">\n</span><span class="s"> np.dot'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">data</span><span class="p">),</span><span class="c1">#矩阵叉乘 =矩阵乘法
+</span>    <span class="s">'</span><span class="se">\n</span><span class="s"> torch.mm'</span><span class="p">,</span><span class="n">torch</span><span class="o">.</span><span class="n">mm</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span><span class="n">tensor</span><span class="p">),</span> <span class="c1">#矩阵乘法
+</span>    <span class="s">'</span><span class="se">\n</span><span class="s"> torch.mul'</span><span class="p">,</span><span class="n">torch</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span><span class="n">tensor</span><span class="p">),</span> <span class="c1">#矩阵点乘
+</span>    <span class="s">'</span><span class="se">\n</span><span class="s"> torch.dot'</span><span class="p">,</span><span class="n">torch</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()),</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()))</span> <span class="c1"># torch.dot 只能适用于1维的矩阵
+</span><span class="p">)</span>
+</code></pre></div></div>
+<p>打印如下:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>np.matmul <span class="o">[[</span> 7 10][15 22]] 
+np.multiply <span class="o">[[</span> 1  4][ 9 16]] 
+np.dot <span class="o">[[</span> 7 10][15 22]] 
+torch.mm tensor<span class="o">([[</span> 7., 10.],[15., 22.]]<span class="o">)</span> 
+torch.mul tensor<span class="o">([[</span> 1.,  4.],[ 9., 16.]]<span class="o">)</span> 
+torch.dot tensor<span class="o">(</span>30<span class="o">)</span>
 </code></pre></div></div>
 
 <hr />
 
-<h5 id="矩阵的点乘哈达马积">矩阵的点乘/哈达马积</h5>
+<h3 id="矩阵的点乘哈达马积">矩阵的点乘/哈达马积</h3>
 
 <ul>
   <li>torch.mul 矩阵点乘</li>
 </ul>
 
-<pre><code class="language-MATH">A=\left[ \begin{matrix} 1 &amp; 2 \\ 3 &amp; 4\end{matrix} \right]
+<p><img src="/assets/img/mul.png" alt="baby" /></p>
+
+<pre><code class="language-math">A=\left[ \begin{matrix} 1 &amp; 2 \\ 3 &amp; 4\end{matrix} \right]
 B=\left[ \begin{matrix} 1 &amp; 2 \\ 3 &amp; 4\end{matrix} \right]
 A*B=\left[ \begin{matrix} 1*1 &amp; 2*2 \\ 3*3&amp; 4*4\end{matrix} \right]=\left[ \begin{matrix} 1 &amp; 4 \\ 9&amp; 16\end{matrix} \right]
 </code></pre>
 <hr />
 
-<h5 id="克罗内克积">克罗内克积</h5>
+<h3 id="克罗内克积">克罗内克积</h3>
 
   </article>
   <div class="search-box">
