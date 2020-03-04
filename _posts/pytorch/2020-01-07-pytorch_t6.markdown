@@ -7,7 +7,7 @@ img: pytorch.jpeg
 pytorch: true
 tags: [pytorch]
 ---
-代码
+## 1. tensorboardX-scalar代码
 ``` python
 import numpy as np
 from tensorboardX import SummaryWriter
@@ -19,7 +19,7 @@ for epoch in range(100):
 
 writer.close()
 ```
-运行下面命令
+* 运行下面命令
 ``` shell
 wellstone@wellstone-HP-Z240-SFF:~/PycharmProjects/pytorch$ tensorboard --logdir runs
 
@@ -30,4 +30,53 @@ Serving TensorBoard on localhost; to expose to the network, use a proxy or pass 
 TensorBoard 2.1.0 at http://localhost:6006/ (Press CTRL+C to quit)
 
 ```
-用浏览器打开地址http://localhost:6006/ 
+* 或者
+``` shell
+wellstone@wellstone-HP-Z240-SFF:~/PycharmProjects/pytorch$ tensorboard --logdir scalar
+2020-02-28 21:38:16.149436: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory
+2020-02-28 21:38:16.149574: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory
+2020-02-28 21:38:16.149582: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+Serving TensorBoard on localhost; to expose to the network, use a proxy or pass --bind_all
+TensorBoard 2.1.0 at http://localhost:6006/ (Press CTRL+C to quit)
+```
+用浏览器打开地址 http://localhost:6006/ 
+
+## 2. tensorboardX-scalar代码
+``` python
+
+```
+
+https://www.cnblogs.com/denny402/p/7593301.htmlimport torch
+import torch.nn as nn
+import torch.nn.functional as F
+from tensorboardX import SummaryWriter
+
+
+class Net1(nn.Module):
+    def __init__(self):
+        super(Net1, self).__init__()
+        self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
+        self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
+        self.conv2_drop = nn.Dropout2d()
+        self.fc1 = nn.Linear(320, 50)
+        self.fc2 = nn.Linear(50, 10)
+        self.bn = nn.BatchNorm2d(20)
+
+    def forward(self, x):
+        x = F.max_pool2d(self.conv1(x), 2)
+        x = F.relu(x) + F.relu(-x)
+        x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), 2))
+        x = self.bn(x)
+        x = x.view(-1, 320)
+        x = F.relu(self.fc1(x))
+        x = F.dropout(x, training=self.training)
+        x = self.fc2(x)
+        x = F.softmax(x, dim=1)
+        return x
+
+
+dummy_input = torch.rand(13, 1, 28, 28)
+print('dummy_input ',dummy_input)
+model = Net1()
+with SummaryWriter(comment='Net1') as w:
+    w.add_graph(model, (dummy_input,))
