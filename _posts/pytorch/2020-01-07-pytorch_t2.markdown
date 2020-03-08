@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 矩阵的乘法
+title: pytorch 知识点
 date: 2020-01-07 00:05:00
 author: wellstone-cheng
 img: pytorch.jpeg
@@ -8,60 +8,45 @@ pytorch: true
 tags: [pytorch]
 ---
 
-
-## 矩阵的乘法,矩阵的点乘和叉乘
----
-### 矩阵的乘法/矩阵的叉乘??
-
-![baby]({{ '/assets/img/mm.png' | prepend: site.baseurl }})
-
-```math
-A=\left[ \begin{matrix} 1 & 2 \\ 3 & 4\end{matrix} \right]
-B=\left[ \begin{matrix} 1 & 2 \\ 3 & 4\end{matrix} \right]
-AB=\left[ \begin{matrix} 1*1+2*3 & 1*2+2*4 \\ 3*1+4*3& 3*2+4*4\end{matrix} \right]=\left[ \begin{matrix} 7 & 9 \\ 15& 22\end{matrix} \right]
+## 1 simple API
+### 1.1 torch.randn vs torch.rand
+#### 1.1.1 torch.rand 均匀分布
+``` python 
+dummy_input =torch.rand(2, 3)# 2维数据
+dummy_input =torch.rand(2,3,4)# 3维数据,每一维数据中有4个数据,每个二维数据中有3个一维数据,每个三维数据中有2个二维数据
+dummy_input = torch.rand(13, 1, 28, 28)# 4维数据,每个一维数据中有28个数据,每个二维数据中有28个一维数据,每个三维数据中有1个二维数据,(即没有二维数据的表示,全表示为三维数据)每个四维数据中有13个三维数据
 ```
+#### 1.1.2 torch.randn 均匀分布
 
-* torch.mm 矩阵相乘
-* 代码运行如下
-  
-
+## 2 神经网络模块(Neural Network)--torch.nn
+#### 2.1 卷积
+##### 2.1.1 torch.nn.Conv1d 
+一维的卷积能处理多维数据
+##### 2.1.2 torch.nn.Conv2d 
+二维卷积可以处理二维数据
 ``` python
-import numpy as np
-import torch
-data=[[1, 2],[3, 4]]# 列表list
-tensor=torch.Tensor(data) #tensor
-
-print(
-    '\n np.matmul', np.matmul(data,data),#矩阵乘法
-    '\n np.multiply', np.multiply(data,data),#矩阵点乘
-    '\n np.dot', np.dot(data,data),#矩阵叉乘 =矩阵乘法
-    '\n torch.mm',torch.mm(tensor,tensor), #矩阵乘法
-    '\n torch.mul',torch.mul(tensor,tensor), #矩阵点乘
-    '\n torch.dot',torch.dot(torch.from_numpy(np.array(data).flatten()),torch.from_numpy(np.array(data).flatten())) # torch.dot 只能适用于1维的矩阵
-)
+self.conv1 = nn.Conv2d(1, 10, kernel_size=5)#in_channels, out_channels, kernel_size, stride
+#batch, channel , height , width,在卷积中其实为二维数据
+dummy_input = torch.rand(13, 1, 28, 28)
 ```
-打印如下:
-
+根据公式
 ``` shell
-np.matmul [[ 7 10][15 22]] 
-np.multiply [[ 1  4][ 9 16]] 
-np.dot [[ 7 10][15 22]] 
-torch.mm tensor([[ 7., 10.],[15., 22.]]) 
-torch.mul tensor([[ 1.,  4.],[ 9., 16.]]) 
-torch.dot tensor(30)
+d = (d - kennel_size + 2 * padding) / stride + 1
 ```
+d(height)=(height-kernnel_size+2 *padding) /Stride +1
+         =(28-5+2*0)/2 +1
+         =12
 
----
-### 矩阵的点乘/哈达马积
+d(weight)=(weight-kernnel_size+2 *padding) /Stride +1
+         =(28-5+2*0)/2 +1
+         =12
+故卷积输出为: batch,out_channel,height,width
+(13,10,12,12)
 
-* torch.mul 矩阵点乘
-  
-![baby]({{ '/assets/img/mul.png' | prepend: site.baseurl }})
-
-``` math
-A=\left[ \begin{matrix} 1 & 2 \\ 3 & 4\end{matrix} \right]
-B=\left[ \begin{matrix} 1 & 2 \\ 3 & 4\end{matrix} \right]
-A*B=\left[ \begin{matrix} 1*1 & 2*2 \\ 3*3& 4*4\end{matrix} \right]=\left[ \begin{matrix} 1 & 4 \\ 9& 16\end{matrix} \right]
-```
----
-### 克罗内克积
+## 3 torch.nn.functional
+### 3.1 与torch.nn的区别
+* torch.nn
+在__init__()函数里定义，定义的是一个类
+* torch.nn.functional
+在__forward()__函数里定义，定义的是一个函数
+https://blog.csdn.net/zbzcDZF/article/details/90447993
