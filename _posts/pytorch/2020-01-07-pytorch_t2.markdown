@@ -17,13 +17,22 @@ dummy_input =torch.rand(2,3,4)# 3维数据,每一维数据中有4个数据,每�
 dummy_input = torch.rand(13, 1, 28, 28)# 4维数据,每个一维数据中有28个数据,每个二维数据中有28个一维数据,每个三维数据中有1个二维数据,(即没有二维数据的表示,全表示为三维数据)每个四维数据中有13个三维数据
 ```
 #### 1.1.2 torch.randn 均匀分布
-
+--- 
 ## 2 神经网络模块(Neural Network)--torch.nn
-#### 2.1 卷积
-##### 2.1.1 torch.nn.Conv1d 
-一维的卷积能处理多维数据
-##### 2.1.2 torch.nn.Conv2d 
-二维卷积可以处理二维数据
+### 2.1 卷积
+#### 2.1.1 torch.nn.Conv1d 
+##### 2.1.1.1 一维的卷积能处理多维数据
+
+#### 2.1.2 torch.nn.Conv2d 
+##### 2.1.2.1二维卷积可以处理二维数据
+##### 2.1.2.2 nn.Conv2d(self, in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True))
+参数：
+* in_channel:　输入数据的通道数，例RGB图片通道数为3；
+* out_channel: 输出数据的通道数，这个根据模型调整；
+* kennel_size: 卷积核大小，可以是int，或tuple；kennel_size=2,意味着卷积大小(2,2)， kennel_size=（2,3），意味着卷积大小（2，3）即非正方形卷积
+  stride：步长，默认为1，与kennel_size类似，stride=2,意味着步长上下左右扫描皆为2， stride=（2,3），左右扫描步长为2，上下为3；
+* padding：　零填充
+#### 2.1.2.3 计算卷积输出
 ``` python
 self.conv1 = nn.Conv2d(1, 10, kernel_size=5)#in_channels, out_channels, kernel_size, stride
 #batch, channel , height , width,在卷积中其实为二维数据
@@ -43,10 +52,50 @@ d(weight)=(weight-kernnel_size+2 *padding) /Stride +1
 故卷积输出为: batch,out_channel,height,width
 (13,10,12,12)
 
+### 2.2 池化
+#### 2.2.1 torch.nn.MaxPool2d
+
+
+
+---
 ## 3 torch.nn.functional
 ### 3.1 与torch.nn的区别
 * torch.nn
 在__init__()函数里定义，定义的是一个类
+
+``` python
+class Conv1d(_ConvNd):
+    def __init__(self, in_channels, out_channels, kernel_size, stride=1,
+                 padding=0, dilation=1, groups=1, bias=True):
+        kernel_size = _single(kernel_size)
+        stride = _single(stride)
+        padding = _single(padding)
+        dilation = _single(dilation)
+        super(Conv1d, self).__init__(
+            in_channels, out_channels, kernel_size, stride, padding, dilation,
+            False, _single(0), groups, bias)
+
+    def forward(self, input):
+        return F.conv1d(input, self.weight, self.bias, self.stride,
+                        self.padding, self.dilation, self.groups)
+```
 * torch.nn.functional
 在__forward()__函数里定义，定义的是一个函数
-https://blog.csdn.net/zbzcDZF/article/details/90447993
+
+``` python
+def conv1d(input, weight, bias=None, stride=1, padding=0, dilation=1,
+           groups=1):
+    if input is not None and input.dim() != 3:
+        raise ValueError("Expected 3D tensor as input, got {}D tensor instead.".format(input.dim()))
+
+    f = ConvNd(_single(stride), _single(padding), _single(dilation), False,
+               _single(0), groups, torch.backends.cudnn.benchmark,
+               torch.backends.cudnn.deterministic, torch.backends.cudnn.enabled)
+    return f(input, weight, bias)
+```
+* 区别与联系
+  (1)torch.nn下的Conv1d类在forward时调用了nn.functional下的conv1d,最终的计算是通过C++编写的THNN库中的ConvNd进行计算的，因此这两个其实是互相调用的关系.
+  (2)init里放的是需要维护状态的，forward 里放的是无需维护状态的
+* 注:(1)ConvNd在torch.nn.Conv1d的class Conv1d(_ConvNd)中
+     (2)torch.nn.+大写字母开头函数; torch.nn.functional.+小写字母开头函数
+https://www.zhihu.com/question/66782101
