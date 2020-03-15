@@ -16,23 +16,116 @@ dummy_input =torch.rand(2, 3)# 2维数据
 dummy_input =torch.rand(2,3,4)# 3维数据,每一维数据中有4个数据,每个二维数据中有3个一维数据,每个三维数据中有2个二维数据
 dummy_input = torch.rand(13, 1, 28, 28)# 4维数据,每个一维数据中有28个数据,每个二维数据中有28个一维数据,每个三维数据中有1个二维数据,(即没有二维数据的表示,全表示为三维数据)每个四维数据中有13个三维数据
 ```
-#### 1.1.2 torch.randn 均匀分布
---- 
-## 2 神经网络模块(Neural Network)--torch.nn
-### 2.1 卷积
-#### 2.1.1 torch.nn.Conv1d 
-##### 2.1.1.1 一维的卷积能处理多维数据
+#### 1.1.2 torch.randn 标准正态分布
 
-#### 2.1.2 torch.nn.Conv2d 
-##### 2.1.2.1二维卷积可以处理二维数据
-##### 2.1.2.2 nn.Conv2d(self, in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True))
+--- 
+
+## 2 神经网络模块(Neural Network)--torch.nn
+### 2.1 卷积理论
+https://zhuanlan.zhihu.com/p/27908027
+
+#### 2.1.1 卷积运算
+![baby]({{ '/assets/img/CNN/CNN_feature1.png' | prepend: site.baseurl }})
+
+##### step1 取特征(feature)
+如上X图所示从一个9x9的图片中取出3个3x3的的图作为特征(feature),feature在CNN中也被成为**卷积核（filter）**，一般是3X3，或者5X5的大小.
+* 其中1代表白色，-1代表黑色,白色为X形状点所在的位置,为将要识别的点;
+##### step2 将特征与要识别的图相乘
+![baby]({{ '/assets/img/CNN/CNN_feature2.png' | prepend: site.baseurl }})
+取 feature里的(1,1)元素值，再取图像上深蓝色框内的(1,1))元素值，二者相乘等于1。把这个结果1填入新的图中。然后依次取feature里的(1,2)元素值与再取图像上深蓝色框内的(1,2)元素值值相乘... 到然后依次取feature里的(3,3))元素值与再取图像上深蓝色框内的(3,3))元素值相乘;最终得到右上角的3x3图.
+##### step3 计算特征图(feature map)
+将上步骤得到的3x3图的九个值**求平均**，得到一个均值，将均值填入一张新的图中.
+进行卷积对应相乘运算并求得均值后，滑动窗便开始向右边滑动。根据步长(stride)的不同选择滑动幅度。
+* <font color='red'>??? 卷积后是否需要求平均</font>
+* 其中步长(stride)应用于向右移和向下移.
+
+经过一系列卷积对应相乘，求均值运算后，把一张完整的特征图feature map填满
+* 9x9的图与一个3x3的特征卷积运算后得到一张7x7的特诊图
+
+![baby]({{ '/assets/img/CNN/CNN_feature3.png' | prepend: site.baseurl }})
+
+* feature map是每一个feature从原始图像中提取出来的“特征”。其中的值，越接近为1表示对应位置和feature的匹配越完整，越是接近-1，表示对应位置和feature的反面匹配越完整，而值接近0的表示对应位置没有任何匹配或者说没有什么关联。
+
+一个feature作用于图片产生一张feature map，对这张X图来说，我们用的是3个feature，因此最终产生3个 feature map。
+
+![baby]({{ '/assets/img/CNN/CNN_feature3.png' | prepend: site.baseurl }})
+
+* **卷积核(filter)数目也就是所取特征的数目**
+  
+#### 2.1.2 非线性激活
+卷积层对原图运算多个卷积产生一组线性激活响应，而**非线性激活层**是对之前的结果进行一个非线性的激活响应。
+在神经网络中用到最多的非线性激活函数是**Relu**函数，它的公式定义如下：
+``` shell
+f(x)=max(0,x)
+```
+即，保留大于等于0的值，其余所有小于0的数值直接改写为0。
+* 作用
+卷积后产生的特征图中的值，越靠近1表示与该特征越关联，越靠近-1表示越不关联，而我们进行特征提取时，为了**使得数据更少，操作更方便，就直接舍弃掉那些不相关联的数据**。
+
+非线性激活函数作用后如下图所示
+![baby]({{ '/assets/img/CNN/non_linear1.png' | prepend: site.baseurl }})
+
+#### 2.1.3 池化层
+##### 2.1.3.1 作用
+卷积操作后，我们得到了一张张有着不同值的feature map，虽数据量比原图少了一些，但还是很庞大.
+池化的操作就是**减少数据量**.
+
+##### 2.1.3.2 分类
+
+池化分为两种，Max Pooling 最大池化、Average Pooling平均池化。
+* 最大池化就是取最大值
+* 平均池化就是取平均值。
+
+拿最大池化举例：选择池化尺寸为2x2，因为选定一个2x2的窗口，在其内选出最大值更新进新的feature map。
+![baby]({{ '/assets/img/CNN/pooling1.png' | prepend: site.baseurl }})
+
+* 经过池化后原来的7x7的特征图变成了4x4的图
+* 因为最大池化保留了每一个小块内的最大值，所以它相当于保留了这一块最佳匹配结果（因为值越接近1表示匹配越好）。这也就意味着它不会具体关注窗口内到底是哪一个地方匹配了，而只关注是不是有某个地方匹配上这也就能够看出，CNN能够发现图像中是否具有某种特征，而不用在意到底在哪里具有这种特征。这也就能够帮助解决之前提到的计算机逐一像素匹配的死板做法。
+* 池化过程的所用的窗口大小也就是**卷积核(filter)** 大小.
+
+#### 2.1.4 全连接层
+##### 2.1.4.1 全连接层简介
+全连接层的形式和**前馈神经网络（feedforward neural network）**的形式一样，或者称为**多层感知机（multilayer perceptron，MLP）**.
+
+* 原图片尺寸为9X9，在一系列的卷积、relu、池化操作后，得到尺寸被压缩为2X2的三张特征图。
+  
+![baby]({{ '/assets/img/CNN/MLP1.png' | prepend: site.baseurl }})
+
+* 全连接层要做的，就是对之前的所有操作进行一个总结，给我们一个最终的结果。
+它最大的目的是对特征图进行维度上的改变，来得到每个分类类别对应的概率值。
+全连接层，顾名思义就是全部都连接起来，让我们把它与卷积层对比起来看。
+
+##### 2.1.4.2 卷积神经网络的重要性质
+* **局部连接**与**参数共享**是卷积神经网络最重要的两个性质
+  
+(1)卷积层采用的是**局部连接**的思想，回忆一下卷积层的操作，是用一个3X3的图与原图进行连接操作，很明显原图中只有一个3X3的窗口能够与它连接起来.
+(2)那除窗口之外的、未连接的部分怎么办呢？ 我们都知道，采用的是将窗口滑动起来的方法后续进行连接。这个方法的思想就是**参数共享** ，参数指的就是**filter**，用滑动窗口的方式，将这个filter值共享给原图中的每一块区域连接进行卷积运算。
+
+* **权值参数矩阵**  -- weight???
+
+得到了2X2的特征图后，对其应用全连接网络，再全连接层中有一个非常重要的函数---- **Softmax**，它是一个分类函数，输出的是每个对应类别的概率值.
+
+#### 2.1.5 神经网络的训练与优化
+ 
+ * 神经网络要训练的就是**卷积核(filter)**
+##### 2.1.5.1 训练方法
+BP算法---**BackProp反向传播**算法 
+
+---
+### 2.2 卷积API
+#### 2.2.1 torch.nn.Conv1d 
+##### 2.2.1.1 一维的卷积能处理多维数据
+
+#### 2.2.2 torch.nn.Conv2d 
+##### 2.2.2.1二维卷积可以处理二维数据
+##### 2.2.2.2 nn.Conv2d(self, in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True))
 参数：
 * in_channel:　输入数据的通道数，例RGB图片通道数为3；
 * out_channel: 输出数据的通道数，这个根据模型调整；
 * kennel_size: 卷积核大小，可以是int，或tuple；kennel_size=2,意味着卷积大小(2,2)， kennel_size=（2,3），意味着卷积大小（2，3）即非正方形卷积
   stride：步长，默认为1，与kennel_size类似，stride=2,意味着步长上下左右扫描皆为2， stride=（2,3），左右扫描步长为2，上下为3；
 * padding：　零填充
-#### 2.1.2.3 计算卷积输出
+#### 2.2.2.3 计算卷积输出
 ``` python
 self.conv1 = nn.Conv2d(1, 10, kernel_size=5)#in_channels, out_channels, kernel_size, stride
 #batch, channel , height , width,在卷积中其实为二维数据
@@ -43,7 +136,7 @@ dummy_input = torch.rand(13, 1, 28, 28)
 d = (d - kennel_size + 2 * padding) / stride + 1
 ```
 d(height)=(height-kernnel_size+2 *padding) /Stride +1
-         =(28-5+2*0)/2 +1
+         =(28-5+2*0)/2y移
          =12
 
 d(weight)=(weight-kernnel_size+2 *padding) /Stride +1
@@ -51,9 +144,19 @@ d(weight)=(weight-kernnel_size+2 *padding) /Stride +1
          =12
 故卷积输出为: batch,out_channel,height,width
 (13,10,12,12)
+#### 2.2.3 torch.nn.Linear
+torch.nn.Linear(in_features, out_features, bias=True)
+* ｉn_features – size of each input sample
+* out_features – size of each output sample
+* bias – If set to False, the layer will not learn an additive bias. Default: True
+#### 2.2.4 torch.nn.Dropout2d
+* p (python:float, optional) – probability of an element to be zero-ed.
+* inplace (bool, optional) – If set to True, will do this operation in-place
+#### 2.2.5 torch.nn.BatchNorm2d
+torch.nn.BatchNorm2d(num_features, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
 
-### 2.2 池化
-#### 2.2.1 torch.nn.MaxPool2d
+### 2.3 池化API
+#### 2.3.1 torch.nn.MaxPool2d
 
 
 
@@ -93,9 +196,29 @@ def conv1d(input, weight, bias=None, stride=1, padding=0, dilation=1,
                torch.backends.cudnn.deterministic, torch.backends.cudnn.enabled)
     return f(input, weight, bias)
 ```
-* 区别与联系
+* 区别
+  (1)init里放的是需要维护状态的，forward 里放的是无需维护状态的
+  (2)nn.functional.xxx是函数接口，而nn.Xxx是nn.functional.xxx的类封装，并且nn.Xxx都继承于一个共同祖先nn.Module。这一点导致nn.Xxx除了具有nn.functional.xxx功能之外，内部附带了nn.Module相关的属性和方法，例如train(), eval(),load_state_dict, state_dict 等
+  (3)nn.Xxx 需要先实例化并传入参数，然后以函数调用的方式调用实例化的对象并传入输入数据
+  ``` python
+  inputs = torch.rand(64, 3, 244, 244)
+  conv = nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, padding=1)
+  out = conv(inputs)
+  ```
+  (4)nn.functional.xxx同时传入输入数据和weight, bias等其他参数
+  ``` python
+  weight = torch.rand(64,3,3,3)
+  bias = torch.rand(64) 
+  out = nn.functional.conv2d(inputs, weight, bias, padding=1)
+  ```
+* 联系
   (1)torch.nn下的Conv1d类在forward时调用了nn.functional下的conv1d,最终的计算是通过C++编写的THNN库中的ConvNd进行计算的，因此这两个其实是互相调用的关系.
-  (2)init里放的是需要维护状态的，forward 里放的是无需维护状态的
-* 注:(1)ConvNd在torch.nn.Conv1d的class Conv1d(_ConvNd)中
-     (2)torch.nn.+大写字母开头函数; torch.nn.functional.+小写字母开头函数
-https://www.zhihu.com/question/66782101
+  (2)nn.Xxx和nn.functional.xxx的实际功能是相同的，即nn.Conv2d和nn.functional.conv2d 都是进行卷积，nn.Dropout 和nn.functional.dropout都是进行dropout;
+  (3)运行效率也是近乎相同
+
+* 注: 
+  (1) ConvNd在torch.nn.Conv1d的class Conv1d(_ConvNd)中
+  (2) torch.nn.+大写字母开头函数; torch.nn.functional.+小写字母开头函数
+---
+
+ 内容转自 https://www.zhihu.com/question/66782101
