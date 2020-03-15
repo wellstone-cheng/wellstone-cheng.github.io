@@ -30,9 +30,11 @@ https://zhuanlan.zhihu.com/p/27908027
 ##### step1 取特征(feature)
 如上X图所示从一个9x9的图片中取出3个3x3的的图作为特征(feature),feature在CNN中也被成为**卷积核（filter）**，一般是3X3，或者5X5的大小.
 * 其中1代表白色，-1代表黑色,白色为X形状点所在的位置,为将要识别的点;
+* 
 ##### step2 将特征与要识别的图相乘
 ![baby]({{ '/assets/img/CNN/CNN_feature2.png' | prepend: site.baseurl }})
 取 feature里的(1,1)元素值，再取图像上深蓝色框内的(1,1))元素值，二者相乘等于1。把这个结果1填入新的图中。然后依次取feature里的(1,2)元素值与再取图像上深蓝色框内的(1,2)元素值值相乘... 到然后依次取feature里的(3,3))元素值与再取图像上深蓝色框内的(3,3))元素值相乘;最终得到右上角的3x3图.
+
 ##### step3 计算特征图(feature map)
 将上步骤得到的3x3图的九个值**求平均**，得到一个均值，将均值填入一张新的图中.
 进行卷积对应相乘运算并求得均值后，滑动窗便开始向右边滑动。根据步长(stride)的不同选择滑动幅度。
@@ -154,7 +156,12 @@ torch.nn.Linear(in_features, out_features, bias=True)
 * inplace (bool, optional) – If set to True, will do this operation in-place
 #### 2.2.5 torch.nn.BatchNorm2d
 torch.nn.BatchNorm2d(num_features, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+* num_features – CC from an expected input of size (N, C, H, W)(N,C,H,W)
+* eps – a value added to the denominator for numerical stability. Default: 1e-5
+* momentum – the value used for the running_mean and running_var computation. Can be set to None for cumulative moving average (i.e. simple average). Default: 0.1
+* affine – a boolean value that when set to True, this module has learnable affine parameters. Default: True
 
+* track_running_stats – a boolean value that when set to True, this module tracks the running mean and variance, and when set to False, this module does not track such statistics and always uses batch statistics in both training and eval modes. Default: True
 ### 2.3 池化API
 #### 2.3.1 torch.nn.MaxPool2d
 
