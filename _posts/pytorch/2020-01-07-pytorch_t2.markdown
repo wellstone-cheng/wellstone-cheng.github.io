@@ -17,6 +17,8 @@ dummy_input =torch.rand(2,3,4)# 3维数据,每一维数据中有4个数据,每�
 dummy_input = torch.rand(13, 1, 28, 28)# 4维数据,每个一维数据中有28个数据,每个二维数据中有28个一维数据,每个三维数据中有1个二维数据,(即没有二维数据的表示,全表示为三维数据)每个四维数据中有13个三维数据
 ```
 #### 1.1.2 torch.randn 标准正态分布
+#### 1.1.3 torch.view
+#### 1.1.4 torch.shape
 
 --- 
 
@@ -42,7 +44,7 @@ https://zhuanlan.zhihu.com/p/27908027
 * 其中步长(stride)应用于向右移和向下移.
 
 经过一系列卷积对应相乘，求均值运算后，把一张完整的特征图feature map填满
-* 9x9的图与一个3x3的特征卷积运算后得到一张7x7的特诊图
+* 9x9的图与一个3x3的特征卷积运算后得到一张7x7的特诊图(stride=1)
 
 ![baby]({{ '/assets/img/CNN/CNN_feature3.png' | prepend: site.baseurl }})
 
@@ -104,8 +106,10 @@ f(x)=max(0,x)
 (2)那除窗口之外的、未连接的部分怎么办呢？ 我们都知道，采用的是将窗口滑动起来的方法后续进行连接。这个方法的思想就是**参数共享** ，参数指的就是**filter**，用滑动窗口的方式，将这个filter值共享给原图中的每一块区域连接进行卷积运算。
 
 * **权值参数矩阵**  -- weight???
-
+##### 2.1.4.3 softmax
 得到了2X2的特征图后，对其应用全连接网络，再全连接层中有一个非常重要的函数---- **Softmax**，它是一个分类函数，输出的是每个对应类别的概率值.
+
+##### 2.1.4.4 linear
 
 #### 2.1.5 神经网络的训练与优化
  
@@ -136,32 +140,88 @@ dummy_input = torch.rand(13, 1, 28, 28)
 根据公式
 ``` shell
 d = (d - kennel_size + 2 * padding) / stride + 1
-```
+
 d(height)=(height-kernnel_size+2 *padding) /Stride +1
-         =(28-5+2*0)/2y移
-         =12
+         =(28-5+2*0)/1+1
+         =24
 
 d(weight)=(weight-kernnel_size+2 *padding) /Stride +1
-         =(28-5+2*0)/2 +1
-         =12
+         =(28-5+2*0)/1 +1
+         =24
+```
+
 故卷积输出为: batch,out_channel,height,width
-(13,10,12,12)
+(13,10,24,24)
 #### 2.2.3 torch.nn.Linear
 torch.nn.Linear(in_features, out_features, bias=True)
 * ｉn_features – size of each input sample
 * out_features – size of each output sample
 * bias – If set to False, the layer will not learn an additive bias. Default: True
+``` python
+import torch
+
+x = torch.randn(10, 20)  # 输入的维度是（10，20）,有10个１维数据，每个１维数据中有20个数据:10*20
+
+m = torch.nn.Linear(20, 30)  #权重矩阵m.weight 有30个１维数据，每个１维数据中有20个数据
+output = m(x)
+print('m.weight.shape:\n ', m.weight.shape)#权重矩阵为30*20 --> 专置权重矩阵维20*30;.shape表示数据的尺寸
+print('m.bias.shape:\n', m.bias.shape)#偏置
+print('output.shape:\n', output.shape)
+#上述代码等价于下述代码
+ans = torch.mm(x, m.weight.t()) + m.bias
+print('ans.shape:\n', ans.shape)
+```
+打印如下
+``` shell
+m.weight.shape:
+  torch.Size([30, 20])
+m.bias.shape:
+ torch.Size([30])
+output.shape:
+ torch.Size([10, 30])
+ans.shape:
+ torch.Size([10, 30])
+```
+* linear线性变换的公式为：　y=A<sup>T</sup>x + b，　其中Ａ为权重矩阵，**通过权重矩阵的转置与输入数据相乘可以实现输入数据尺寸的改变，一般用于全连接层**.
+
+
 #### 2.2.4 torch.nn.Dropout2d
 * p (python:float, optional) – probability of an element to be zero-ed.
 * inplace (bool, optional) – If set to True, will do this operation in-place
+##### 2.2.4.1 nn.Dropout2d vs nn.Dropout
+* torch.nn.Dropout对所有元素中每个元素按照概率P更改为零
+* torch.nn.Dropout2d是对每个通道按照概率P置为0
+  
 #### 2.2.5 torch.nn.BatchNorm2d
 torch.nn.BatchNorm2d(num_features, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
 * num_features – CC from an expected input of size (N, C, H, W)(N,C,H,W)
 * eps – a value added to the denominator for numerical stability. Default: 1e-5
-* momentum – the value used for the running_mean and running_var computation. Can be set to None for cumulative moving average (i.e. simple average). Default: 0.1
+* momentum – the lue used for the running_mean and running_var computation. Can be set to None for cumulative moving average (i.e. simple average). Default: 0.1
 * affine – a boolean value that when set to True, this module has learnable affine parameters. Default: True
 
 * track_running_stats – a boolean value that when set to True, this module tracks the running mean and variance, and when set to False, this module does not track such statistics and always uses batch statistics in both training and eval modes. Default: True
+##### 2.2.5.1 简单介绍
+* 举例
+假设在网络中间经过某些卷积操作之后的输出的feature map的尺寸为4×3×2×2;4为batch的大小，3为channel的数目，2×2为feature map的长宽.
+
+![baby]({{ '/assets/img/CNN/BN1.png' | prepend: site.baseurl }})
+
+上图中，batch size一共是4, 对于每一个batch的feature map的size是3×2×2
+对于所有batch中的同一个channel的元素进行求均值与方差，比如上图，对于所有的batch，都拿出来最后一个channel，一共有4×4=16个元素，
+然后求区这16个元素的均值与方差（上图只求了mean，没有求方差。。。），
+求取完了均值与方差之后，对于这16个元素中的每个元素进行减去求取得到的均值与方差，然后乘以gamma加上beta
+
+http://www.mamicode.com/info-detail-2378483.html
+
+#### 2.2.6 max_pool2d
+##### 2.2.6.1 torch.nn.functional.max_pool2d
+torch.nn.functional.max_pool2d(input, kernel_size, stride=None, padding=0, dilation=1,
+ceil_mode=False, return_indices=False)
+##### 2.2.6.2 torch.nn.MaxPool2d
+torch.nn.MaxPool2d(kernel_size, stride=None, padding=0, dilation=1, return_indices=False, ceil_mode=False)
+* stride: max pooling的窗口移动的步长。默认值是kernel_size
+
+
 ### 2.3 池化API
 #### 2.3.1 torch.nn.MaxPool2d
 

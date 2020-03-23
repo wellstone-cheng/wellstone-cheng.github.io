@@ -7,3 +7,207 @@ img: pytorch.jpeg
 pytorch: true
 tags: [pytorch]
 ---
+## 1.构建方法一
+``` python
+import torch
+import torch.nn.functional as F
+from tensorboardX import SummaryWriter
+class Net1(torch.nn.Module):
+    def __init__(self):
+        super(Net1, self).__init__()
+        self.conv1 = torch.nn.Conv2d(3, 32, 3, 1, 1)
+        self.dense1 = torch.nn.Linear(32 * 3 * 3, 128)
+        self.dense2 = torch.nn.Linear(128, 10)
+
+    def forward(self, x):
+        x = F.max_pool2d(F.relu(self.conv1(x)), 2)#[2, 32, 6, 6]-->[2, 32, 3, 3]
+        x = x.view(x.size(0), -1)#x.size(0) =2 ; [2, 32, 3, 3]-->[2, 288]
+        x = F.relu(self.dense1(x))#[2, 288]-->[2, 128]
+        x = self.dense2(x)#[2, 128]-->[2, 10]
+        return x
+print("Method 1:")
+model1 = Net1()
+print(model1)
+dummy_input = torch.rand(2, 3, 6, 6)
+with SummaryWriter(comment='Net1') as w:
+    w.add_graph(model1, (dummy_input,))
+```
+打印如下
+``` shell
+Method 1:
+Net1(
+  (conv1): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  (dense1): Linear(in_features=288, out_features=128, bias=True)
+  (dense2): Linear(in_features=128, out_features=10, bias=True)
+)
+```
+tensorboard显示如下:
+
+![baby]({{ '/assets/img/CNN/Sruct1.png' | prepend: site.baseurl }})
+
+## ２.构建方法二
+这种方法利用torch.nn.Sequential（）容器进行快速搭建，模型的各层被顺序添加到容器中。缺点是每层的编号是默认的阿拉伯数字，不易区分
+
+``` python
+import torch
+import torch.nn.functional as F
+from tensorboardX import SummaryWriter
+
+class Net2(torch.nn.Module):
+    def __init__(self):
+        super(Net2, self).__init__()
+        self.conv1 = torch.nn.Sequential(
+            torch.nn.Conv2d(3, 32, 3, 1, 1),
+            torch.nn.ReLU(),
+            torch.nn.MaxPool2d(2))
+        self.dense = torch.nn.Sequential(
+            torch.nn.Linear(32 * 3 * 3, 128),
+            torch.nn.ReLU(),
+            torch.nn.Linear(128, 10)
+        )
+
+    def forward(self, x):
+        conv_out = self.conv1(x)
+        res = conv_out.view(conv_out.size(0), -1)
+        out = self.dense(res)
+        return out
+
+print("Method 2:")
+model2 = Net2()
+print(model2)
+dummy_input = torch.rand(2, 3, 6, 6)
+with SummaryWriter(comment='Net2') as w:
+    w.add_graph(model2, (dummy_input,))
+```
+打印如下
+``` shell
+
+Method 2:
+Net2(
+  (conv1): Sequential(
+    (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU()
+    (2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (dense): Sequential(
+    (0): Linear(in_features=288, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=128, out_features=10, bias=True)
+  )
+)
+```
+tensorboard显示如下:
+
+![baby]({{ '/assets/img/CNN/Sruct2.png' | prepend: site.baseurl }})
+
+## ３.构建方法三
+这种方法是对第二种方法的改进：通过add_module()添加每一层，并且为每一层增加了一个单独的**名字**。
+``` python
+import torch.nn.functional as F
+from tensorboardX import SummaryWriter
+
+class Net3(torch.nn.Module):
+    def __init__(self):
+        super(Net3, self).__init__()
+        self.conv=torch.nn.Sequential()
+        self.conv.add_module("conv1",torch.nn.Conv2d(3, 32, 3, 1, 1))
+        self.conv.add_module("relu1",torch.nn.ReLU())
+        self.conv.add_module("pool1",torch.nn.MaxPool2d(2))
+        self.dense = torch.nn.Sequential()
+        self.dense.add_module("dense1",torch.nn.Linear(32 * 3 * 3, 128))
+        self.dense.add_module("relu2",torch.nn.ReLU())
+        self.dense.add_module("dense2",torch.nn.Linear(128, 10))
+
+    def forward(self, x):
+        conv_out = self.conv(x)
+        res = conv_out.view(conv_out.size(0), -1)
+        out = self.dense(res)
+        return out
+
+print("Method 3:")
+model3 = Net3()
+print(model3)
+dummy_input = torch.rand(2, 3, 6, 6)
+with SummaryWriter(comment='Net2') as w:
+    w.add_graph(model3, (dummy_input,))
+```
+打印输出如下：
+``` shell
+Method 3:
+Net3(
+  (conv): Sequential(
+    (conv1): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (relu1): ReLU()
+    (pool1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (dense): Sequential(
+    (dense1): Linear(in_features=288, out_features=128, bias=True)
+    (relu2): ReLU()
+    (dense2): Linear(in_features=128, out_features=10, bias=True)
+  )
+)
+```
+
+tensorboard显示如下:
+
+![baby]({{ '/assets/img/CNN/Sruct3.png' | prepend: site.baseurl }})
+
+## ４.构建方法四
+``` python
+import torch
+import torch.nn.functional as F
+from tensorboardX import SummaryWriter
+from collections import OrderedDict
+
+class Net4(torch.nn.Module):
+    def __init__(self):
+        super(Net4, self).__init__()
+        self.conv = torch.nn.Sequential(
+            OrderedDict(
+                [
+                    ("conv1", torch.nn.Conv2d(3, 32, 3, 1, 1)),
+                    ("relu1", torch.nn.ReLU()),
+                    ("pool", torch.nn.MaxPool2d(2))
+                ]
+            ))
+
+        self.dense = torch.nn.Sequential(
+            OrderedDict([
+                ("dense1", torch.nn.Linear(32 * 3 * 3, 128)),
+                ("relu2", torch.nn.ReLU()),
+                ("dense2", torch.nn.Linear(128, 10))
+            ])
+        )
+
+    def forward(self, x):
+        conv_out = self.conv(x)
+        res = conv_out.view(conv_out.size(0), -1)
+        out = self.dense(res)
+        return out
+
+print("Method 4:")
+model4 = Net4()
+print(model4)
+dummy_input = torch.rand(2, 3, 6, 6)
+with SummaryWriter(comment='Net2') as w:
+    w.add_graph(model4, (dummy_input,))
+```
+打印如下：
+``` shell
+Method 4:
+Net4(
+  (conv): Sequential(
+    (conv1): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (relu1): ReLU()
+    (pool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (dense): Sequential(
+    (dense1): Linear(in_features=288, out_features=128, bias=True)
+    (relu2): ReLU()
+    (dense2): Linear(in_features=128, out_features=10, bias=True)
+  )
+)
+```
+tensorboard显示如下:
+
+![baby]({{ '/assets/img/CNN/Sruct4.png' | prepend: site.baseurl }})
