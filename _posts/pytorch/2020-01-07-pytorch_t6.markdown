@@ -117,3 +117,8 @@ plt.show()
 显示图片如下
 
 ![baby]({{ '/assets/img/regression.png' | prepend: site.baseurl }})
+
+## 函数解析
+* torch.nn.MSELoss
+计算输入X和输出Y的**均方误差**.
+loss(xi,yi)=(xi−yi)2
