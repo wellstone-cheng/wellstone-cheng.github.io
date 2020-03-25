@@ -1,0 +1,71 @@
+---
+layout: post
+title: 优化器
+date: 2020-03-2２ 00:05:00
+author: wellstone-cheng
+img: pytorch.jpeg
+pytorch: true
+tags: [pytorch]
+---
+
+## 1 torch.optim.SGD
+### 1.1 定义
+class torch.optim.SGD(params, lr=<object object>, momentum=0, dampening=0, weight_decay=0, nesterov=False)
+
+### 1.2 功能:
+可实现SGD优化算法，带动量SGD优化算法，带NAG(Nesterov accelerated gradient)动量SGD优化算法,并且均可拥有weight_decay项。
+
+### 1.3 参数:
+* params(iterable)- 参数组(参数组的概念请查看 3.2 优化器基类：Optimizer)，优化器要管理的那部分参数。
+* lr(float)- 初始学习率，可按需随着训练过程不断调整学习率。
+* **momentum(float)**- 动量，通常设置为0.9，0.8
+* dampening(float)- dampening for momentum ，暂时不了其功能，在源码中是这样用的：buf.mul_(momentum).add_(1 - dampening, d_p)，值得注意的是，若采用nesterov，dampening必须为 0.
+* weight_decay(float)- 权值衰减系数，也就是L2正则项的系数
+* nesterov(bool)- bool选项，是否使用NAG(Nesterov accelerated gradient)
+
+### 1.4 优点:
+    虽然SGD需要走很多步的样子，但是对梯度的要求很低（计算梯度快）。而对于引入噪声，大量的理论和实践工作证明，只要噪声不是特别大，SGD都能很好地收敛。应用大型数据集时，训练速度很快。比如每次从百万数据样本中，取几百个数据点，算一个SGD梯度，更新一下模型参数。相比于标准梯度下降法的遍历全部样本，每输入一个样本更新一次参数，要快得多。
+
+### 1.5 缺点:
+    SGD在随机选择梯度的同时会引入噪声，使得权值更新的方向不一定正确。此外，SGD也没能单独克服局部最优解的问题。
+## 2 使用动量(Momentum)的随机梯度下降法(SGD)
+使用动量(Momentum)的随机梯度下降法(SGD)，主要思想是引入一个积攒历史梯度信息动量来加速SGD。
+* 动量主要解决SGD的两个问题：一是随机梯度的方法（引入的噪声）；二是Hessian矩阵病态问题（可以理解为SGD在收敛过程中和正确梯度相比来回摆动比较大的问题）。
+
+* 简单理解：由于当前权值的改变会受到上一次权值改变的影响，类似于小球向下滚动的时候带上了惯性。这样可以加快小球向下滚动的速度。
+
+## 3 torch.optim.RMSprop
+### 3.1 定义
+class torch.optim.RMSprop(params, lr=0.01, alpha=0.99, eps=1e-08, weight_decay=0, momentum=0, centered=False)
+
+### 3.2 功能
+实现RMSprop优化方法（Hinton提出），RMS是均方根（root meam square）的意思。RMSprop和Adadelta一样，也是对Adagrad的一种改进。RMSprop采用均方根作为分母，可缓解Adagrad学习率下降较快的问题。并且引入均方根，可以减少摆动．
+
+### 3.3 原理
+与动量梯度下降一样，都是消除梯度下降过程中的摆动来加速梯度下降的方法。
+更新权重的时候，使用除根号的方法，可以使较大的梯度大幅度变小，而较小的梯度小幅度变小，这样就可以使较大梯度方向上的波动小下来，那么整个梯度下降的过程中摆动就会比较小，就能设置较大的learning-rate，使得学习步子变大，达到加快学习的目的。
+
+###　3.4 应用
+在实际的应用中，权重W或者b往往是很多维度权重集合，就是多维的，在进行除根号操作中，会将其中大的维度的梯度大幅降低，不是说权重W变化趋势一样。
+RMSProp算法在经验上已经被证明是一种有效且实用的深度神经网络优化算法。目前它是深度学习从业者经常采用的优化方法之一。
+
+## 4 torch.optim.Adam(AMSGrad)
+### 4.1 定义
+class torch.optim.Adam(params, lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0, amsgrad=False)
+
+### 4.2 功能
+实现Adam(Adaptive Moment Estimation))优化方法。Adam是一种自适应学习率的优化方法，Adam利用梯度的一阶矩估计和二阶矩估计动态的调整学习率。Adam是结合了**Momentum**和**RMSprop**，并进行了偏差修正。
+Adam中动量直接并入了梯度一阶矩（指数加权）的估计。其次，相比于缺少修正因子导致二阶矩估计可能在训练初期具有很高偏置的RMSProp，Adam包括偏置修正，修正从原点初始化的一阶矩（动量项）和（非中心的）二阶矩估计．
+该方法和RMSProp很像，除了使用的是平滑版的梯度m，而不是原始梯度dx。推荐参数值eps=1e-8, beta1=0.9, beta2=0.999。在实际操作中，推荐Adam作为默认算法，一般比RMSProp要好一点。
+
+## 5 比较
+opt_SGD=torch.optim.SGD(net_SGD.parameters(),lr=LR)
+opt_Momentum=torch.optim.SGD(net_Momentum.parameters(),lr=LR,momentum=0.8)
+opt_RMSprop=torch.optim.RMSprop(net_RMSprop.parameters(),lr=LR,alpha=0.9)
+opt_Adam=torch.optim.Adam(net_Adam.parameters(),lr=LR,betas=(0.9,0.99))
+
+![baby]({{ '/assets/img/CNN/optim.png' | prepend: site.baseurl }})
+
+SGD 是最普通的优化器, 也可以说没有加速效果, 而 Momentum 是 SGD 的改良版, 它加入了动量原则. 后面的 RMSprop 又是 Momentum 的升级版. 而 Adam 又是 RMSprop 的升级版. 不过从这个结果中我们看到, Adam 的效果似乎比 RMSprop 要差一点. 所以说并不是越先进的优化器, 结果越佳。
+
+https://zhuanlan.zhihu.com/p/78622301

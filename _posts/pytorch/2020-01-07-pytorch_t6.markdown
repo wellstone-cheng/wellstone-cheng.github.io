@@ -13,7 +13,7 @@ tags: [pytorch]
 - **torch.unsqueeze**
   
   torch.unsqueeze(input, dim, out=None) → Tensor
-  对数据维度进行扩充,dim维扩维数
+  对数据维度进行扩充,指定位置dim加上维数为1
   <font color='red'> torch只会处理2维的数据??? </font>
   Returns a new tensor with a dimension of size one inserted at the specified position.
 
@@ -39,6 +39,8 @@ print(
  x_tenser_0 tensor([[1., 2., 3., 4.]]) 
  x_tenser_1 tensor([[1.],[2.],[3.],[4.]])
 ```
+* 结论
+  
 - **torch.linspace**
 
   torch.linspace(start, end, steps=100, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) → Tensor
@@ -94,7 +96,6 @@ print(net)
 
 optimizer = torch.optim.SGD(net.parameters(),lr=0.2)
 loss_func = torch.nn.MSELoss()
-
 plt.ion()
 
 for t in range(2000):
@@ -114,6 +115,5 @@ plt.ioff()
 plt.show()
 ```
 显示图片如下
-
 
 ![baby]({{ '/assets/img/regression.png' | prepend: site.baseurl }})

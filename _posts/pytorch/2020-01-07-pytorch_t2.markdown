@@ -188,6 +188,7 @@ ans.shape:
 #### 2.2.4 torch.nn.Dropout2d
 * p (python:float, optional) – probability of an element to be zero-ed.
 * inplace (bool, optional) – If set to True, will do this operation in-place
+
 ##### 2.2.4.1 nn.Dropout2d vs nn.Dropout
 * torch.nn.Dropout对所有元素中每个元素按照概率P更改为零
 * torch.nn.Dropout2d是对每个通道按照概率P置为0
@@ -200,11 +201,13 @@ torch.nn.BatchNorm2d(num_features, eps=1e-05, momentum=0.1, affine=True, track_r
 * affine – a boolean value that when set to True, this module has learnable affine parameters. Default: True
 
 * track_running_stats – a boolean value that when set to True, this module tracks the running mean and variance, and when set to False, this module does not track such statistics and always uses batch statistics in both training and eval modes. Default: True
+  
 ##### 2.2.5.1 简单介绍
+
 * 举例
 假设在网络中间经过某些卷积操作之后的输出的feature map的尺寸为4×3×2×2;4为batch的大小，3为channel的数目，2×2为feature map的长宽.
 
-![baby]({{ '/assets/img/CNN/BN1.png' | prepend: site.baseurl }})
+![baby]({{ '/assets/img/CNN/BN1.jpg' | prepend: site.baseurl }})
 
 上图中，batch size一共是4, 对于每一个batch的feature map的size是3×2×2
 对于所有batch中的同一个channel的元素进行求均值与方差，比如上图，对于所有的batch，都拿出来最后一个channel，一共有4×4=16个元素，

@@ -43,7 +43,7 @@ Net1(
 ```
 tensorboard显示如下:
 
-![baby]({{ '/assets/img/CNN/Sruct1.png' | prepend: site.baseurl }})
+![baby]({{ '/assets/img/CNN/Struct1.png' | prepend: site.baseurl }})
 
 ## ２.构建方法二
 这种方法利用torch.nn.Sequential（）容器进行快速搭建，模型的各层被顺序添加到容器中。缺点是每层的编号是默认的阿拉伯数字，不易区分
@@ -98,7 +98,7 @@ Net2(
 ```
 tensorboard显示如下:
 
-![baby]({{ '/assets/img/CNN/Sruct2.png' | prepend: site.baseurl }})
+![baby]({{ '/assets/img/CNN/Struct2.png' | prepend: site.baseurl }})
 
 ## ３.构建方法三
 这种方法是对第二种方法的改进：通过add_module()添加每一层，并且为每一层增加了一个单独的**名字**。
@@ -150,7 +150,7 @@ Net3(
 
 tensorboard显示如下:
 
-![baby]({{ '/assets/img/CNN/Sruct3.png' | prepend: site.baseurl }})
+![baby]({{ '/assets/img/CNN/Struct3.png' | prepend: site.baseurl }})
 
 ## ４.构建方法四
 ``` python
@@ -210,4 +210,4 @@ Net4(
 ```
 tensorboard显示如下:
 
-![baby]({{ '/assets/img/CNN/Sruct4.png' | prepend: site.baseurl }})
+![baby]({{ '/assets/img/CNN/Struct4.png' | prepend: site.baseurl }})
