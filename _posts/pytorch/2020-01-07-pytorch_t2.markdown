@@ -19,6 +19,38 @@ dummy_input = torch.rand(13, 1, 28, 28)# 4维数据,每个一维数据中有28�
 #### 1.1.2 torch.randn 标准正态分布
 #### 1.1.3 torch.view
 #### 1.1.4 torch.shape
+#### 1.1.5 torch.max
+torch.max(input, dim, keepdim=False, out=None) -> (Tensor, LongTensor)
+按维度dim 返回最大值
+
+``` python
+import torch
+
+a = torch.randn(3,3)
+print('a',a)
+print('a0',torch.max(a,0))# 每列返回最大值
+print('a1',torch.max(a,1))# 每行返回最大值
+print('a2',torch.max(a,1)[0])#只返回最大值的每个数
+print('a3',torch.max(a,1)[1])#只返回最大值的每个索引,比如现在选择的是行，那这个就是返回这行里最大值的位置
+print('a4',torch.max(a,1)[1].data)
+print('a5',torch.max(a,1)[1].data.numpy())
+```
+打印如下
+``` shell
+a tensor([[ 0.7168,  1.0687, -1.6276],
+        [ 1.7062,  0.8561,  0.3501],
+        [ 0.0679,  2.5287, -1.3863]])
+a0 torch.return_types.max(
+values=tensor([1.7062, 2.5287, 0.3501]),
+indices=tensor([1, 2, 1]))
+a1 torch.return_types.max(
+values=tensor([1.0687, 1.7062, 2.5287]),
+indices=tensor([1, 0, 1]))
+a2 tensor([1.0687, 1.7062, 2.5287])
+a3 tensor([1, 0, 1])
+a4 tensor([1, 0, 1])
+a5 [1 0 1]
+```
 
 --- 
 
