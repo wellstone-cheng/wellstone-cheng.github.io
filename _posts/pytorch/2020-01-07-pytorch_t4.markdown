@@ -7,6 +7,9 @@ img: pytorch.jpeg
 pytorch: true
 tags: [pytorch]
 ---
+……
+[TOC]
+……
 
 
 ## 矩阵的乘法,矩阵的点乘和叉乘

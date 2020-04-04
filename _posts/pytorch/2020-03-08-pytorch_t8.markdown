@@ -7,6 +7,11 @@ img: pytorch.jpeg
 pytorch: true
 tags: [pytorch]
 ---
+……
+[TOC]
+……
+
+
 ## 1. tensorboardX-scalar代码
 ``` python
 import numpy as np
@@ -41,7 +46,7 @@ TensorBoard 2.1.0 at http://localhost:6006/ (Press CTRL+C to quit)
 ```
 用浏览器打开地址 http://localhost:6006/ 
 
-## 2. tensorboardX-scalar代码
+## 2. tensorboardX-graph代码
 ``` python
 import torch
 import torch.nn as nn

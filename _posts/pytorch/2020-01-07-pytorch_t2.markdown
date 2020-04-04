@@ -7,6 +7,9 @@ img: pytorch.jpeg
 pytorch: true
 tags: [pytorch]
 ---
+……
+[TOC]
+……
 
 ## 1 simple API
 ### 1.1 torch.randn vs torch.rand
@@ -80,7 +83,7 @@ https://zhuanlan.zhihu.com/p/27908027
 
 ![baby]({{ '/assets/img/CNN/CNN_feature3.png' | prepend: site.baseurl }})
 
-* feature map是每一个feature从原始图像中提取出来的“特征”。其中的值，越接近为1表示对应位置和feature的匹配越完整，越是接近-1，表示对应位置和feature的反面匹配越完整，而值接近0的表示对应位置没有任何匹配或者说没有什么关联。
+* feature map是每一个feature从原始图像中提取出来的"特征"。其中的值，越接近为1表示对应位置和feature的匹配越完整，越是接近-1，表示对应位置和feature的反面匹配越完整，而值接近0的表示对应位置没有任何匹配或者说没有什么关联。
 
 一个feature作用于图片产生一张feature map，对这张X图来说，我们用的是3个feature，因此最终产生3个 feature map。
 

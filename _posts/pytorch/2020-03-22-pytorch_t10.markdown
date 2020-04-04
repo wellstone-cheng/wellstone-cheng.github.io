@@ -7,4 +7,8 @@ img: pytorch.jpeg
 pytorch: true
 tags: [pytorch]
 ---
+……
+[TOC]
+……
+
 https://www.cnblogs.com/wmr95/articles/7814892.html

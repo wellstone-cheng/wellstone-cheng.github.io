@@ -7,7 +7,9 @@ img: pytorch.jpeg
 pytorch: true
 tags: [pytorch]
 ---
-
+……
+[TOC]
+……
 ## 1 torch.optim.SGD
 ### 1.1 定义
 class torch.optim.SGD(params, lr=<object object>, momentum=0, dampening=0, weight_decay=0, nesterov=False)

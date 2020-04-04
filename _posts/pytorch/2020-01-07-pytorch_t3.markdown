@@ -7,6 +7,9 @@ img: pytorch.jpeg
 pytorch: true
 tags: [pytorch]
 ---
+……
+[TOC]
+……
 
 ## 1 tensor 和numpy的转换
 

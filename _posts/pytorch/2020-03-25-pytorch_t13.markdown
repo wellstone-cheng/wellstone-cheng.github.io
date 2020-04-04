@@ -1,7 +1,7 @@
 ---
 layout: post
-title: pytorch图像识别与opencv
-date: 2020-03-20 00:05:00
+title: 批量处理
+date: 2020-03-2２ 00:05:00
 author: wellstone-cheng
 img: pytorch.jpeg
 pytorch: true

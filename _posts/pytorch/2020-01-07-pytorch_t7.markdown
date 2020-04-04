@@ -7,6 +7,10 @@ img: pytorch.jpeg
 pytorch: true
 tags: [pytorch]
 ---
+……
+[TOC]
+……
+
 ## 1.构建方法一
 ``` python
 import torch
