@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 批量处理
-date: 2020-03-2２ 00:05:00
+title: RNN
+date: 2020-04-12 00:05:00
 author: wellstone-cheng
 img: pytorch.jpeg
 pytorch: true
@@ -10,4 +10,3 @@ tags: [pytorch]
 ……
 [TOC]
 ……
-test22

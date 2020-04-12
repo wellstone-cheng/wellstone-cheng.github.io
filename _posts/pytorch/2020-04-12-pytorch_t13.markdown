@@ -1,0 +1,76 @@
+---
+layout: post
+title: 批量处理
+date: 2020-04-12 00:05:00
+author: wellstone-cheng
+img: pytorch.jpeg
+pytorch: true
+tags: [pytorch]
+---
+……
+[TOC]
+……
+### 应用的函数接口
+#### 1. TensorDataset
+CLASS torch.utils.data.TensorDataset(*tensors)[SOURCE]
+Dataset wrapping tensors.
+
+Each sample will be retrieved by indexing tensors along the first dimension.
+
+Parameters
+* tensors (Tensor) – tensors that have the same size of the first dimension.
+  
+#### 2. DataLoader
+CLASS torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False, sampler=None, batch_sampler=None, num_workers=0, collate_fn=<function default_collate>, pin_memory=False, drop_last=False, timeout=0, worker_init_fn=None)
+
+Parameters: 
+* dataset – dataset from which to load the data.（数据集）
+* batch_size – how many samples per batch to load (default: `1`).（批次大小）
+* shuffle – set to `True` to have the data reshuffled at every epoch (default: `False`).（是否打乱数据集）
+* sampler – defines the strategy to draw samples from the dataset. If specified, `shuffle` must be False.（采样方式，若开启，shuffle为false）
+* batch_sampler – like sampler, but returns a batch of indices at a time. Mutually exclusive with `batch_size`, `shuffle`, `sampler`, and `drop_last`.（像sampler一样采样，但是返回的是批大小的索引）
+* num_workers – how many subprocesses to use for data loading. 0 means that the data will be loaded in the main process. (default: `0`)（设置多少个子进程）
+*collate_fn – merges a list of samples to form a mini-batch.（将样本融合为一个mini-batch）
+* pin_memory – If `True`, the data loader will copy tensors into CUDA pinned memory before returning them.
+* drop_last – set to `True` to drop the last incomplete batch, if the dataset size is not divisible by the batch size. If `False` and the size of dataset is not divisible by the batch size, then the last batch will be smaller. (default: `False`)
+* timeout – if positive, the timeout value for collecting a batch from workers. Should always be non-negative. (default: `0`)
+* worker_init_fn – If not `None`, this will be called on each worker subprocess with the worker id (an int in `[0, num_workers - 1]`) as input, after seeding and before data loading. (default: `None`)
+---
+### 例１
+``` python
+import torch.utils.data as Data
+x = torch.linspace(1, 10, 10)       # this is x data (torch tensor)
+y = torch.linspace(10, 1, 10)       # this is y data (torch tensor)
+
+torch_dataset = Data.TensorDataset(x, y)
+loader = Data.DataLoader(
+    dataset=torch_dataset,      # torch TensorDataset format
+    batch_size=BATCH_SIZE,      # mini batch size
+    shuffle=True,               # random shuffle for training
+    num_workers=2,              # subprocesses for loading data
+)
+for step, (batch_x, batch_y) in enumerate(loader):  # for each training step
+```
+### 例2
+``` python
+import torch.utils.data as Data
+x = torch.unsqueeze(torch.linspace(-1, 1, 1000), dim=1)
+y = x.pow(2) + 0.1*torch.normal(torch.zeros(*x.size()))
+torch_dataset = Data.TensorDataset(x, y)
+loader = Data.DataLoader(dataset=torch_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2,)
+
+for step, (b_x, b_y) in enumerate(loader):
+```
+
+### 例3
+``` python
+train_data = dsets.MNIST(
+    root='./mnist/',
+    train=True,                         # this is training data
+    transform=transforms.ToTensor(),    # Converts a PIL.Image or numpy.ndarray to
+                                        # torch.FloatTensor of shape (C x H x W) and normalize in the range [0.0, 1.0]
+    download=DOWNLOAD_MNIST,            # download it if you don't have it
+)
+train_loader = torch.utils.data.DataLoader(dataset=train_data, batch_size=BATCH_SIZE, shuffle=True)
+for step, (b_x, b_y) in enumerate(train_loader):
+```

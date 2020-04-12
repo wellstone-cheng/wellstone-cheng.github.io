@@ -7,6 +7,10 @@ img: python.jpeg
 python: true
 tags: [python]
 ---
+……
+[TOC]
+……
+
 # 1.Python 安装与卸载
 
 ##   1.1 先卸载已安装的Python版本
